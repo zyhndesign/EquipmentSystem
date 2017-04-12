@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.cidic.equipment.dao.ColorDao;
-import com.cidic.equipment.model.Color;
+import com.cidic.equipment.model.Texture;
+import com.cidic.equipment.dao.TextureDao;
 
 @Repository
 @Component
-@Qualifier(value = "colorDaoImpl")
-public class ColorDaoImpl implements ColorDao {
+@Qualifier(value = "textureDaoImpl")
+public class TextureDaoImpl implements TextureDao {
 
 	@Autowired
 	@Qualifier("sessionFactory")
@@ -31,53 +31,53 @@ public class ColorDaoImpl implements ColorDao {
 	}
 	
 	@Override
-	public void createColor(Color color) {
+	public void createTexture(Texture texture) {
 		Session session = this.getSessionFactory().getCurrentSession();
-		session.save(color);
+		session.save(texture);
 	}
 
 	@Override
-	public void updateColor(Color color) {
+	public void updateTexture(Texture texture) {
 		Session session = this.getSessionFactory().getCurrentSession();
-		session.update(color);
+		session.update(texture);		
 	}
 
 	@Override
-	public void deleteColor(int id) {
+	public void deleteTexture(int id) {
 		Session session = this.getSessionFactory().getCurrentSession();
-		String hql = " delete from Color c where c.id = ? ";
+		String hql = " delete from Texture t where t.id = ? ";
 		Query query = session.createQuery(hql);
         query.setParameter(0, id); 
 		query.executeUpdate();
 	}
 
 	@Override
-	public List<Color> getColorByPage(int offset, int limit) {
+	public List<Texture> getTextureByPage(int offset, int limit) {
 		Session session = this.getSessionFactory().getCurrentSession();
-		String hql = " from Color ";
+		String hql = " from Texture ";
 		final Query query = session.createQuery(hql); 
         query.setFirstResult(offset);    
         query.setMaxResults(limit); 
         @SuppressWarnings("unchecked")
-		final List<Color> list = query.list(); 
+		final List<Texture> list = query.list(); 
 		return list;
 	}
 
 	@Override
-	public int getCountColor() {
+	public int getCountTexture() {
 		Session session = this.getSessionFactory().getCurrentSession();
-		final String hql = " select count(c) from Color c"; 
+		final String hql = " select count(t) from Texture t"; 
         final Query query = session.createQuery(hql); 
         return (Integer)query.uniqueResult();
 	}
 
 	@Override
-	public List<Color> getAllColor() {
+	public List<Texture> getAllTexture() {
 		Session session = this.getSessionFactory().getCurrentSession();
-		String hql = " from Color";
+		String hql = " from Texture";
 		final Query query = session.createQuery(hql);  
         @SuppressWarnings("unchecked")
-		final List<Color> list = query.list(); 
+		final List<Texture> list = query.list(); 
 		return list;
 	}
 

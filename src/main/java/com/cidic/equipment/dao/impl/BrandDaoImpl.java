@@ -2,45 +2,83 @@ package com.cidic.equipment.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 import com.cidic.equipment.dao.BrandDao;
 import com.cidic.equipment.model.Brand;
 
+@Repository
+@Component
+@Qualifier(value = "brandDaoImpl")
 public class BrandDaoImpl implements BrandDao {
 
+	@Autowired
+	@Qualifier("sessionFactory")
+	private SessionFactory sessionFactory;
+	
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	
 	@Override
 	public void createBrand(Brand brand) {
-		// TODO Auto-generated method stub
-
+		Session session = this.getSessionFactory().getCurrentSession();
+		session.save(brand);
 	}
 
 	@Override
 	public void updateBrand(Brand brand) {
-		// TODO Auto-generated method stub
-
+		Session session = this.getSessionFactory().getCurrentSession();
+		session.update(brand);
 	}
 
 	@Override
 	public void deleteBrand(int id) {
-		// TODO Auto-generated method stub
-
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = " delete from Brand b where b.id = ? ";
+		Query query = session.createQuery(hql);
+        query.setParameter(0, id); 
+		query.executeUpdate();
 	}
 
 	@Override
 	public List<Brand> getBrandByPage(int offset, int limit) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = " from Brand";
+		final Query query = session.createQuery(hql); 
+        query.setFirstResult(offset);    
+        query.setMaxResults(limit); 
+        @SuppressWarnings("unchecked")
+		final List<Brand> list = query.list(); 
+		return list;
 	}
 
 	@Override
 	public int getCountBrand() {
-		// TODO Auto-generated method stub
-		return 0;
+		Session session = this.getSessionFactory().getCurrentSession();
+		final String hql = " select count(b) from Brand b"; 
+        final Query query = session.createQuery(hql); 
+        return (Integer)query.uniqueResult();
 	}
 
 	@Override
 	public List<Brand> getAllBrand() {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = " from Brand";
+		final Query query = session.createQuery(hql);  
+        @SuppressWarnings("unchecked")
+		final List<Brand> list = query.list(); 
+		return list;
 	}
 
 }

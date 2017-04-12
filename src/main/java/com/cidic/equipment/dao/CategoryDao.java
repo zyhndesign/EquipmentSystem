@@ -16,5 +16,5 @@ public interface CategoryDao {
 	
 	public int getCountCategory();
 	
-	public List<Category> Category();
+	public List<Category> getAllCategory();
 }

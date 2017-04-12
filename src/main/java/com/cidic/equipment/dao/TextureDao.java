@@ -10,9 +10,9 @@ public interface TextureDao {
 	
 	public void updateTexture(Texture texture);
 	
-	public void deleteBrand(int id);
+	public void deleteTexture(int id);
 	
-	public List<Texture> getBrandByPage(int offset, int limit);
+	public List<Texture> getTextureByPage(int offset, int limit);
 	
 	public int getCountTexture();
 	
