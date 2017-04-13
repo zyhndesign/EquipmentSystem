@@ -1,5 +1,8 @@
 function ZYTreeHandler(params) {
     this.newDefaultName = params.newDefaultName;
+    this.removeUrl=params.removeUrl;
+    this.renameUrl=params.renameUrl;
+    this.addUrl=params.addUrl;
     this.getNodes(function(data){
         params.init(data);
     });
@@ -90,36 +93,90 @@ ZYTreeHandler.prototype.getSettings = function () {
 };
 ZYTreeHandler.prototype.remove = function (id, parentId) {
 
-    var index=config.findInArray(this.data,"id",id);
+    functions.showLoading();
+    var me=this;
+    $.ajax({
+        url:me.removeUrl,
+        type:"post",
+        data:{
+            parentId:parentId,
+            id:id
+        },
+        dataType:"json",
+        success:function(response){
+            if(response.success){
+                functions.hideLoading();
+                Materialize.toast(config.messages.optSuccess, 4000);
+            }else{
+                functions.ajaxReturnErrorHandler(response.message);
+            }
 
-    if(index!=-1){
-        this.data.splice(index,1);
-    }
+        },
+        error:function(){
+            functions.ajaxErrorHandler();
+        }
+    });
 
-    localStorage.setItem(this.keyName,JSON.stringify(this.data));
-    Materialize.toast(config.messages.optSuccess, 4000);
 };
 ZYTreeHandler.prototype.rename = function (id, parentId, name) {
-    var index=config.findInArray(this.data,"id",id);
+    functions.showLoading();
+    var me=this;
+    $.ajax({
+        url:me.renameUrl,
+        type:"post",
+        data:{
+            name:name,
+            parentId:parentId,
+            id:id
+        },
+        dataType:"json",
+        success:function(response){
+            if(response.success){
+                functions.hideLoading();
+                Materialize.toast(config.messages.optSuccess, 4000);
+            }else{
+                functions.ajaxReturnErrorHandler(response.message);
+            }
 
-    if(index!=-1){
-        this.data[index].name=name;
-    }
+        },
+        error:function(){
+            functions.ajaxErrorHandler();
+        }
+    });
 
-    localStorage.setItem(this.keyName,JSON.stringify(this.data));
-    Materialize.toast(config.messages.optSuccess, 4000);
 };
 ZYTreeHandler.prototype.add = function (treeNode) {
-    var zTree = $.fn.zTree.getZTreeObj("zyTree");
+    functions.showLoading();
+    var me=this;
     var no=(new Date()).getTime();
-    var node={
-        parentId: treeNode.id,
-        isLeaf:true,
-        name: this.newDefaultName + no
-    };
+    $.ajax({
+        url:me.addUrl,
+        type:"post",
+        data:{
+            name:me.newDefaultName+no,
+            parentId:treeNode.id
+        },
+        dataType:"json",
+        success:function(response){
+            if(response.success){
+                functions.hideLoading();
+                Materialize.toast(config.messages.optSuccess, 4000);
 
-    Materialize.toast(config.messages.optSuccess, 4000);
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 
-    zTree.expandNode(treeNode);
-    zTree.addNodes(treeNode, node);
+                if(treeNode.check_Child_State!=-1||treeNode.open==true){
+                    zTree.addNodes(treeNode, {id:response.object, parentId:treeNode.id, name:me.newDefaultName +no,isParent:true});
+                }else{
+                    zTree.expandNode(treeNode);
+                }
+
+            }else{
+                functions.ajaxReturnErrorHandler(response.message);
+            }
+
+        },
+        error:function(){
+            functions.ajaxErrorHandler();
+        }
+    });
 };
