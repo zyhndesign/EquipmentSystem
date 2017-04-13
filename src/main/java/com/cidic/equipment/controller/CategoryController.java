@@ -90,7 +90,7 @@ public class CategoryController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "����ʧ��");
+			throw new EquipmentException(500, "操作失败！");
 		}
 	}
 	
@@ -112,7 +112,7 @@ public class CategoryController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "����ʧ��");
+			throw new EquipmentException(500, "操作失败！");
 		}
 	}
 	
@@ -127,7 +127,7 @@ public class CategoryController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "����ʧ��");
+			throw new EquipmentException(500, "操作失败！");
 		}
 	}
 	
@@ -164,7 +164,7 @@ public class CategoryController {
 			resultModel.setObject(list);
 			return resultModel;
 		}catch (Exception e) {
-			throw new EquipmentException(500, "����ʧ��");
+			throw new EquipmentException(500, "操作失败！");
 		}
 	}
 }

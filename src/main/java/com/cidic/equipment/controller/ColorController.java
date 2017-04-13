@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cidic.equipment.exception.EquipmentException;
+import com.cidic.equipment.model.Brand;
 import com.cidic.equipment.model.Color;
 import com.cidic.equipment.model.ColorTableModel;
 import com.cidic.equipment.model.ListResultModel;
@@ -89,7 +90,7 @@ public class ColorController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "����ʧ��");
+			throw new EquipmentException(500, "操作失败！");
 		}
 	}
 	
@@ -111,7 +112,7 @@ public class ColorController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "����ʧ��");
+			throw new EquipmentException(500, "操作失败！");
 		}
 	}
 	
@@ -126,7 +127,7 @@ public class ColorController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "����ʧ��");
+			throw new EquipmentException(500, "操作失败！");
 		}
 	}
 	
@@ -163,7 +164,23 @@ public class ColorController {
 			resultModel.setObject(list);
 			return resultModel;
 		}catch (Exception e) {
-			throw new EquipmentException(500, "����ʧ��");
+			throw new EquipmentException(500, "操作失败！");
+		}
+	}
+	
+	@RequestMapping(value = "/getColorById", method = RequestMethod.POST)
+	@ResponseBody
+	public ResultModel getColorById(HttpServletRequest request, HttpServletResponse response,@RequestParam int id) {
+		WebRequestUtil.AccrossAreaRequestSet(request, response);
+		resultModel = new ResultModel();
+		try {
+			Color color = colorServiceImpl.getDataByColorId(id).get();
+			resultModel.setResultCode(200);
+			resultModel.setSuccess(true);
+			resultModel.setObject(color);
+			return resultModel;
+		}catch (Exception e) {
+			throw new EquipmentException(500, "操作失败！");
 		}
 	}
 }

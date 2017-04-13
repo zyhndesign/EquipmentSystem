@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cidic.equipment.exception.EquipmentException;
 import com.cidic.equipment.model.ListResultModel;
 import com.cidic.equipment.model.ResultModel;
+import com.cidic.equipment.model.Texture;
 import com.cidic.equipment.model.VehicleInfo;
 import com.cidic.equipment.model.VehicleInfoTableModel;
 import com.cidic.equipment.service.VehicleInfoService;
@@ -84,7 +85,7 @@ public class VehicleInfoController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "����ʧ��");
+			throw new EquipmentException(500, "操作失败！");
 		}
 	}
 	
@@ -100,7 +101,7 @@ public class VehicleInfoController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "����ʧ��");
+			throw new EquipmentException(500, "操作失败！");
 		}
 	}
 	
@@ -115,7 +116,7 @@ public class VehicleInfoController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "����ʧ��");
+			throw new EquipmentException(500, "操作失败！");
 		}
 	}
 	
@@ -138,5 +139,21 @@ public class VehicleInfoController {
 			listResultModel.setSuccess(false);
 		}
 		return listResultModel;
+	}
+	
+	@RequestMapping(value = "/getVehicleInfoById", method = RequestMethod.POST)
+	@ResponseBody
+	public ResultModel getVehicleInfoById(HttpServletRequest request, HttpServletResponse response,@RequestParam int id) {
+		WebRequestUtil.AccrossAreaRequestSet(request, response);
+		resultModel = new ResultModel();
+		try {
+			VehicleInfo vehicleInfo = vehicleInfoServiceImpl.getDataByVehicleInfoId(id).get();
+			resultModel.setResultCode(200);
+			resultModel.setSuccess(true);
+			resultModel.setObject(vehicleInfo);
+			return resultModel;
+		}catch (Exception e) {
+			throw new EquipmentException(500, "操作失败！");
+		}
 	}
 }
