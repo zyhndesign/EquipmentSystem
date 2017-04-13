@@ -5,13 +5,13 @@
         <html lang="en">
         <head>
         <%@ include file="head.jsp"%>
-    <link href="/resources/css/lib/materialicons.css" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/lib/materialize.min.css">
-    <link rel="stylesheet" href="/resources/css/lib/jquery.dataTables.css">
-    <link rel="stylesheet" href="/resources/css/src/main.css">
-    <link rel="stylesheet" href="/resources/css/src/components/header/header.css">
-    <link rel="stylesheet" href="/resources/css/src/components/menu/menu.css">
-    <link rel="stylesheet" href="/resources/css/src/pages/infoMgr/info.css">
+    <link href="resources/css/lib/materialicons.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="resources/css/lib/jquery.dataTables.css">
+    <link rel="stylesheet" href="resources/css/src/main.css">
+    <link rel="stylesheet" href="resources/css/src/components/header/header.css">
+    <link rel="stylesheet" href="resources/css/src/components/menu/menu.css">
+    <link rel="stylesheet" href="resources/css/src/pages/infoMgr/info.css">
 </head>
 <body>
 
@@ -159,14 +159,14 @@
 <script>
     var pageName="mgr";
 </script>
-<script src="/resources/js/lib/jquery-2.0.3.min.js"></script>
-<script src="/resources/js/lib/materialize.min.js"></script>
-<script src="/resources/js/lib/jquery.dataTables.min.js"></script>
-<script src="/resources/js/lib/juicer-min.js"></script>
-<script src="/resources/js/src/config.js"></script>
-<script src="/resources/js/src/ZYTableHandler.js"></script>
-<script src="/resources/js/src/ZYCtrlDataHandler.js"></script>
-<script src="/resources/js/src/pages/infoMgr/infoMgr.js"></script>
+<script src="resources/js/lib/jquery-2.0.3.min.js"></script>
+<script src="resources/js/lib/materialize.min.js"></script>
+<script src="resources/js/lib/jquery.dataTables.min.js"></script>
+<script src="resources/js/lib/juicer-min.js"></script>
+<script src="resources/js/src/config.js"></script>
+<script src="resources/js/src/ZYTableHandler.js"></script>
+<script src="resources/js/src/ZYCtrlDataHandler.js"></script>
+<script src="resources/js/src/pages/infoMgr/infoMgr.js"></script>
 
 </body>
 </html>

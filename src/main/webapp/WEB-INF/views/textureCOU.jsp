@@ -5,12 +5,12 @@
         <html lang="en">
         <head>
         <%@ include file="head.jsp"%>
-    <link href="/resources/css/lib/materialicons.css" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/lib/materialize.min.css">
-    <link rel="stylesheet" href="/resources/css/lib/jquery.dataTables.css">
-    <link rel="stylesheet" href="/resources/css/src/main.css">
-    <link rel="stylesheet" href="/resources/css/src/components/header/header.css">
-    <link rel="stylesheet" href="/resources/css/src/components/menu/menu.css">
+    <link href="resources/css/lib/materialicons.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="resources/css/lib/jquery.dataTables.css">
+    <link rel="stylesheet" href="resources/css/src/main.css">
+    <link rel="stylesheet" href="resources/css/src/components/header/header.css">
+    <link rel="stylesheet" href="resources/css/src/components/menu/menu.css">
 </head>
 <body>
 
@@ -62,13 +62,13 @@
 <script>
     var pageName="texture";
 </script>
-<script src="/resources/js/lib/jquery-2.0.3.min.js"></script>
-<script src="/resources/js/lib/materialize.min.js"></script>
-<script src="/resources/js/lib/jquery.dataTables.min.js"></script>
-<script src="/resources/js/lib/jquery.validate.min.js"></script>
-<script src="/resources/js/src/config.js"></script>
-<script src="/resources/js/src/ZYFormHandler.js"></script>
-<script src="/resources/js/src/pages/texture/textureCOU.js"></script>
+<script src="resources/js/lib/jquery-2.0.3.min.js"></script>
+<script src="resources/js/lib/materialize.min.js"></script>
+<script src="resources/js/lib/jquery.dataTables.min.js"></script>
+<script src="resources/js/lib/jquery.validate.min.js"></script>
+<script src="resources/js/src/config.js"></script>
+<script src="resources/js/src/ZYFormHandler.js"></script>
+<script src="resources/js/src/pages/texture/textureCOU.js"></script>
 
 </body>
 </html>

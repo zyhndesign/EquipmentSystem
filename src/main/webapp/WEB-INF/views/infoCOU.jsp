@@ -5,13 +5,13 @@
         <html lang="en">
         <head>
         <%@ include file="head.jsp"%>
-    <link rel="stylesheet" href="/resources/css/lib/materialicons.css" >
-    <link rel="stylesheet" href="/resources/css/lib/materialize.min.css">
-    <link rel="stylesheet" href="/resources/css/lib/jquery.Jcrop.min.css">
-    <link rel="stylesheet" href="/resources/css/src/main.css">
-    <link rel="stylesheet" href="/resources/css/src/components/header/header.css">
-    <link rel="stylesheet" href="/resources/css/src/components/menu/menu.css">
-    <link rel="stylesheet" href="/resources/css/src/pages/infoMgr/info.css">
+    <link rel="stylesheet" href="resources/css/lib/materialicons.css" >
+    <link rel="stylesheet" href="resources/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="resources/css/lib/jquery.Jcrop.min.css">
+    <link rel="stylesheet" href="resources/css/src/main.css">
+    <link rel="stylesheet" href="resources/css/src/components/header/header.css">
+    <link rel="stylesheet" href="resources/css/src/components/menu/menu.css">
+    <link rel="stylesheet" href="resources/css/src/pages/infoMgr/info.css">
 </head>
 <body>
 
@@ -84,13 +84,13 @@
         <div class="zyFormChildCtrl">
             <label class="zyFormLabel zyRequired zyFormLabelHasSub">产品图像<br>&nbsp;&nbsp;&nbsp;&nbsp;(svg)</label>
             <div class="zyImageUpload">
-                <img src="/resources/images/upload.png">
+                <img src="resources/images/upload.png">
                 <input type="file" name="infoImage">
                 <input type="hidden" class="zyActionRequired" id="infoImageChanPin">
             </div>
             <label style="margin-left: 40px" class="zyFormLabel zyFormLabelHasSub">特征线图像<br>&nbsp;&nbsp;&nbsp;&nbsp;(svg)</label>
             <div class="zyImageUpload">
-                <img src="/resources/images/upload.png">
+                <img src="resources/images/upload.png">
                 <input type="file" name="infoImage">
                 <input type="hidden" id="infoImageXianXin">
             </div>
@@ -489,14 +489,14 @@
 <script>
     var pageName="mgr";
 </script>
-<script src="/resources/js/lib/jquery-2.0.3.min.js"></script>
-<script src="/resources/js/lib/materialize.min.js"></script>
-<script src="/resources/js/lib/jquery.Jcrop.min.js"></script>
-<script src="/resources/js/lib/juicer-min.js"></script>
-<script src="/resources/js/src/config.js"></script>
-<script src="/resources/js/src/ZYCtrlDataHandler.js"></script>
-<script src="/resources/js/src/ZYFormHandler.js"></script>
-<script src="/resources/js/src/pages/infoMgr/infoCOU.js"></script>
+<script src="resources/js/lib/jquery-2.0.3.min.js"></script>
+<script src="resources/js/lib/materialize.min.js"></script>
+<script src="resources/js/lib/jquery.Jcrop.min.js"></script>
+<script src="resources/js/lib/juicer-min.js"></script>
+<script src="resources/js/src/config.js"></script>
+<script src="resources/js/src/ZYCtrlDataHandler.js"></script>
+<script src="resources/js/src/ZYFormHandler.js"></script>
+<script src="resources/js/src/pages/infoMgr/infoCOU.js"></script>
 
 </body>
 </html>
