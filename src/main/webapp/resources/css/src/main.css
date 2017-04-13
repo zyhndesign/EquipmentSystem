@@ -176,18 +176,6 @@ li{
 .zyForm .zyTextarea{
     width: 70%;
 }
-.zyForm .btn{
-    position: relative;
-}
-.zyForm .btn input[type='file']{
-    position: absolute;
-    left:0px;
-    top:0px;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor:pointer;
-}
 .zyForm .zyFormChildCtrl{
     margin-left: 50px;
     margin-top: 0px;

@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="resources/css/src/main.css">
     <link rel="stylesheet" href="resources/css/src/components/header/header.css">
     <link rel="stylesheet" href="resources/css/src/components/menu/menu.css">
+
+        <script>
+            var id="${brand.id}";
+        </script>
 </head>
 <body>
 
@@ -29,14 +33,14 @@
             <div class="zyPanelTitle">新建/修改 品牌</div>
             <div class="zyPanelContent zyPd20">
                 <form class="zyForm" id="myForm" action="#">
-                    <div class="row">
+                    <div class="row" id="uploadContainer">
                         <label class="zyFormLabel">文件：</label>
-                        <div class="btn">
-                            <span>上传LOGO</span>
-                            <input type="file" id="uploadFile">
+                        <div class="btn" id="uploadBtn">
+                            上传LOGO
                         </div>
-                        <img id="imageShow" style="margin-left: 50px;width:100px;vertical-align: top" src="/data/brand.png">
-                        <input type="hidden" name="image" id="image">
+                        <img id="imageShow" style="margin-left: 50px;width:100px;vertical-align: top"
+                            src="resources/images/defaultBrand.png">
+                        <input type="hidden" name="icon" id="image">
                     </div>
                     <div class="row">
                         <label class="zyFormLabel">名称：</label>
@@ -63,9 +67,13 @@
 </script>
 <script src="resources/js/lib/jquery-2.0.3.min.js"></script>
 <script src="resources/js/lib/materialize.min.js"></script>
-<script src="resources/js/lib/jquery.dataTables.min.js"></script>
+        <script src="resources/js/lib/jquery.form.js"></script>
 <script src="resources/js/lib/jquery.validate.min.js"></script>
+        <script src="resources/js/lib/plupload.full.min.js"></script>
+        <script src="resources/js/lib/qiniu.js"></script>
 <script src="resources/js/src/config.js"></script>
+<script src="resources/js/src/functions.js"></script>
+<script src="resources/js/src/ZYCtrlDataHandler.js"></script>
 <script src="resources/js/src/ZYFormHandler.js"></script>
 <script src="resources/js/src/pages/brand/brandCOU.js"></script>
 

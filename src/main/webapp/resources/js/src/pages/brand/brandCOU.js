@@ -1,14 +1,11 @@
 $(document).ready(function(){
-    var editId;
-    if(location.search){
-        editId=location.search.substr(1);
-        var data=JSON.parse(localStorage.getItem("brand"));
-        data=data[config.findInArray(data,"id",editId)];
-
-        $("#name").val(data.name);
-        $("#description").val(data.description);
-        $("#image").val(data.image);
-        $("#imageShow").attr("src",data.image);
+    if(id){
+        ZYCtrlDataHandler.getDataForUpdate(config.ajaxUrls.brandGetDetail,{id:id},function(){
+            $("#name").val(data.name);
+            $("#description").val(data.description);
+            $("#image").val(data.icon);
+            $("#imageShow").attr("src",data.icon);
+        });
     }
     var formHandler=new ZYFormHandler({
         redirectUrl:"/pages/brand/brand.html",
@@ -21,7 +18,7 @@ $(document).ready(function(){
                 required:true,
                 maxlength:32
             },
-            image:{
+            icon:{
                 required:true
             }
         },
@@ -30,20 +27,30 @@ $(document).ready(function(){
                 required:config.validErrors.required,
                 maxlength:config.validErrors.maxLength.replace("${max}",32)
             },
-            image:{
+            icon:{
                 required:config.validErrors.required
             }
         },
         submitHandler:function(form) {
-            formHandler.submitForm(form,editId);
+            formHandler.submitForm(form,id);
         }
     });
 
-    $("#uploadFile").change(function(){
-        var name=this.files[0].name,
-            url="/data/"+name;
+    functions.createQiNiuUploader({
+        maxSize:config.uploader.sizes.img,
+        filter:config.uploader.filters.img,
+        uploadBtn:"uploadBtn",
+        multiSelection:false,
+        multipartParams:null,
+        uploadContainer:"uploadContainer",
+        fileAddCb:null,
+        progressCb:null,
+        uploadedCb:function(info,file,up){
+            $("#image").val(info.url);
 
-        $("#image").val(url);
-        $("#imageShow").attr("src",url);
+            $("#imageShow").attr("src",info.url);
+
+            $(".error[for='image']").remove();
+        }
     });
 });

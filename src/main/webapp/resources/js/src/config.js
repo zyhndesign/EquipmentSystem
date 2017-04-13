@@ -32,7 +32,7 @@ var config={
 
     },
     dataTable:{
-        langUrl:"/resources/lang/de_DE.txt"
+        langUrl:"resources/lang/de_DE.txt"
     },
     perLoadCounts:{
         table:10
@@ -51,7 +51,7 @@ var config={
             pdf:"pdf,PDF"
         },
         qiNiu:{
-            upTokenUrl:"qi-niu/up-token",
+            upTokenUrl:"qiniu/getUploadKey",
             uploadDomain:"http://qiniu-plupload.qiniudn.com/",
             bucketDomain:"http://oobviza1s.bkt.clouddn.com/"
         }
