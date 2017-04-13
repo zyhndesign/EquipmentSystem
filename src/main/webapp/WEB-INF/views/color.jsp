@@ -28,7 +28,7 @@
         <div class="zyPanel zyBd2">
             <div class="zyPanelTitle">颜色设置</div>
             <div class="zyPanelContent zyPd20">
-                <a class="waves-effect waves-light btn" href="colorCOU.html">
+                <a class="waves-effect waves-light btn" href="color/colorCOU">
                     <i class="material-icons left">add</i>新建
                 </a>
 
@@ -59,13 +59,14 @@
 <script>
     var pageName="color";
 </script>
-<script src="/static/js/lib/jquery-2.0.3.min.js"></script>
-<script src="/static/js/lib/materialize.min.js"></script>
-<script src="/static/js/lib/jquery.dataTables.min.js"></script>
-<script src="/static/js/lib/juicer-min.js"></script>
-<script src="/static/js/src/config.js"></script>
-<script src="/static/js/src/ZYTableHandler.js"></script>
-<script src="/static/js/src/pages/color/color.js"></script>
+<script src="resources/js/lib/jquery-2.0.3.min.js"></script>
+<script src="resources/js/lib/materialize.min.js"></script>
+<script src="resources/js/lib/jquery.dataTables.min.js"></script>
+<script src="resources/js/lib/juicer-min.js"></script>
+<script src="resources/js/src/config.js"></script>
+        <script src="resources/js/src/functions.js"></script>
+<script src="resources/js/src/ZYTableHandler.js"></script>
+<script src="resources/js/src/pages/color/color.js"></script>
 
 </body>
 </html>

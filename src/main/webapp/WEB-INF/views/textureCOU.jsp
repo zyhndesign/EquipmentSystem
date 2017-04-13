@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="resources/css/src/main.css">
     <link rel="stylesheet" href="resources/css/src/components/header/header.css">
     <link rel="stylesheet" href="resources/css/src/components/menu/menu.css">
+        <script>
+            var id="${texture.id}";
+        </script>
 </head>
 <body>
 
@@ -30,14 +33,13 @@
             <div class="zyPanelContent zyPd20">
                 <form class="zyForm" id="myForm" action="#">
                     <div class="row">
-                        <label class="zyFormLabel">文件：</label>
+                        <label class="zyFormLabel">图像：</label>
                         <div class="btn">
-                            <span>上传</span>
-                            <input type="file" id="uploadFile">
+                            上传
                         </div>
                         <img id="imageShow" style="margin-left: 50px;width:100px;vertical-align: top"
-                             src="/data/texture.png">
-                        <input type="hidden" name="image" id="image">
+                             src="resources/image/defaultTexture.png">
+                        <input type="hidden" name="icon" id="image">
                     </div>
                     <div class="row">
                         <label class="zyFormLabel">名称：</label>
@@ -64,10 +66,14 @@
 </script>
 <script src="resources/js/lib/jquery-2.0.3.min.js"></script>
 <script src="resources/js/lib/materialize.min.js"></script>
-<script src="resources/js/lib/jquery.dataTables.min.js"></script>
-<script src="resources/js/lib/jquery.validate.min.js"></script>
-<script src="resources/js/src/config.js"></script>
-<script src="resources/js/src/ZYFormHandler.js"></script>
+        <script src="resources/js/lib/jquery.form.js"></script>
+        <script src="resources/js/lib/jquery.validate.min.js"></script>
+        <script src="resources/js/lib/plupload.full.min.js"></script>
+        <script src="resources/js/lib/qiniu.js"></script>
+        <script src="resources/js/src/config.js"></script>
+        <script src="resources/js/src/functions.js"></script>
+        <script src="resources/js/src/ZYCtrlDataHandler.js"></script>
+        <script src="resources/js/src/ZYFormHandler.js"></script>
 <script src="resources/js/src/pages/texture/textureCOU.js"></script>
 
 </body>

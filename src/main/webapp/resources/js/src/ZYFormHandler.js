@@ -29,7 +29,7 @@ ZYFormHandler.prototype.submitForm=function(form,editId,data,isJsonString){
         })
     }else{
         $(form).ajaxSubmit({
-            url:isNew?me.createUrl:me.updateUrl,
+            url:editId?me.createUrl:me.updateUrl,
             dataType:"json",
             type:"post",
             data:data,

@@ -28,7 +28,7 @@
         <div class="zyPanel zyBd2">
             <div class="zyPanelTitle">纹理设置</div>
             <div class="zyPanelContent zyPd20">
-                <a class="waves-effect waves-light btn" href="textureCOU.html">
+                <a class="waves-effect waves-light btn" href="texture/textureCOU">
                     <i class="material-icons left">add</i>新建
                 </a>
 
@@ -63,6 +63,7 @@
 <script src="/static/js/lib/materialize.min.js"></script>
 <script src="/static/js/lib/jquery.dataTables.min.js"></script>
 <script src="/static/js/src/config.js"></script>
+        <script src="/static/js/src/functions.js"></script>
 <script src="/static/js/src/ZYTableHandler.js"></script>
 <script src="/static/js/src/pages/texture/texture.js"></script>
 </body>

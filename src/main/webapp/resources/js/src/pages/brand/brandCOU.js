@@ -1,6 +1,6 @@
 $(document).ready(function(){
     if(id){
-        ZYCtrlDataHandler.getDataForUpdate(config.ajaxUrls.brandGetDetail,{id:id},function(){
+        ZYCtrlDataHandler.getDataForUpdate(config.ajaxUrls.brandGetDetail,{id:id},function(data){
             $("#name").val(data.name);
             $("#description").val(data.description);
             $("#image").val(data.icon);
@@ -8,8 +8,9 @@ $(document).ready(function(){
         });
     }
     var formHandler=new ZYFormHandler({
-        redirectUrl:"/pages/brand/brand.html",
-        keyName:"brand"
+        redirectUrl:"brand/brand",
+        createUrl:config.ajaxUrls.brandCreate,
+        updateUrl:config.ajaxUrls.brandUpdate
     });
     $("#myForm").validate({
         ignore:[],

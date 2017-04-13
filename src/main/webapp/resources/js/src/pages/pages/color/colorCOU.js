@@ -1,16 +1,14 @@
 $(document).ready(function(){
-    var editId;
-    if(location.search){
-        editId=location.search.substr(1);
-        var data=JSON.parse(localStorage.getItem("brand"));
-        data=data[config.findInArray(data,"id",editId)];
-
-        $("#name").val(data.name);
-        $("#color").val(data.color);
+    if(id){
+        ZYCtrlDataHandler.getDataForUpdate(config.ajaxUrls.colorGetDetail,{id:id},function(data){
+            $("#name").val(data.name);
+            $("#color").val(data.colorValue);
+        });
     }
     var formHandler=new ZYFormHandler({
-        redirectUrl:"/pages/color/color.html",
-        keyName:"color"
+        redirectUrl:"color/color",
+        createUrl:config.ajaxUrls.colorCreate,
+        updateUrl:config.ajaxUrls.colorUpdate
     });
     $("#myForm").validate({
         ignore:[],
@@ -19,7 +17,7 @@ $(document).ready(function(){
                 required:true,
                 maxlength:32
             },
-            value:{
+            colorValue:{
                 required:true
             }
         },
@@ -28,12 +26,12 @@ $(document).ready(function(){
                 required:config.validErrors.required,
                 maxlength:config.validErrors.maxLength.replace("${max}",32)
             },
-            value:{
+            colorValue:{
                 required:config.validErrors.required
             }
         },
         submitHandler:function(form) {
-            formHandler.submitForm(form,editId);
+            formHandler.submitForm(form,id);
         }
     });
 });
