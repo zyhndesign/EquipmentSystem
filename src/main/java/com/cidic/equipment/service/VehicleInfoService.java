@@ -1,5 +1,7 @@
 package com.cidic.equipment.service;
 
+import java.util.Optional;
+
 import com.cidic.equipment.model.VehicleInfo;
 import com.cidic.equipment.model.VehicleInfoTableModel;
 
@@ -12,4 +14,6 @@ public interface VehicleInfoService {
 	public int deleteVehicleInfo(int id);
 	
 	public VehicleInfoTableModel getVehicleInfoByPage(int offset, int limit);
+	
+	public Optional<VehicleInfo> getDataByVehicleInfoId(int id);
 }

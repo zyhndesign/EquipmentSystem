@@ -2,6 +2,7 @@ package com.cidic.equipment.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,15 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cidic.equipment.exception.EquipmentException;
 import com.cidic.equipment.model.Texture;
 import com.cidic.equipment.model.TextureTableModel;
+import com.cidic.equipment.model.Color;
 import com.cidic.equipment.model.ListResultModel;
 import com.cidic.equipment.model.ResultModel;
 import com.cidic.equipment.service.TextureService;
@@ -43,6 +48,31 @@ public class TextureController {
 		return resultModel;
 	}
 	
+	@RequestMapping(value = "/texture", method = RequestMethod.GET)
+	public String texture(Locale locale, Model model) {
+		return "texture";
+	}
+	
+	@RequestMapping(value = "/textureCOU", method = RequestMethod.GET)
+	public ModelAndView textureCOU(Locale locale, Model model) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("textureCOU");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/textureCOU/{id}", method = RequestMethod.GET)
+    public ModelAndView updateTextureCOU(HttpServletRequest request, @PathVariable int id) {
+
+		Texture texture = null;
+        if (id > 0) {
+        	texture = textureServiceImpl.getDataByTextureId(id).get();
+        }
+        ModelAndView view = new ModelAndView();
+        view.setViewName("textureCOU");
+        view.addObject("texture", texture);
+        return view;
+    }
+	
 	@RequestMapping(value = "/createTexture", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultModel createTexture(HttpServletRequest request, HttpServletResponse response,
@@ -61,7 +91,7 @@ public class TextureController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "²Ù×÷Ê§°Ü");
+			throw new EquipmentException(500, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 	
@@ -84,7 +114,7 @@ public class TextureController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "²Ù×÷Ê§°Ü");
+			throw new EquipmentException(500, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 	
@@ -99,7 +129,7 @@ public class TextureController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "²Ù×÷Ê§°Ü");
+			throw new EquipmentException(500, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 	
@@ -136,7 +166,7 @@ public class TextureController {
 			resultModel.setObject(list);
 			return resultModel;
 		}catch (Exception e) {
-			throw new EquipmentException(500, "²Ù×÷Ê§°Ü");
+			throw new EquipmentException(500, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 }

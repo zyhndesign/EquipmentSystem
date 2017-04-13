@@ -1,6 +1,7 @@
 package com.cidic.equipment.dao.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -79,6 +80,23 @@ public class BrandDaoImpl implements BrandDao {
         @SuppressWarnings("unchecked")
 		final List<Brand> list = query.list(); 
 		return list;
+	}
+
+	@Override
+	public Optional<Brand> getDataByBrandId(int id) {
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = " from Brand where Id = ?";
+		Query query = session.createQuery(hql);
+        query.setParameter(0, id); 
+        @SuppressWarnings("unchecked")
+		List<Brand> list = query.list();
+        if (list.size() > 0){
+        	Optional<Brand> user = Optional.ofNullable(list.get(0));
+     		return user;
+        }
+        else{
+        	return Optional.empty();
+        }
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.cidic.equipment.dao.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -67,6 +68,23 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 		final String hql = " select count(v) from VehicleInfo v"; 
         final Query query = session.createQuery(hql); 
         return (Integer)query.uniqueResult();
+	}
+
+	@Override
+	public Optional<VehicleInfo> getDataByVehicleInfoId(int id) {
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = " from VehicleInfo where Id = ?";
+		Query query = session.createQuery(hql);
+        query.setParameter(0, id); 
+        @SuppressWarnings("unchecked")
+		List<VehicleInfo> list = query.list();
+        if (list.size() > 0){
+        	Optional<VehicleInfo> vehicleInfo = Optional.ofNullable(list.get(0));
+     		return vehicleInfo;
+        }
+        else{
+        	return Optional.empty();
+        }
 	}
 
 }

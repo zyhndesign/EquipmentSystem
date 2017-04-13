@@ -1,6 +1,7 @@
 package com.cidic.equipment.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -65,6 +66,12 @@ public class VehicleInfoServiceImpl implements VehicleInfoService {
 		vehicleInfoTableModel.setList(list);
 		vehicleInfoTableModel.setCount(count);
 		return vehicleInfoTableModel;
+	}
+
+	@Override
+	public Optional<VehicleInfo> getDataByVehicleInfoId(int id) {
+		// TODO Auto-generated method stub
+		return vehicleInfoDaoImpl.getDataByVehicleInfoId(id);
 	}
 
 }

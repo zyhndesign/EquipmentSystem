@@ -9,6 +9,7 @@ private int resultCode;
 	
 	private String message;
 	private Object object;
+	private String uptoken;
 	
 	public int getResultCode() {
 		return resultCode;
@@ -39,6 +40,12 @@ private int resultCode;
 	}
 	public void setObject(Object object) {
 		this.object = object;
+	}
+	public String getUptoken() {
+		return uptoken;
+	}
+	public void setUptoken(String uptoken) {
+		this.uptoken = uptoken;
 	}
 	
 	

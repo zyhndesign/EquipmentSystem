@@ -1,6 +1,7 @@
 package com.cidic.equipment.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.cidic.equipment.model.Brand;
 
@@ -17,4 +18,6 @@ public interface BrandDao {
 	public int getCountBrand();
 	
 	public List<Brand> getAllBrand();
+	
+	public Optional<Brand> getDataByBrandId(int id);
 }

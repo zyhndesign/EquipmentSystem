@@ -1,6 +1,7 @@
 package com.cidic.equipment.dao.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -79,6 +80,23 @@ public class CategoryDaoImpl implements CategoryDao {
         @SuppressWarnings("unchecked")
 		final List<Category> list = query.list(); 
 		return list;
+	}
+
+	@Override
+	public Optional<Category> getDataByCategoryId(int id) {
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = " from Category where Id = ?";
+		Query query = session.createQuery(hql);
+        query.setParameter(0, id); 
+        @SuppressWarnings("unchecked")
+		List<Category> list = query.list();
+        if (list.size() > 0){
+        	Optional<Category> category = Optional.ofNullable(list.get(0));
+     		return category;
+        }
+        else{
+        	return Optional.empty();
+        }
 	}
 
 }

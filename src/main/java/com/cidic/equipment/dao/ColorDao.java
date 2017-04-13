@@ -1,6 +1,7 @@
 package com.cidic.equipment.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.cidic.equipment.model.Color;
 
@@ -17,4 +18,6 @@ public interface ColorDao {
 	public int getCountColor();
 	
 	public List<Color> getAllColor();
+	
+	public Optional<Color> getDataByColorId(int id);
 }

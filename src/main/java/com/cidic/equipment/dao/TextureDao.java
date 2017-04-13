@@ -1,6 +1,7 @@
 package com.cidic.equipment.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.cidic.equipment.model.Texture;
 
@@ -17,4 +18,6 @@ public interface TextureDao {
 	public int getCountTexture();
 	
 	public List<Texture> getAllTexture();
+	
+	public Optional<Texture> getDataByTextureId(int id);
 }

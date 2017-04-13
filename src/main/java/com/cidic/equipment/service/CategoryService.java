@@ -1,6 +1,7 @@
 package com.cidic.equipment.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.cidic.equipment.model.Category;
 import com.cidic.equipment.model.CategoryTableModel;
@@ -16,4 +17,6 @@ public interface CategoryService {
 	public CategoryTableModel getCategoryByPage(int offset, int limit);
 	
 	public List<Category> getAllCategory();
+	
+	public Optional<Category> getDataByCategoryId(int id);
 }

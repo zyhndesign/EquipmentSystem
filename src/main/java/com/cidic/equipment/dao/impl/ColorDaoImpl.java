@@ -1,6 +1,7 @@
 package com.cidic.equipment.dao.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -79,6 +80,23 @@ public class ColorDaoImpl implements ColorDao {
         @SuppressWarnings("unchecked")
 		final List<Color> list = query.list(); 
 		return list;
+	}
+
+	@Override
+	public Optional<Color> getDataByColorId(int id) {
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = " from Color where Id = ?";
+		Query query = session.createQuery(hql);
+        query.setParameter(0, id); 
+        @SuppressWarnings("unchecked")
+		List<Color> list = query.list();
+        if (list.size() > 0){
+        	Optional<Color> color = Optional.ofNullable(list.get(0));
+     		return color;
+        }
+        else{
+        	return Optional.empty();
+        }
 	}
 
 }

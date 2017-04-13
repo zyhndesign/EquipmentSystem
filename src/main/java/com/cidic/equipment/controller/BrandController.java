@@ -2,6 +2,7 @@ package com.cidic.equipment.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,11 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cidic.equipment.exception.EquipmentException;
 import com.cidic.equipment.model.Brand;
@@ -43,6 +47,31 @@ public class BrandController {
 		return resultModel;
 	}
 	
+	@RequestMapping(value = "/brand", method = RequestMethod.GET)
+	public String brand(Locale locale, Model model) {
+		return "brand";
+	}
+	
+	@RequestMapping(value = "/brandCOU", method = RequestMethod.GET)
+	public ModelAndView guideCOU(Locale locale, Model model) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("brandCOU");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/brandCOU/{id}", method = RequestMethod.GET)
+    public ModelAndView updateGuideCOU(HttpServletRequest request, @PathVariable int id) {
+
+		Brand brand = null;
+        if (id > 0) {
+        	brand = brandServiceImpl.getDataByBrandId(id).get();
+        }
+        ModelAndView view = new ModelAndView();
+        view.setViewName("brandCOU");
+        view.addObject("brand", brand);
+        return view;
+    }
+	
 	@RequestMapping(value = "/createBrand", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultModel createBrand(HttpServletRequest request, HttpServletResponse response,
@@ -61,7 +90,7 @@ public class BrandController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "²Ù×÷Ê§°Ü");
+			throw new EquipmentException(500, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 	
@@ -84,7 +113,7 @@ public class BrandController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "²Ù×÷Ê§°Ü");
+			throw new EquipmentException(500, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 	
@@ -99,7 +128,7 @@ public class BrandController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "²Ù×÷Ê§°Ü");
+			throw new EquipmentException(500, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 	
@@ -136,7 +165,7 @@ public class BrandController {
 			resultModel.setObject(list);
 			return resultModel;
 		}catch (Exception e) {
-			throw new EquipmentException(500, "²Ù×÷Ê§°Ü");
+			throw new EquipmentException(500, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 }

@@ -2,6 +2,7 @@ package com.cidic.equipment.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,11 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cidic.equipment.exception.EquipmentException;
 import com.cidic.equipment.model.Color;
@@ -43,6 +47,31 @@ public class ColorController {
 		return resultModel;
 	}
 	
+	@RequestMapping(value = "/color", method = RequestMethod.GET)
+	public String brand(Locale locale, Model model) {
+		return "color";
+	}
+	
+	@RequestMapping(value = "/colorCOU", method = RequestMethod.GET)
+	public ModelAndView guideCOU(Locale locale, Model model) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("colorCOU");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/colorCOU/{id}", method = RequestMethod.GET)
+    public ModelAndView updateColorCOU(HttpServletRequest request, @PathVariable int id) {
+
+		Color color = null;
+        if (id > 0) {
+        	color = colorServiceImpl.getDataByColorId(id).get();
+        }
+        ModelAndView view = new ModelAndView();
+        view.setViewName("colorCOU");
+        view.addObject("color", color);
+        return view;
+    }
+	
 	@RequestMapping(value = "/createColor", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultModel createColor(HttpServletRequest request, HttpServletResponse response,
@@ -60,7 +89,7 @@ public class ColorController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "²Ù×÷Ê§°Ü");
+			throw new EquipmentException(500, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 	
@@ -82,7 +111,7 @@ public class ColorController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "²Ù×÷Ê§°Ü");
+			throw new EquipmentException(500, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 	
@@ -97,7 +126,7 @@ public class ColorController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "²Ù×÷Ê§°Ü");
+			throw new EquipmentException(500, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 	
@@ -134,7 +163,7 @@ public class ColorController {
 			resultModel.setObject(list);
 			return resultModel;
 		}catch (Exception e) {
-			throw new EquipmentException(500, "²Ù×÷Ê§°Ü");
+			throw new EquipmentException(500, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package com.cidic.equipment.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.cidic.equipment.model.Color;
 import com.cidic.equipment.model.ColorTableModel;
@@ -16,4 +17,6 @@ public interface ColorService {
 	public ColorTableModel getColorByPage(int offset, int limit);
 	
 	public List<Color> getAllColor();
+	
+	public Optional<Color> getDataByColorId(int id);
 }

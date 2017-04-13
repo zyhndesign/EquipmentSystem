@@ -1,6 +1,7 @@
 package com.cidic.equipment.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -70,6 +71,12 @@ public class TextureServiceImpl implements TextureService {
 	@Override
 	public List<Texture> getAllTexture() {
 		return textureDaoImpl.getAllTexture();
+	}
+
+	@Override
+	public Optional<Texture> getDataByTextureId(int id) {
+		// TODO Auto-generated method stub
+		return textureDaoImpl.getDataByTextureId(id);
 	}
 
 }

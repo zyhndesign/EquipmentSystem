@@ -1,6 +1,7 @@
 package com.cidic.equipment.dao.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -79,6 +80,23 @@ public class TextureDaoImpl implements TextureDao {
         @SuppressWarnings("unchecked")
 		final List<Texture> list = query.list(); 
 		return list;
+	}
+
+	@Override
+	public Optional<Texture> getDataByTextureId(int id) {
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = " from Texture where Id = ?";
+		Query query = session.createQuery(hql);
+        query.setParameter(0, id); 
+        @SuppressWarnings("unchecked")
+		List<Texture> list = query.list();
+        if (list.size() > 0){
+        	Optional<Texture> texture = Optional.ofNullable(list.get(0));
+     		return texture;
+        }
+        else{
+        	return Optional.empty();
+        }
 	}
 
 }

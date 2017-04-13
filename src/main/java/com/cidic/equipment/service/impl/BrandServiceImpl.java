@@ -1,6 +1,7 @@
 package com.cidic.equipment.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -70,6 +71,12 @@ public class BrandServiceImpl implements BrandService {
 	@Override
 	public List<Brand> getAllBrand() {
 		return brandDaoImpl.getAllBrand();
+	}
+
+	@Override
+	public Optional<Brand> getDataByBrandId(int id) {
+		// TODO Auto-generated method stub
+		return brandDaoImpl.getDataByBrandId(id);
 	}
 
 }

@@ -1,6 +1,6 @@
 package com.cidic.equipment.controller;
 
-import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,12 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cidic.equipment.exception.EquipmentException;
 import com.cidic.equipment.model.ListResultModel;
@@ -43,6 +46,31 @@ public class VehicleInfoController {
 		return resultModel;
 	}
 	
+	@RequestMapping(value = "/infoMgr", method = RequestMethod.GET)
+	public String infoMgr(Locale locale, Model model) {
+		return "infoMgr";
+	}
+	
+	@RequestMapping(value = "/infoCOU", method = RequestMethod.GET)
+	public ModelAndView guideCOU(Locale locale, Model model) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("infoCOU");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/infoCOU/{id}", method = RequestMethod.GET)
+    public ModelAndView updateInfoCOU(HttpServletRequest request, @PathVariable int id) {
+
+		VehicleInfo vehicleInfo = null;
+        if (id > 0) {
+        	vehicleInfo = vehicleInfoServiceImpl.getDataByVehicleInfoId(id).get();
+        }
+        ModelAndView view = new ModelAndView();
+        view.setViewName("infoCOU");
+        view.addObject("info", vehicleInfo);
+        return view;
+    }
+	
 	@RequestMapping(value = "/createVehicleInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultModel createVehicleInfo(HttpServletRequest request, HttpServletResponse response,
@@ -56,7 +84,7 @@ public class VehicleInfoController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "²Ù×÷Ê§°Ü");
+			throw new EquipmentException(500, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 	
@@ -72,7 +100,7 @@ public class VehicleInfoController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "²Ù×÷Ê§°Ü");
+			throw new EquipmentException(500, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 	
@@ -87,7 +115,7 @@ public class VehicleInfoController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "²Ù×÷Ê§°Ü");
+			throw new EquipmentException(500, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 	
