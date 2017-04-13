@@ -90,7 +90,7 @@ public class BrandController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "����ʧ��");
+			throw new EquipmentException(500, "操作失败！");
 		}
 	}
 	
@@ -113,7 +113,7 @@ public class BrandController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "����ʧ��");
+			throw new EquipmentException(500, "操作失败！");
 		}
 	}
 	
@@ -128,7 +128,7 @@ public class BrandController {
 			resultModel.setSuccess(true);
 			return resultModel;
 		} else {
-			throw new EquipmentException(500, "����ʧ��");
+			throw new EquipmentException(500, "操作失败！");
 		}
 	}
 	
@@ -165,7 +165,23 @@ public class BrandController {
 			resultModel.setObject(list);
 			return resultModel;
 		}catch (Exception e) {
-			throw new EquipmentException(500, "����ʧ��");
+			throw new EquipmentException(500, "操作失败！");
+		}
+	}
+	
+	@RequestMapping(value = "/getBrandById", method = RequestMethod.POST)
+	@ResponseBody
+	public ResultModel getBrandById(HttpServletRequest request, HttpServletResponse response,@RequestParam int id) {
+		WebRequestUtil.AccrossAreaRequestSet(request, response);
+		resultModel = new ResultModel();
+		try {
+			Brand brand = brandServiceImpl.getDataByBrandId(id).get();
+			resultModel.setResultCode(200);
+			resultModel.setSuccess(true);
+			resultModel.setObject(brand);
+			return resultModel;
+		}catch (Exception e) {
+			throw new EquipmentException(500, "操作失败！");
 		}
 	}
 }
