@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cidic.equipment.exception.EquipmentException;
-import com.cidic.equipment.model.Brand;
 import com.cidic.equipment.model.Category;
 import com.cidic.equipment.model.CategoryTableModel;
 import com.cidic.equipment.model.ListResultModel;
