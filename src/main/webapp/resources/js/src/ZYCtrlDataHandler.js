@@ -8,7 +8,7 @@ var ZYCtrlDataHandler={
             success:function(response){
                 if(response.success){
                     if(callback){
-                        callback();
+                        callback(response.object);
                     }
                 }else{
                     functions.ajaxReturnErrorHandler(response.message);
@@ -19,104 +19,236 @@ var ZYCtrlDataHandler={
             }
         })
     },
-    getCategoryFirstLevelItems:function(type,idFlag){
-        var list=JSON.parse(localStorage.getItem("category")),
-            arr=[],string;
+    generateCategoryItems:function(list,idFlag,callback){
+        var arr=[],stringOption,stringCheckbox;
         idFlag=idFlag||"";
+
         for(var i=0,len=list.length;i<len;i++){
-            if(list[i].pId==="00"){
+            if(list[i].parentId===0){
                 arr.push(list[i]);
             }
         }
 
-        if(type=="option"){
-            string=juicer(config.categoryAllOptionTpl,{
-                idFlag:idFlag,
-                items:arr
-            })
-        }else if(type=="checkbox"){
-            string=juicer(config.categoryAllCheckboxTpl,{
-                idFlag:idFlag,
-                items:arr
-            })
+        stringOption=juicer(config.categoryAllOptionTpl,{
+            idFlag:idFlag,
+            items:arr
+        });
+
+        stringCheckbox=juicer(config.categoryAllCheckboxTpl,{
+            idFlag:idFlag,
+            items:arr
+        });
+
+        if(callback){
+            callback(stringOption,stringCheckbox);
         }
 
-        return string;
     },
-    getCategoryTreeItems:function(){
-        var categoryArr=JSON.parse(localStorage.getItem("category")),
-            category,items=[],itemChild,itemsCtrlArr=[],
-            parentIndexMap={};
+    getCategoryFirstLevelItems:function(idFlag,callback){
+        var me=this;
+        if(me.categoryData){
+            this.generateCategoryItems(me.categoryData,idFlag,callback);
 
-        for(var i=0,len=categoryArr.length;i<len;i++){
-            category=categoryArr[i];
-
-            if(category.id==="00"){
-                continue;
-            }
-            if(category.isParent){
-                if(category.pId!=="00"){
-                    category.childs=[];
-                    items.push(category);
-                    parentIndexMap[category.id]=items.length-1;
-                }
-
-                continue;
-            }
-
-            if(category.isLeaf){
-                items[parentIndexMap[category.pId]].childs.push(category);
-            }
+            return ;
         }
 
-        return juicer(config.categoryTreeTpl,{
-            items:items
+        $.ajax({
+            dataType:"json",
+            type:"post",
+            url:config.ajaxUrls.categoryGetAll,
+            success:function(response){
+                if(response.success){
+                    me.categoryData=response.object;
+                    me.generateCategoryItems(me.categoryData,idFlag,callback);
+                }else{
+                    functions.ajaxReturnErrorHandler(response.message);
+                }
+            },
+            error:function(){
+                functions.ajaxErrorHandler();
+            }
         })
     },
-    getBrandItems:function(type,idFlag){
-        var list=JSON.parse(localStorage.getItem("brand")),
-            string;
-        idFlag=idFlag||"";
+    generateCategoryGroupOptions:function(list,callback){
+        var items=[],item,string,
+            parentIndexMap={};
 
-        if(type=="option"){
-            string=juicer(config.brandAllOptionTpl,{
-                idFlag:idFlag,
-                items:list
-            })
-        }else if(type=="checkbox"){
-            string=juicer(config.brandAllCheckboxTpl,{
-                idFlag:idFlag,
-                items:list
-            })
+        for(var i=0,len=list.length;i<len;i++){
+            item=list[i];
+
+            if(item.id===0){
+                continue;
+            }
+            if(item.parentId===0){
+                item.childs=[];
+                items.push(item);
+                parentIndexMap[item.id]=items.length-1;
+
+                continue;
+            }
+
+            if(item.id===0&&item.parentId!==0){
+                items[parentIndexMap[item.parentId]].childs.push(item);
+            }
         }
 
-        return string;
+        string = juicer(config.categoryTreeTpl,{
+            items:items
+        });
+
+        if(callback){
+            callback(string);
+        }
     },
-    getTextureItems:function(idFlag){
-        var list=JSON.parse(localStorage.getItem("texture")),
-            string;
+    getCategoryGroupOptions:function(callback){
+        var me=this;
+        if(me.categoryData){
+            me.generateCategoryGroupOptions(me.categoryData,callback);
+            return ;
+        }
+
+        $.ajax({
+            dataType:"json",
+            type:"post",
+            url:config.ajaxUrls.categoryGetAll,
+            success:function(response){
+                if(response.success){
+                    me.categoryData=response.object;
+                    me.generateCategoryGroupOptions(me.categoryData,callback);
+                }else{
+                    functions.ajaxReturnErrorHandler(response.message);
+                }
+            },
+            error:function(){
+                functions.ajaxErrorHandler();
+            }
+        })
+
+    },
+    generateBrandItems:function(list,idFlag,callback){
+        var stringOption,stringCheckbox;
         idFlag=idFlag||"";
 
-        string=juicer(config.textureAllCheckboxTpl,{
+        stringOption=juicer(config.brandAllOptionTpl,{
+            idFlag:idFlag,
+            items:list
+        });
+        stringCheckbox=juicer(config.brandAllCheckboxTpl,{
             idFlag:idFlag,
             items:list
         });
 
-        return string;
+        if(callback){
+            callback(stringOption,stringCheckbox);
+        }
     },
-    getColorItems:function(type,idFlag){
-        var list=JSON.parse(localStorage.getItem("color")),
-        string;
+    getBrandItems:function(idFlag,callback){
+        var me=this;
+        if(me.brandData){
+            me.generateBrandItems(me.brandData,idFlag,callback);
+            return ;
+        }
+        $.ajax({
+            dataType:"json",
+            type:"post",
+            url:config.ajaxUrls.brandGetAll,
+            success:function(response){
+                if(response.success){
+                    me.brandData=response.object;
+                    me.generateBrandItems(me.brandData,idFlag,callback);
+
+                }else{
+                    functions.ajaxReturnErrorHandler(response.message);
+                }
+            },
+            error:function(){
+                functions.ajaxErrorHandler();
+            }
+        })
+
+    },
+    generateTextureItems:function(list,idFlag,callback){
+        var stringOption,stringCheckbox;
         idFlag=idFlag||"";
 
-        if(type=="option"){
-            string=juicer(config.colorAllOptionTpl,{
-                idFlag:idFlag,
-                items:list
-            });
+        stringOption=juicer(config.textureAllCheckboxTpl,{
+            idFlag:idFlag,
+            items:list
+        });
+        stringCheckbox=juicer(config.brandAllCheckboxTpl,{
+            idFlag:idFlag,
+            items:list
+        });
+
+        if(callback){
+            callback(stringOption,stringCheckbox);
+        }
+    },
+    getTextureItems:function(idFlag,callback){
+        var me=this;
+        if(me.textureData){
+            me.generateTextureItems(me.textureData,idFlag,callback);
+            return ;
         }
 
-        return string;
+        $.ajax({
+            dataType:"json",
+            type:"post",
+            url:config.ajaxUrls.textureGetAll,
+            success:function(response){
+                if(response.success){
+                    me.textureData=response.object;
+                    me.generateTextureItems(me.textureData,idFlag,callback);
+                }else{
+                    functions.ajaxReturnErrorHandler(response.message);
+                }
+            },
+            error:function(){
+                functions.ajaxErrorHandler();
+            }
+        })
+
+    },
+    generateColorItems:function(list,idFlag,callback){
+        var stringOption,stringCheckbox;
+        idFlag=idFlag||"";
+
+        stringOption=juicer(config.colorAllOptionTpl,{
+            idFlag:idFlag,
+            items:list
+        });
+        stringCheckbox=juicer(config.colorAllOptionTpl,{
+            idFlag:idFlag,
+            items:list
+        });
+
+        if(callback){
+            callback(stringOption,stringCheckbox);
+        }
+    },
+    getColorItems:function(type,idFlag,callback){
+        var me=this;
+        if(me.colorData){
+            me.generateColorItems(me.colorData,idFlag,callback);
+            return ;
+        }
+        $.ajax({
+            dataType:"json",
+            type:"post",
+            url:config.ajaxUrls.textureGetAll,
+            success:function(response){
+                if(response.success){
+                    me.colorData=response.object;
+                    me.generateColorItems(me.colorData,idFlag,callback);
+                }else{
+                    functions.ajaxReturnErrorHandler(response.message);
+                }
+            },
+            error:function(){
+                functions.ajaxErrorHandler();
+            }
+        })
+
     },
     /**
      * 计算实际image的尺寸和margin

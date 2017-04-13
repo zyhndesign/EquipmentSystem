@@ -33,7 +33,7 @@
                 
 <div class="zySearch" id="search">
     <div class="zySearchRow">
-        <a class="waves-effect waves-light btn" href="cou/cou.html">
+        <a class="waves-effect waves-light btn" href="vehicleInfo/infoCOU">
             <i class="material-icons left">backup</i>新建</a>
 
         <div class="right">
@@ -164,6 +164,7 @@
 <script src="resources/js/lib/jquery.dataTables.min.js"></script>
 <script src="resources/js/lib/juicer-min.js"></script>
 <script src="resources/js/src/config.js"></script>
+        <script src="resources/js/src/functions.js"></script>
 <script src="resources/js/src/ZYTableHandler.js"></script>
 <script src="resources/js/src/ZYCtrlDataHandler.js"></script>
 <script src="resources/js/src/pages/infoMgr/infoMgr.js"></script>

@@ -1,4 +1,4 @@
-var mgr=(function(config,ZYCtrlDataHandler){
+var infoMgr=(function(config,ZYCtrlDataHandler){
 
     return {
         table:null,
@@ -31,7 +31,7 @@ var mgr=(function(config,ZYCtrlDataHandler){
 
         },
         search:function(){
-            this.table.tableSearch(this.getSearchInfo());
+            this.table.tableRedraw();
         },
         initSearchHandler:function(){
             var me=this;
@@ -42,19 +42,27 @@ var mgr=(function(config,ZYCtrlDataHandler){
             });
         },
         initData:function(){
-            $("#searchBrand").html(ZYCtrlDataHandler.getBrandItems("checkbox"));
-            $("#searchTexture").html(ZYCtrlDataHandler.getTextureItems());
-            $("#searchMainColor").append(ZYCtrlDataHandler.getColorItems("option"));
-            $("#searchAssistColor1").append(ZYCtrlDataHandler.getColorItems("option"));
-            $("#searchAssistColor2").append(ZYCtrlDataHandler.getColorItems("option"));
+            ZYCtrlDataHandler.getBrandItems("checkbox","",function(string){
+                $("#searchBrand").html(string);
+            });
+            ZYCtrlDataHandler.getTextureItems("infoMgrTexture",function(string){
+                $("#searchTexture").html(string);
+            });
+            ZYCtrlDataHandler.getColorItems("option",function(string){
+                $("#searchMainColor").append(string);
+                $("#searchAssistColor1").append(string);
+                $("#searchAssistColor2").append(string);
+            });
+
+
         }
     };
 })(config,ZYCtrlDataHandler);
 
 $(document).ready(function(){
 
-    mgr.initData();
-    mgr.initSearchHandler();
+    infoMgr.initData();
+    infoMgr.initSearchHandler();
 
     $("#zySearchCollapse").click(function(){
         if($(this).data("target").indexOf("up")!=-1){
@@ -70,12 +78,14 @@ $(document).ready(function(){
         }
     });
 
-    mgr.table=new ZYTableHandler({
-        keyName:"mgr",
+    infoMgr.table=new ZYTableHandler({
+        removeUrl:config.ajaxUrls.infoDelete,
         ownTable:function(data){
             var dtTable=$('#myTable').dataTable( {
-                "bServerSide": false,
+                "bServerSide": true,
                 "bInfo":true,
+                "sAjaxSource": config.ajaxUrls.infoGetByPage,
+                "bProcessing": true,
                 "bLengthChange": false,
                 "bFilter": false,
                 "bSort":false,
@@ -85,7 +95,6 @@ $(document).ready(function(){
                 "oLanguage": {
                     "sUrl":config.dataTable.langUrl
                 },
-                aaData: data,
                 aoColumns: [
                     { "mDataProp": "imageChanPin",
                         "fnRender":function(oObj){
@@ -107,11 +116,46 @@ $(document).ready(function(){
                         }},
                     { "mDataProp": "opt",
                         "fnRender":function(oObj){
-                            return  '<a href="/pages/mgr/cou/cou.html?'+oObj.aData.id+'">编辑</a>&nbsp;&nbsp;'+
+                            return  '<a href="vehicleInfo/infoCOU.html?'+oObj.aData.id+'">编辑</a>&nbsp;&nbsp;'+
                                 '<a href="'+oObj.aData.id+'" class="remove">删除</a>';
                         }
                     }
-                ]
+                ],
+                "fnServerParams": function (aoData) {
+
+                },
+                "fnServerData": function (sSource, aoData, fnCallback) {
+
+                    //回调函数
+                    $.ajax({
+                        "dataType": 'json',
+                        "type": "get",
+                        "url": sSource,
+                        "data": aoData,
+                        "success": function (response) {
+                            if (response.success === false) {
+                                functions.ajaxReturnErrorHandler(response.message);
+                            } else {
+                                var json = {
+                                    "sEcho": response.sEcho
+                                };
+
+                                for (var i = 0, iLen = response.aaData.length; i < iLen; i++) {
+                                    response.aaData[i].opt = "opt";
+                                }
+
+                                json.aaData = response.aaData;
+                                json.iTotalRecords = response.iTotalRecords;
+                                json.iTotalDisplayRecords = response.iTotalDisplayRecords;
+                                fnCallback(json);
+                            }
+
+                        }
+                    });
+                },
+                "fnFormatNumber": function (iIn) {
+                    return iIn;
+                }
             });
 
             return dtTable;
@@ -119,7 +163,7 @@ $(document).ready(function(){
     });
 
     $("#myTable").on("click","a.remove",function(){
-        mgr.table.delete($(this).attr("href"));
+        mgr.table.delete({id:$(this).attr("href")});
         return false;
     })
 });

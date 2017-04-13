@@ -50,8 +50,6 @@ $(document).ready(function() {
                                     "sEcho": response.sEcho
                                 };
 
-                                productMgr.loadedData = {};
-
                                 for (var i = 0, iLen = response.aaData.length; i < iLen; i++) {
                                     response.aaData[i].opt = "opt";
                                 }

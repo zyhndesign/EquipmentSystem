@@ -9,16 +9,12 @@ var cou=(function(config,ZYCtrlDataHandler){
                 //显示保存按钮，隐藏infoChild页面的保存和取消
                 $("#saveBtn").removeClass("hide");
                 $("#previewBtn").removeClass("hide");
-                if(location.search){
-                    $("#removeBtn").removeClass("hide");
-                }
 
                 $("#infoChildSave").addClass("hide");
                 $("#infoChildCancel").addClass("hide");
             }else{
                 $("#saveBtn").addClass("hide");
                 $("#previewBtn").addClass("hide");
-                $("#removeBtn").addClass("hide");
 
                 $("#infoChildSave").removeClass("hide");
                 $("#infoChildCancel").removeClass("hide");
@@ -254,10 +250,7 @@ var cou=(function(config,ZYCtrlDataHandler){
             return data;
             
         },
-        initCtrlData:function(){
-            var list=JSON.parse(localStorage.getItem("mgr")),
-                index=config.findInArray(list,"id",this.editId),
-                data=list[index];
+        initCtrlData:function(data){
 
             this.componentInfo=data.componentInfo;
             $("#infoCategory").val(data.category);
@@ -283,31 +276,47 @@ var cou=(function(config,ZYCtrlDataHandler){
 
         },
         initData:function(){
-            $("#infoCategory").html(ZYCtrlDataHandler.getCategoryFirstLevelItems("option"));
-            $("#infoBrand").html(ZYCtrlDataHandler.getBrandItems("option"));
-            $("#infoTexture").html(ZYCtrlDataHandler.getTextureItems());
-            $("#infoMainColor").append(ZYCtrlDataHandler.getColorItems("option"));
-            $("#infoAssistColor1").append(ZYCtrlDataHandler.getColorItems("option"));
-            $("#infoAssistColor2").append(ZYCtrlDataHandler.getColorItems("option"));
-            $("#iCAddTexture").html(ZYCtrlDataHandler.getTextureItems("iCAdd"));
-            $(".zyActionCategory").html(ZYCtrlDataHandler.getCategoryTreeItems()).material_select();
 
-            if(location.search){
-                this.editId=location.search.substr(1);
-                this.initCtrlData();
-                $("#removeBtn").removeClass("hide");
+            ZYCtrlDataHandler.getBrandItems("",function(stringOption,stringCheckbox){
+                $("#infoBrand").html(stringOption);
+            });
+            ZYCtrlDataHandler.getTextureItems("infoCOUTexture",function(stringOption,stringCheckbox){
+                $("#infoTexture").html(stringCheckbox);
+            });
+            ZYCtrlDataHandler.getTextureItems("iCAdd",function(stringOption,stringCheckbox){
+                $("#iCAddTexture").html(stringCheckbox);
+            });
+            ZYCtrlDataHandler.getColorItems("option",function(stringOption,stringCheckbox){
+                $("#infoMainColor").append(stringOption);
+                $("#infoAssistColor1").append(stringOption);
+                $("#infoAssistColor2").append(stringOption);
+                $("#iCAddColor").append(stringOption);
+            });
+            ZYCtrlDataHandler.getCategoryFirstLevelItems("",function(stringOption,stringCheckbox){
+                $("#infoCategory").html(stringOption);
+            });
+
+            ZYCtrlDataHandler.getCategoryGroupOptions(function(string){
+                $(".zyActionCategory").html(string).material_select();
+            });
+
+
+            //编辑的时候都要设置值
+            if(id){
+                ZYCtrlDataHandler.getDataForUpdate(config.ajaxUrls.infoGetDetail,{id:id},function(data){
+                    this.initCtrlData(data);
+                })
             }
 
-
-            $("#iCAddColor").append(ZYCtrlDataHandler.getColorItems("option"));
             this.initInfoChildTable($("#infoChildTable tbody"));
         }
     }
 })(config,ZYCtrlDataHandler);
 $(document).ready(function(){
     var formHandler=new ZYFormHandler({
-        keyName:"mgr",
-        redirectUrl:"/pages/mgr/mgr.html"
+        redirectUrl:"vehicleInfo/infoMgr",
+        createUrl:config.ajaxUrls.infoCreate,
+        updateUrl:config.ajaxUrls.infoUpdate
     });
 
     cou.initData();
@@ -444,11 +453,8 @@ $(document).ready(function(){
             cou.getSubmitData();
         }
 
-        formHandler.submitForm(cou.submitData,cou.editId?cou.editId:undefined);
+        formHandler.submitForm(cou.submitData,id);
 
-    });
-    $("#removeBtn").click(function(){
-        formHandler.remove(cou.editId);
     });
 
 });
