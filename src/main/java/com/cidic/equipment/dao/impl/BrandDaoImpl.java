@@ -69,7 +69,8 @@ public class BrandDaoImpl implements BrandDao {
 		Session session = this.getSessionFactory().getCurrentSession();
 		final String hql = " select count(b) from Brand b"; 
         final Query query = session.createQuery(hql); 
-        return (Integer)query.uniqueResult();
+        long count = (Long)query.uniqueResult();
+        return (int)count;
 	}
 
 	@Override

@@ -148,6 +148,7 @@ public class BrandController {
 			listResultModel.setiTotalDisplayRecords((int) brandTableModel.getCount());
 			listResultModel.setSuccess(true);
 		} catch (Exception e) {
+			e.printStackTrace();
 			listResultModel.setSuccess(false);
 		}
 		return listResultModel;

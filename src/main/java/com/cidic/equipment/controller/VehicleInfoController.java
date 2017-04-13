@@ -1,5 +1,6 @@
 package com.cidic.equipment.controller;
 
+import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -78,7 +79,7 @@ public class VehicleInfoController {
 			@RequestBody VehicleInfo vehicleInfo) {
 		WebRequestUtil.AccrossAreaRequestSet(request, response);
 		resultModel = new ResultModel();
-		
+		vehicleInfo.setCreateTime(new Date());
 		int result = vehicleInfoServiceImpl.createVehicleInfo(vehicleInfo);
 		if (result == ResponseCodeUtil.DB_OPERATION_SUCCESS) {
 			resultModel.setResultCode(200);

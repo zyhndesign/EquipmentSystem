@@ -69,7 +69,8 @@ public class ColorDaoImpl implements ColorDao {
 		Session session = this.getSessionFactory().getCurrentSession();
 		final String hql = " select count(c) from Color c"; 
         final Query query = session.createQuery(hql); 
-        return (Integer)query.uniqueResult();
+        long count = (Long)query.uniqueResult();
+        return (int)count;
 	}
 
 	@Override

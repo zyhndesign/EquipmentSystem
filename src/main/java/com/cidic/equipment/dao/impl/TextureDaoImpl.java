@@ -69,7 +69,8 @@ public class TextureDaoImpl implements TextureDao {
 		Session session = this.getSessionFactory().getCurrentSession();
 		final String hql = " select count(t) from Texture t"; 
         final Query query = session.createQuery(hql); 
-        return (Integer)query.uniqueResult();
+        long count = (Long)query.uniqueResult();
+        return (int)count;
 	}
 
 	@Override

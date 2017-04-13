@@ -67,7 +67,8 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 		Session session = this.getSessionFactory().getCurrentSession();
 		final String hql = " select count(v) from VehicleInfo v"; 
         final Query query = session.createQuery(hql); 
-        return (Integer)query.uniqueResult();
+        long count = (Long)query.uniqueResult();
+        return (int)count;
 	}
 
 	@Override

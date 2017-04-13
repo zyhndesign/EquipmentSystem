@@ -69,7 +69,8 @@ public class CategoryDaoImpl implements CategoryDao {
 		Session session = this.getSessionFactory().getCurrentSession();
 		final String hql = " select count(c) from Category c"; 
         final Query query = session.createQuery(hql); 
-        return (Integer)query.uniqueResult();
+        long count = (Long)query.uniqueResult();
+        return (int)count;
 	}
 
 	@Override
