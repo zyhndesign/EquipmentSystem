@@ -8,6 +8,8 @@ pageEncoding="UTF-8"%>
     <link href="resources/css/lib/materialicons.css" rel="stylesheet">
     <link rel="stylesheet" href="resources/css/lib/materialize.min.css">
     <link rel="stylesheet" href="resources/css/src/main.css">
+    <link rel="stylesheet" href="resources/css/src/components/header/header.css">
+    <link rel="stylesheet" href="resources/css/src/components/menu/menu.css">
 </head>
 <body>
 
@@ -35,7 +37,6 @@ pageEncoding="UTF-8"%>
 </script>
 <script src="resources/js/lib/jquery-2.0.3.min.js"></script>
 <script src="resources/js/src/config.js"></script>
-<script src="resources/js/src/index.js"></script>
 
 </body>
 </html>

@@ -1,45 +1,53 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <%@ include file="head.jsp"%>
-    <link href="resources/css/lib/materialicons.css" rel="stylesheet">
-    <link rel="stylesheet" href="resources/css/lib/materialize.min.css">
-    <link rel="stylesheet" href="resources/css/lib/jquery.dataTables.css">
-    <link rel="stylesheet" href="resources/css/src/main.css">
-    <link rel="stylesheet" href="resources/css/src/components/header/header.css">
-    <link rel="stylesheet" href="resources/css/src/components/menu/menu.css">
-</head>
-<body>
+    <%@ page language="java" contentType="text/html; charset=UTF-8"
+             pageEncoding="UTF-8"%>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <%@ include file="head.jsp"%>
+        <link href="resources/css/lib/materialicons.css" rel="stylesheet">
+        <link rel="stylesheet" href="resources/css/lib/materialize.min.css">
+        <link rel="stylesheet" href="resources/css/lib/jquery.dataTables.css">
+        <link rel="stylesheet" href="resources/css/src/main.css">
+        <link rel="stylesheet" href="resources/css/src/components/header/header.css">
+        <link rel="stylesheet" href="resources/css/src/components/menu/menu.css">
+        </head>
+        <body>
 
 
-    <%@ include file="header.jsp"%>
+        <%@ include file="header.jsp"%>
 
-    <div class="zyMain">
-    <div class="zyLeft">
+        <div class="zyMain">
+        <div class="zyLeft">
 
-    <%@ include file="menu.jsp"%>
+        <%@ include file="menu.jsp"%>
 
-    </div>
+        </div>
+
     <div class="zyRight zyPd20">
         <div class="zyPanel zyBd2">
-            <div class="zyPanelTitle">新建/修改 颜色</div>
+            <div class="zyPanelTitle">颜色设置</div>
             <div class="zyPanelContent zyPd20">
-                <form class="zyForm" id="myForm" action="#">
-                    <div class="row">
-                        <label class="zyFormLabel">颜色：</label>
-                        <input class="zyInput" type="color" id="color" name="value">
-                    </div>
-                    <div class="row">
-                        <label class="zyFormLabel">名称：</label>
-                        <input class="zyInput" type="text" id="name" name="name">
-                    </div>
-                    <div class="row zyFormSubmitRow">
-                        <input type="submit" class="btn" value="确定">
-                    </div>
-                </form>
+                <a class="waves-effect waves-light btn" href="colorCOU.html">
+                    <i class="material-icons left">add</i>新建
+                </a>
+
+                <table id="myTable" class="dataTable">
+                    <thead>
+                    <tr>
+                        <th>色彩</th>
+                        <th>名称</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <!--<tr>
+                            <td><span style="width:100px;height:20px;background:red"></span></td>
+                            <td>xxxx</td>
+                            <td><a href="1">修改</a>&nbsp;&nbsp;<a href="1">删除</a></td>
+                        </tr>-->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -51,13 +59,13 @@ pageEncoding="UTF-8"%>
 <script>
     var pageName="color";
 </script>
-<script src="resources/js/lib/jquery-2.0.3.min.js"></script>
-<script src="resources/js/lib/materialize.min.js"></script>
-<script src="resources/js/lib/jquery.dataTables.min.js"></script>
-<script src="resources/js/lib/jquery.validate.min.js"></script>
-<script src="resources/js/src/config.js"></script>
-<script src="resources/js/src/ZYFormHandler.js"></script>
-<script src="resources/js/src/pages/color/colorCOU.js"></script>
+<script src="/static/js/lib/jquery-2.0.3.min.js"></script>
+<script src="/static/js/lib/materialize.min.js"></script>
+<script src="/static/js/lib/jquery.dataTables.min.js"></script>
+<script src="/static/js/lib/juicer-min.js"></script>
+<script src="/static/js/src/config.js"></script>
+<script src="/static/js/src/ZYTableHandler.js"></script>
+<script src="/static/js/src/pages/color/color.js"></script>
 
 </body>
 </html>
