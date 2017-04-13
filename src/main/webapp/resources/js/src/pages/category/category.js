@@ -1,9 +1,8 @@
 $(document).ready(function(){
     var treeHandler=new ZYTreeHandler({
         newDefaultName:"新结构",
-        keyName:"category"
+        init:function(data){
+            $.fn.zTree.init($("#zyTree"), treeHandler.getSettings(),data);
+        }
     });
-
-    $.fn.zTree.init($("#zyTree"), treeHandler.getSettings(),treeHandler.getNodes());
-
 });

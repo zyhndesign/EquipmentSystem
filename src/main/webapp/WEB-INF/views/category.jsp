@@ -43,6 +43,7 @@ pageEncoding="UTF-8"%>
 <script src="resources/js/lib/materialize.min.js"></script>
 <script src="resources/js/lib/jquery.ztree.all.min.js"></script>
 <script src="resources/js/src/config.js"></script>
+    <script src="resources/js/src/functions.js"></script>
 <script src="resources/js/src/ZYTreeHandler.js"></script>
 <script src="resources/js/src/pages/category/category.js"></script>
 </body>

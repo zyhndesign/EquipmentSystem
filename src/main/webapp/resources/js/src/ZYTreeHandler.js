@@ -1,10 +1,30 @@
 function ZYTreeHandler(params) {
-    this.keyName=params.keyName;
     this.newDefaultName = params.newDefaultName;
-    this.data=JSON.parse(localStorage.getItem(this.keyName));
+    this.getNodes(function(data){
+        params.init(data);
+    });
 }
 ZYTreeHandler.prototype.getNodes=function(){
-    return this.data;
+    return this.nodes;
+}
+ZYTreeHandler.prototype.getNodes=function(callback){
+    $.ajax({
+        dataType:"json",
+        type:"post",
+        url:config.ajaxUrls.categoryGetAll,
+        success:function(response){
+            var data=response.object;
+            if(response.success){
+                data.unshift({id:0,name:"品类",parentId:-1,open:true,isParent:true});
+                callback(data);
+            }else{
+                functions.ajaxReturnErrorHandler(response.message);
+            }
+        },
+        error:function(){
+            functions.ajaxErrorHandler();
+        }
+    })
 };
 ZYTreeHandler.prototype.getSettings = function () {
     var me = this;
@@ -50,10 +70,10 @@ ZYTreeHandler.prototype.getSettings = function () {
             },
             onRemove: function (e, treeId, treeNode) {
                 //这里讲数据发给后台
-                me.remove(treeNode.id, treeNode.pId);
+                me.remove(treeNode.id, treeNode.parentId);
             },
             onRename: function (e, treeId, treeNode) {
-                me.rename(treeNode.id, treeNode.pId, treeNode.name);
+                me.rename(treeNode.id, treeNode.parentId, treeNode.name);
             },
             beforeRename: function (treeId, treeNode, newName) {
                 if (newName.length == 0) {
@@ -68,7 +88,7 @@ ZYTreeHandler.prototype.getSettings = function () {
         }
     }
 };
-ZYTreeHandler.prototype.remove = function (id, pId) {
+ZYTreeHandler.prototype.remove = function (id, parentId) {
 
     var index=config.findInArray(this.data,"id",id);
 
@@ -79,7 +99,7 @@ ZYTreeHandler.prototype.remove = function (id, pId) {
     localStorage.setItem(this.keyName,JSON.stringify(this.data));
     Materialize.toast(config.messages.optSuccess, 4000);
 };
-ZYTreeHandler.prototype.rename = function (id, pId, name) {
+ZYTreeHandler.prototype.rename = function (id, parentId, name) {
     var index=config.findInArray(this.data,"id",id);
 
     if(index!=-1){
@@ -93,19 +113,11 @@ ZYTreeHandler.prototype.add = function (treeNode) {
     var zTree = $.fn.zTree.getZTreeObj("zyTree");
     var no=(new Date()).getTime();
     var node={
-        id: parseInt(this.data[this.data.length-1].id)+1,
-        pId: treeNode.id,
+        parentId: treeNode.id,
         isLeaf:true,
         name: this.newDefaultName + no
     };
 
-    var index=config.findInArray(this.data,"id",treeNode.id);
-    this.data[index].isParent=true;
-    delete this.data[index].isLeaf;
-
-    this.data.push(node);
-
-    localStorage.setItem(this.keyName,JSON.stringify(this.data));
     Materialize.toast(config.messages.optSuccess, 4000);
 
     zTree.expandNode(treeNode);

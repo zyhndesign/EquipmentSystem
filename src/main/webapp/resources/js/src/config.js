@@ -32,8 +32,7 @@ var config={
         textureCreate:"texture/createTexture",
         textureUpdate:"texture/updateTexture",
         textureGetDetail:"texture/getTextureById",
-        categoryGetByNode:"category/",
-        categoryGetAll:"category/getAllData",
+        categoryGetAll:"category/getAllCategory",
         categoryCreate:"category/createCategory",
         categoryUpdate:"category/updateCategory",
         categoryDelete:"category/deleteCategory"
