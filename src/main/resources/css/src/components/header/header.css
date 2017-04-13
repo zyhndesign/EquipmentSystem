@@ -1,0 +1,19 @@
+.zyHeader{
+    background: #3e3a39;
+}
+.zyLogo{
+    color: #fff;
+    margin:0px;
+    padding: 10px 0px;
+    display: inline-block;
+}
+.zyLogo a{
+    color: #fff;
+    padding-left: 45px;
+    display:block;
+    font-size:21px;
+    line-height: 32px;
+    background:url(../../../../images/logo.png) no-repeat;
+    background-size: 30px 30px;
+    background-position: 8px,6px; 
+}
