@@ -188,7 +188,7 @@ var infoCou=(function(config,ZYCtrlDataHandler){
             $("#iCAddColor").val("").prev().removeAttr("style");
             $("#iCAddTexture input[type='checkbox']").prop("checked",false);
             $("#iCAddAppraise").val("");
-            $("#cutImage").attr("src","/images/cut.png").removeAttr("style");
+            $("#cutImage").attr("src","").removeAttr("style");
 
             if(this.cutCtrl){
                 delete this.cutCtrl.customData;
@@ -525,7 +525,7 @@ $(document).ready(function(){
         }
 
         formHandler.submitForm($("#infoCOUForm"),
-            infoCou.submitData,id,{vehicleInfo:JSON.stringify(infoCou.submitData)});
+            id,{vehicleInfo:JSON.stringify(infoCou.submitData)});
 
     });
 

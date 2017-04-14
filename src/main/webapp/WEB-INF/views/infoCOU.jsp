@@ -46,7 +46,8 @@ pageEncoding="UTF-8" %>
     <li class="tab "><a href="#infoChild">2.部件信息</a></li>
 </ul>
 <div id="info" class="zyTabPanel">
-    <form class="zyForm" id="infoCOUForm">
+    <form id="infoCOUForm" style="display:none"></form>
+    <div class="zyForm">
         <div class="row">
             <label class="zyFormLabel zyRequired">产品类别：</label>
             <select class="zyInput zyActionRequired" id="infoCategory">
@@ -164,7 +165,7 @@ pageEncoding="UTF-8" %>
             <span style="margin-left: 20px;" id="infoModalShow"></span>
             <input type="hidden" id="infoModal" value="">
         </div>
-    </form>
+    </div>
 </div>
 
 
