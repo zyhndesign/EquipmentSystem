@@ -28,10 +28,10 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public int createCategory(Category category) {
 		try{
-			categoryDaoImpl.createCategory(category);
-			return ResponseCodeUtil.DB_OPERATION_SUCCESS;
+			return categoryDaoImpl.createCategory(category);
 		}
 		catch(Exception e){
+			e.printStackTrace();
 			return ResponseCodeUtil.DB_OPERATION_FAILURE;
 		}
 	}

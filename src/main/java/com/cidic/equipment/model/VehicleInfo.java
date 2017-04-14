@@ -34,10 +34,12 @@ public class VehicleInfo implements java.io.Serializable {
 	private String style;
 	private String modelUrl;
 	private Date createTime;
+	private String componentInfos; //部件信息
+	private Date onSaleDate;
 	
 	private Set<VehicleColor> vehicleColors = new HashSet<VehicleColor>(0);
-	private Set<ComponentInfo> componentInfos = new HashSet<ComponentInfo>(0);
-
+	private Set<VehicleTexture> vehicleTextures = new HashSet<VehicleTexture>(0);
+	
 	public VehicleInfo() {
 	}
 
@@ -49,7 +51,7 @@ public class VehicleInfo implements java.io.Serializable {
 	}
 
 	public VehicleInfo(int categoryId, byte entry, String imageUrl1, String imageUrl2, String style, String modelUrl,
-			Set<VehicleColor> vehicleColors, Set<ComponentInfo> componentInfos) {
+			Set<VehicleColor> vehicleColors) {
 		this.categoryId = categoryId;
 		this.entry = entry;
 		this.imageUrl1 = imageUrl1;
@@ -57,7 +59,6 @@ public class VehicleInfo implements java.io.Serializable {
 		this.style = style;
 		this.modelUrl = modelUrl;
 		this.vehicleColors = vehicleColors;
-		this.componentInfos = componentInfos;
 	}
 
 	@Id
@@ -144,14 +145,24 @@ public class VehicleInfo implements java.io.Serializable {
 		this.vehicleColors = vehicleColors;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vehicleInfo")
-	public Set<ComponentInfo> getComponentInfos() {
-		return this.componentInfos;
+	@Column(name = "component_info", nullable = false, length = 65535)
+	public String getComponentInfos() {
+		return componentInfos;
 	}
 
-	public void setComponentInfos(Set<ComponentInfo> componentInfos) {
+	public void setComponentInfos(String componentInfos) {
 		this.componentInfos = componentInfos;
 	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vehicleInfo")
+	public Set<VehicleTexture> getVehicleTextures() {
+		return vehicleTextures;
+	}
+	
+	public void setVehicleTextures(Set<VehicleTexture> vehicleTextures) {
+		this.vehicleTextures = vehicleTextures;
+	}
+
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "create_time", nullable = false, length = 19)
@@ -163,4 +174,16 @@ public class VehicleInfo implements java.io.Serializable {
 		this.createTime = createTime;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "on_sale_date", nullable = false, length = 19)
+	public Date getOnSaleDate() {
+		return onSaleDate;
+	}
+
+	
+	public void setOnSaleDate(Date onSaleDate) {
+		this.onSaleDate = onSaleDate;
+	}
+
+	
 }

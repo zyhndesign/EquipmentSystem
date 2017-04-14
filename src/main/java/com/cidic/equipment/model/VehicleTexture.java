@@ -2,9 +2,12 @@ package com.cidic.equipment.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -19,20 +22,19 @@ public class VehicleTexture implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private int vehicleId;
+	private VehicleInfo vehicleInfo;
 	private int textureId;
 
 	public VehicleTexture() {
 	}
 
-	public VehicleTexture(int vehicleId, int textureId) {
-		this.vehicleId = vehicleId;
+	public VehicleTexture(VehicleInfo vehicleInfo, int textureId) {
+		this.vehicleInfo = vehicleInfo;
 		this.textureId = textureId;
 	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "Id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
@@ -42,13 +44,14 @@ public class VehicleTexture implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "vehicleId", nullable = false)
-	public int getVehicleId() {
-		return this.vehicleId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "vehicleId", nullable = false)
+	public VehicleInfo getVehicleInfo() {
+		return vehicleInfo;
 	}
 
-	public void setVehicleId(int vehicleId) {
-		this.vehicleId = vehicleId;
+	public void setVehicleInfo(VehicleInfo vehicleInfo) {
+		this.vehicleInfo = vehicleInfo;
 	}
 
 	@Column(name = "textureId", nullable = false)

@@ -84,9 +84,10 @@ public class CategoryController {
 		category.setParentId(parentId);
 		
 		int result = categoryServiceImpl.createCategory(category);
-		if (result == ResponseCodeUtil.DB_OPERATION_SUCCESS) {
+		if (result != ResponseCodeUtil.DB_OPERATION_FAILURE) {
 			resultModel.setResultCode(200);
 			resultModel.setSuccess(true);
+			resultModel.setObject(result);
 			return resultModel;
 		} else {
 			throw new EquipmentException(500, "操作失败！");

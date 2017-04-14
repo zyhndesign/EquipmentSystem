@@ -32,9 +32,10 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 	
 	@Override
-	public void createCategory(Category category) {
+	public int createCategory(Category category) {
 		Session session = this.getSessionFactory().getCurrentSession();
-		session.save(category);
+		int id = (Integer) session.save(category);
+		return id;
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import com.cidic.equipment.model.Category;
 
 public interface CategoryDao {
 
-	public void createCategory(Category category);
+	public int createCategory(Category category);
 	
 	public void updateCategory(Category category);
 	
