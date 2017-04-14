@@ -325,27 +325,27 @@ pageEncoding="UTF-8" %>
                     <div class="zyBgFFFFFF zyPd10">
                         <div class="row">
                             <label class="zyFormLabel">产品类别:</label>
-                            <label class="zyFormLabel" id="pInfoCategory">起重机</label>
+                            <label class="zyFormLabel" id="pInfoCategory">xxx</label>
                         </div>
                         <div class="row">
                             <label class="zyFormLabel">条目类别:</label>
-                            <label class="zyFormLabel" id="pInfoType">上市产品</label>
+                            <label class="zyFormLabel" id="pInfoType">xxxx</label>
                         </div>
                         <div class="row">
                             <label class="zyFormLabel">上市日期:</label>
-                            <label class="zyFormLabel" id="pInfoMarketDate">2016</label>
+                            <label class="zyFormLabel" id="pInfoMarketDate">xxx</label>
                         </div>
                         <div class="row">
                             <label class="zyFormLabel">品牌:</label>
-                            <label class="zyFormLabel" id="pInfoBrand">三一</label>
+                            <label class="zyFormLabel" id="pInfoBrand">xxx</label>
                         </div>
                         <div class="row">
                             <label class="zyFormLabel">风格：</label>
-                            <label class="zyFormLabel" id="pInfoStyle">简单、干净</label>
+                            <label class="zyFormLabel" id="pInfoStyle">xxx,xxxx</label>
                         </div>
                         <div class="row">
                             <label class="zyFormLabel">模型：</label>
-                            <a class="zyFormLabel" id="pInfoModal" href="#">xxxx.fbx</a>
+                            <%--<a class="zyFormLabel" id="pInfoModal" href="#">xxxx</a>--%>
                         </div>
                     </div>
                     <div class="zyMT20 zyPanelWrapper">
@@ -357,7 +357,6 @@ pageEncoding="UTF-8" %>
 
                                 <div class="zyColorItem">
                                     <span class="zyColorShow" id="pInfoMainColor" style="background: orange"></span>
-                                    <!--<span class="zyColorName">橙色</span>-->
                                 </div>
                             </div>
 
@@ -366,7 +365,6 @@ pageEncoding="UTF-8" %>
 
                                 <div class="zyColorItem">
                                     <span class="zyColorShow" id="pInfoAssistColor1" style="background: orange"></span>
-                                    <!--<span class="zyColorName">橙色</span>-->
                                 </div>
                             </div>
                             <div class="row">
@@ -374,43 +372,13 @@ pageEncoding="UTF-8" %>
 
                                 <div class="zyColorItem">
                                     <span class="zyColorShow" id="pInfoAssistColor2" style="background: orange"></span>
-                                    <!--<span class="zyColorName">橙色</span>-->
                                 </div>
                             </div>
                         </div>
                         <div class="row zyBgFFFFFF zyTexturePanel zyPd10">
-                            <label class="zyFormLabel" style="display:block;">纹理:</label>
+                            <label class="zyFormLabel">纹理:</label>
 
-                            <div class="zyTextureItem">
-                                <label class="zyFormLabel" id="pInfoTexture">亮光</label>
-
-                                <div class="zytexture">
-                                    <img src="/data/texture2.jpg">
-                                </div>
-                            </div>
-
-                            <div class="zyTextureItem">
-                                <label class="zyFormLabel" id="pInfoTexture">亚光</label>
-
-                                <div class="zytexture">
-                                    <img src="/data/texture2.jpg">
-                                </div>
-                            </div>
-
-                            <div class="zyTextureItem">
-                                <label class="zyFormLabel" id="pInfoTexture">亚光</label>
-
-                                <div class="zytexture">
-                                    <img src="/data/texture2.jpg">
-                                </div>
-                            </div>
-
-                            <div class="zyTextureItem">
-                                <label class="zyFormLabel" id="pInfoTexture">亚光</label>
-
-                                <div class="zytexture">
-                                    <img src="/data/texture2.jpg">
-                                </div>
+                            <div id="pInfoTexture">
                             </div>
 
 

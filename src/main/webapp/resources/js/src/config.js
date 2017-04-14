@@ -108,7 +108,7 @@ var config={
     ].join(''),
     colorAllOptionTpl:[
         '{@each items as item}',
-        '<option value="$${item.colorValue}">${item.name}</option>',
+        '<option value="$${item.id}" data-value="$${item.colorValue}">${item.name}</option>',
         '{@/each}'
     ].join(''),
     infoChildTrsTpl:[
@@ -180,6 +180,17 @@ var config={
         '<label for="texture${idFlag}${index}" style="margin-right: 10px;">${item.name}</label>',
         '{@/each}'
     ].join(''),
+    textureItems:[
+        '{@each items as item,index}',
+        '<div class="zyTextureItem">',
+        '<label class="zyFormLabel">${item.name}</label>',
+
+        '<div class="zyTextureImg">',
+        '<img src="${item.icon}">',
+        '</div>',
+        '</div>',
+        '{@/each}'
+    ],
     styleAllTpl:[
         '{@each items as item,index}',
         '<div class="chip">',

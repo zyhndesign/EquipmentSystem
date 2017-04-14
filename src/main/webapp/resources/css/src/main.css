@@ -531,7 +531,7 @@ textarea.zyTextarea{
     display: inline-block;
     margin-left: 4%;
 }
-.zytexture{
+.zyTextureItem .zyTextureImg{
     height: 50px;
     width: 50px;
     overflow:hidden;

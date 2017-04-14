@@ -242,6 +242,7 @@ var infoCou=(function(config,ZYCtrlDataHandler){
             $("input[name='infoStyle']").each(function(index,el){
                 data.style.push($(el).val());
             });
+            data.style=JSON.stringify(data.style);
             data.modalUrl=$("#infoModal").val();
             data.vehicleTextures=[];
             $("#infoTexture").find("input[type='checkbox']").each(function(index,el){
@@ -278,7 +279,7 @@ var infoCou=(function(config,ZYCtrlDataHandler){
                 }
             });
             $("#infoStyle").html(juicer(config.styleAllTpl,{
-                items:data.style
+                items:JSON.parse(data.style)
             }));
 
             $("#infoModal").val(data.modal).prev().text(data.modal);
@@ -493,16 +494,33 @@ $(document).ready(function(){
     $("#previewBtn").click(function(){
         var submitData=infoCou.getSubmitData();
 
+        var textures=[],colors=[],index;
+
+        for(var i= 0,len=submitData.vehicleTextures;i<len;i++){
+            index=config.findInArray(ZYCtrlDataHandler.textureData,"id",submitData.vehicleTextures[i].textureId);
+            if(index!=-1){
+                textures.push(ZYCtrlDataHandler.textureData[index]);
+            }
+        }
+        for(var j= 0,jLen=submitData.vehicleColors;j<jLen;j++){
+            index=config.findInArray(ZYCtrlDataHandler.colorData,"id",submitData.vehicleColors[j].colorId);
+            if(index!=-1){
+                colors.push(ZYCtrlDataHandler.colorData[index]);
+            }
+        }
+
         $("#pInfoCategory").text($("#infoCategory option:selected").text());
         $("#pInfoType").text($("input[name='infoMarketType']:checked").next().text());
         $("#pInfoMarketDate").text(submitData.onSaleDate);
         $("#pInfoBrand").text($("#infoBrand option:selected").text());
         $("#pImage").attr("src",submitData.imageUrl1);
-        $("#pInfoTexture").text(submitData.texture.join(','));
-        $("#pInfoMainColor").css("background",submitData.color[0]);
-        $("#pInfoAssistColor1").css("background",submitData.color[1]);
-        $("#pInfoAssistColor2").css("background",submitData.color[2]);
-        $("#pInfoStyle").text(submitData.style.join(","));
+        $("#pInfoMainColor").css("background",colors[0].colorValue);
+        $("#pInfoAssistColor1").css("background",colors[1].colorValue);
+        $("#pInfoAssistColor2").css("background",colors[2].colorValue);
+        $("#pInfoTexture").html(juicer(config.textureItems,{
+            items:textures
+        }));
+        $("#pInfoStyle").text(JSON.parse(submitData.style).join(","));
         $("#pInfoModal").attr("href",submitData.modalUrl).text(submitData.modalUrl);
 
         infoCou.setHtmlForInfoChildTable(JSON.parse(submitData.componentInfos),$("#pInfoChildTable tbody"));
