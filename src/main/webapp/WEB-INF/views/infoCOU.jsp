@@ -46,7 +46,6 @@ pageEncoding="UTF-8" %>
     <li class="tab "><a href="#infoChild">2.部件信息</a></li>
 </ul>
 <div id="info" class="zyTabPanel">
-    <form id="infoCOUForm" style="display:none"></form>
     <div class="zyForm">
         <div class="row">
             <label class="zyFormLabel zyRequired">产品类别：</label>

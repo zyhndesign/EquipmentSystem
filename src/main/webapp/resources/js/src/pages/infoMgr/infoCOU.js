@@ -542,8 +542,8 @@ $(document).ready(function(){
             infoCou.getSubmitData();
         }
 
-        formHandler.submitForm($("#infoCOUForm"),
-            id,{vehicleInfo:JSON.stringify(infoCou.submitData)});
+        formHandler.submitForm(null,
+            id,JSON.stringify({vehicleInfo:infoCou.submitData}),true);
 
     });
 
