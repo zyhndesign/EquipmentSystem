@@ -37,7 +37,7 @@
             <i class="material-icons left">backup</i>新建</a>
 
         <div class="right">
-            <input type="text" class="zyInput1" placeholder="搜索风格" id="searchStyleInput">
+            <input type="text" class="zyInput1" placeholder="搜索名称" id="searchStyleInput">
             <button class="btn waves-effect waves-light grey lighten-2 black-text zyActionSearchByClick" id="searchStyle">搜索
                 <i class="material-icons left">search</i>
             </button>
@@ -47,7 +47,7 @@
         <h4 class="zySearchTitle">上市时间:</h4>
         <div class="zySearchContent">
             <input type="date" class="zyInput zyActionSearchByChange" id="searchStartDate">
-            <div class="line"></div>
+            <div class="zyLine"></div>
             <input type="date" class="zyInput zyActionSearchByChange" id="searchEndDate">
         </div>
     </div>

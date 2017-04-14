@@ -42,16 +42,16 @@ var infoMgr=(function(config,ZYCtrlDataHandler){
             });
         },
         initData:function(){
-            ZYCtrlDataHandler.getBrandItems("checkbox","",function(string){
-                $("#searchBrand").html(string);
+            ZYCtrlDataHandler.getBrandItems("",function(stringOption,stringCheckbox){
+                $("#searchBrand").html(stringCheckbox);
             });
-            ZYCtrlDataHandler.getTextureItems("infoMgrTexture",function(string){
-                $("#searchTexture").html(string);
+            ZYCtrlDataHandler.getTextureItems("infoMgrTexture",function(stringOption,stringCheckbox){
+                $("#searchTexture").html(stringOption);
             });
-            ZYCtrlDataHandler.getColorItems("option",function(string){
-                $("#searchMainColor").append(string);
-                $("#searchAssistColor1").append(string);
-                $("#searchAssistColor2").append(string);
+            ZYCtrlDataHandler.getColorItems("option",function(stringOption,stringCheckbox){
+                $("#searchMainColor").append(stringOption);
+                $("#searchAssistColor1").append(stringOption);
+                $("#searchAssistColor2").append(stringOption);
             });
 
 

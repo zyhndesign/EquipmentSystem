@@ -72,6 +72,15 @@ li{
     margin-left: 200px;
     min-height: 100%;
 }
+.zyLine{
+    width:10px;
+    height:1px;
+    margin:0px auto;
+    padding:0px;
+    background-color:#ccc;
+    overflow:hidden;
+    display: inline-block;
+}
 /************************************按钮组****************************/
 .zyGroupButtons{
     text-align: center;
@@ -607,15 +616,6 @@ img{
 }
 .row .col{
     padding-left: 0;
-}
-.line{
-    width:10px;
-    height:1px;
-    margin:0px auto;
-    padding:0px;
-    background-color:#ccc;
-    overflow:hidden;
-    display: inline-block;
 }
 .grey.lighten-2{
     background-color: white !important;

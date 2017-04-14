@@ -1,8 +1,8 @@
-var cou=(function(config,ZYCtrlDataHandler){
+var infoCou=(function(config,ZYCtrlDataHandler){
 
     return {
         cutCtrl:null,
-        componentInfo:[],
+        componentInfos:[],
         changeMainBtnStatus:function(showSave){
 
             if(showSave){
@@ -90,7 +90,7 @@ var cou=(function(config,ZYCtrlDataHandler){
 
             return valid;
         },
-        setHtmlForInfoChildTable:function(list,tableTbody){
+        setHtmlForInfoChildTable:function(list,tableTBody){
 
             var item;
             for(var j=0,jLen=list.length;j<jLen;j++){
@@ -113,24 +113,29 @@ var cou=(function(config,ZYCtrlDataHandler){
 
             }
 
-            tableTbody.html(juicer(config.infoChildTrsTpl,{
-                type:tableTbody.data("type"),
+            tableTBody.html(juicer(config.infoChildTrsTpl,{
+                type:tableTBody.data("type"),
                 items:list
             }));
         },
-        initInfoChildTable:function(tableTbody){
+        /**
+         * 填充子部件信息，这里每次都要生成，以免用户更改了category的树结构，导致数据不对
+         * @param tableTBody
+         */
+        initInfoChildTable:function(tableTBody){
 
-            if(this.componentInfo.length==0){
-                var categories=JSON.parse(localStorage.getItem("category")),
-                    arr=[],parent;
-                for(var i=0,len=categories.length;i<len;i++){
-                    if(categories[i].isLeaf){
-                        arr.push(categories[i]);
-                        parent=categories[config.findInArray(categories,"id",categories[i].pId)];
-                        this.componentInfo.push({
-                            id:"iC"+i,
+            var list=ZYCtrlDataHandler.categoryGroupData,
+                arr=[],parent,item;
+            for(var i=0,len=list.length;i<len;i++){
+                parent=list[i];
+                for(var j= 0,jLen=parent.childs.length;j<jLen;j++){
+                    item=parent.childs[j];
+
+                    if(config.findInArray(this.componentInfos,"id",item.id)==-1){
+                        this.componentInfos.push({
+                            id:item.id,
                             image:{},
-                            name:parent.name+"/"+categories[i].name,
+                            name:parent.name+"/"+item.name,
                             texture:[],
                             color:[],
                             hasBiaoZhi:"无",
@@ -140,20 +145,20 @@ var cou=(function(config,ZYCtrlDataHandler){
                 }
             }
 
-            this.setHtmlForInfoChildTable(this.componentInfo,tableTbody);
+            this.setHtmlForInfoChildTable(this.componentInfos,tableTBody);
         },
         filterInfoChildTable:function(filter,tableTbody){
             var arr=[];
-            for(var i=0,len=this.componentInfo.length;i<len;i++){
-                if(this.componentInfo[i].name.indexOf(filter)!=-1){
-                    arr.push(this.componentInfo[i]);
+            for(var i=0,len=this.componentInfos.length;i<len;i++){
+                if(this.componentInfos[i].id.indexOf(filter)!=-1){
+                    arr.push(this.componentInfos[i]);
                 }
             }
 
             this.setHtmlForInfoChildTable(arr,tableTbody);
         },
         infoChildSave:function(){
-            var component=this.componentInfo[this.infoChildIndex];
+            var component=this.componentInfos[this.infoChildIndex];
 
             if(this.cutCtrl&&this.cutCtrl.customData){
                 component.image.src=this.cutCtrl.customData.src;
@@ -190,7 +195,7 @@ var cou=(function(config,ZYCtrlDataHandler){
             }
         },
         initICAdd:function(){
-            var component=this.componentInfo[this.infoChildIndex];
+            var component=this.componentInfos[this.infoChildIndex];
             $("#iCAddColor").val(component.color).prev().css("background",component.color);
             $("#iCAddTexture input[type='checkbox']").each(function(index,el){
                 if(component.texture.indexOf($(this).val())!=-1){
@@ -227,23 +232,27 @@ var cou=(function(config,ZYCtrlDataHandler){
         getSubmitData:function(){
             var data={};
 
-            data.imageChanPin=$("#infoImageChanPin").val();
-            data.imageXianXin=$("#infoImageXianXin").val();
-            data.brand=$("#infoBrand").val();
-            data.category=$("#infoCategory").val();
-            data.marketType=$("input[name='infoMarketType']").val();
-            data.marketDate=$("#infoMarketDate").val();
+            data.imageUrl1=$("#infoImageChanPin").val();
+            data.imageUrl2=$("#infoImageXianXin").val();
+            data.brandId=$("#infoBrand").val();
+            data.categoryId=$("#infoCategory").val();
+            data.entry=$("input[name='infoMarketType']:checked").val();
+            data.onSaleDate=$("#infoMarketDate").val();
             data.style=[];
             $("input[name='infoStyle']").each(function(index,el){
                 data.style.push($(el).val());
             });
-            data.modal=$("#infoModal").val();
-            data.texture=[];
+            data.modalUrl=$("#infoModal").val();
+            data.vehicleTextures=[];
             $("#infoTexture").find("input[type='checkbox']").each(function(index,el){
-                data.texture.push($(el).val());
+                data.vehicleTextures.push({textureId:$(el).val()});
             });
-            data.color=[$("#infoMainColor").val(),$("#infoAssistColor1").val(),$("#infoAssistColor2").val()];
-            data.componentInfo=this.componentInfo;
+            data.vehicleColors=[
+                {colorId:$("#infoMainColor").val()},
+                {colorId:$("#infoAssistColor1").val()},
+                {colorId:$("#infoAssistColor2").val()}
+            ];
+            data.componentInfos=JSON.stringify(this.componentInfos);
 
             this.submitData=data;
 
@@ -252,7 +261,7 @@ var cou=(function(config,ZYCtrlDataHandler){
         },
         initCtrlData:function(data){
 
-            this.componentInfo=data.componentInfo;
+            this.componentInfos=JSON.parse(data.componentInfos);
             $("#infoCategory").val(data.category);
             $("input[name='infoMarketType']").val(data.marketType);
             $("#infoMarketDate").val(data.marketDate);
@@ -276,17 +285,20 @@ var cou=(function(config,ZYCtrlDataHandler){
 
         },
         initData:function(){
+            var me=this;
 
             ZYCtrlDataHandler.getBrandItems("",function(stringOption,stringCheckbox){
                 $("#infoBrand").html(stringOption);
             });
             ZYCtrlDataHandler.getTextureItems("infoCOUTexture",function(stringOption,stringCheckbox){
                 $("#infoTexture").html(stringCheckbox);
+
+                ZYCtrlDataHandler.getTextureItems("iCAdd",function(stringOption,stringCheckbox){
+                    $("#iCAddTexture").html(stringCheckbox);
+                });
             });
-            ZYCtrlDataHandler.getTextureItems("iCAdd",function(stringOption,stringCheckbox){
-                $("#iCAddTexture").html(stringCheckbox);
-            });
-            ZYCtrlDataHandler.getColorItems("option",function(stringOption,stringCheckbox){
+
+            ZYCtrlDataHandler.getColorItems("",function(stringOption,stringCheckbox){
                 $("#infoMainColor").append(stringOption);
                 $("#infoAssistColor1").append(stringOption);
                 $("#infoAssistColor2").append(stringOption);
@@ -296,19 +308,21 @@ var cou=(function(config,ZYCtrlDataHandler){
                 $("#infoCategory").html(stringOption);
             });
 
-            ZYCtrlDataHandler.getCategoryGroupOptions(function(string){
+            if(id){
+                ZYCtrlDataHandler.getDataForUpdate(config.ajaxUrls.infoGetDetail,{id:id},function(data){
+                    me.initCtrlData(data);
+
+                });
+            }
+
+        },
+        initChildInfo:function(categoryId){
+            var me=this;
+            ZYCtrlDataHandler.getCategoryGroupOptions(categoryId,function(string){
                 $(".zyActionCategory").html(string).material_select();
             });
 
-
-            //编辑的时候都要设置值
-            if(id){
-                ZYCtrlDataHandler.getDataForUpdate(config.ajaxUrls.infoGetDetail,{id:id},function(data){
-                    this.initCtrlData(data);
-                })
-            }
-
-            this.initInfoChildTable($("#infoChildTable tbody"));
+            me.initInfoChildTable($("#infoChildTable tbody"));
         }
     }
 })(config,ZYCtrlDataHandler);
@@ -319,19 +333,71 @@ $(document).ready(function(){
         updateUrl:config.ajaxUrls.infoUpdate
     });
 
-    cou.initData();
+    infoCou.initData();
+
+    functions.createQiNiuUploader({
+        maxSize:config.uploader.sizes.all,
+        filter:config.uploader.filters.all,
+        uploadBtn:"uploadModalBtn",
+        multiSelection:false,
+        multipartParams:null,
+        uploadContainer:"uploadModalContainer",
+        fileAddCb:null,
+        progressCb:null,
+        uploadedCb:function(info,file,up){
+            $("#infoModal").val(info.url);
+
+            $("#infoModalShow").attr("src",file.name);
+
+            $(".error[for='image']").remove();
+        }
+    });
+    functions.createQiNiuUploader({
+        maxSize:config.uploader.sizes.img,
+        filter:config.uploader.filters.img,
+        uploadBtn:"uploadChanPinImageBtn",
+        multiSelection:false,
+        multipartParams:null,
+        uploadContainer:"uploadChanPinImageContainer",
+        fileAddCb:null,
+        progressCb:null,
+        uploadedCb:function(info,file,up){
+            $("#infoImageChanPin").val(info.url);
+
+            $("#uploadChanPinImageBtn").attr("src",info.url);
+
+            $(".error[for='image']").remove();
+        }
+    });
+    functions.createQiNiuUploader({
+        maxSize:config.uploader.sizes.img,
+        filter:config.uploader.filters.img,
+        uploadBtn:"uploadXianXinImageBtn",
+        multiSelection:false,
+        multipartParams:null,
+        uploadContainer:"uploadXianXinImageContainer",
+        fileAddCb:null,
+        progressCb:null,
+        uploadedCb:function(info,file,up){
+            $("#infoImageXianXin").val(info.url);
+
+            $("#uploadXianXinImageBtn").attr("src",info.url);
+
+            $(".error[for='image']").remove();
+        }
+    });
 
     $("#tab a").click(function(e){
         if($(this).attr("href")=="#infoChild"){
-            if(!cou.validInfo($("#info"))){
+            if(!infoCou.validInfo($("#info"))){
                 return false;
             }
 
         }else{
-            cou.showInfoChildMgr();
+            infoCou.showInfoChildMgr();
         }
 
-        cou.changeMainBtnStatus(true);
+        infoCou.changeMainBtnStatus(true);
     });
     $("input[name='infoImage']").change(function(){
         var name=this.files[0].name,
@@ -360,16 +426,21 @@ $(document).ready(function(){
     $("#infoStyle").on("click",".close",function(){
         $(this).parent().remove();
     });
+    $("#infoCategory").change(function(){
+        if($(this).val()){
+            infoCou.initChildInfo($(this).val());
+        }
+    });
 
     /**********************************分结构信息*******************************/
     $("#infoChildTable").on("click",".zyActionEdit",function(){
-        cou.currentInfoChildTr=$(this).parents("tr");
-        cou.infoChildIndex=config.findInArray(cou.componentInfo,"id",$(this).attr("href"));
-        cou.hideInfoChildMgr();
+        infoCou.currentInfoChildTr=$(this).parents("tr");
+        infoCou.infoChildIndex=config.findInArray(infoCou.componentInfos,"id",$(this).attr("href"));
+        infoCou.hideInfoChildMgr();
         return false;
     });
     $("#infoChildSearch").change(function(){
-        cou.filterInfoChildTable($(this).val(),$("#infoChildTable tbody"));
+        infoCou.filterInfoChildTable($(this).val(),$("#infoChildTable tbody"));
     });
 
     $('#cutImageModal').modal();
@@ -394,66 +465,67 @@ $(document).ready(function(){
         $(this).addClass("zyGBItemActive");
         $("#toCutImage").attr("src",imageSrc);
 
-        cou.initJCrop();
+        infoCou.initJCrop();
     });
 
     $("#cutImage").click(function(){
         $('#cutImageModal').modal('open');
         $("#toCutImage").attr("src",$("#infoImageChanPin").val());
-        cou.initJCrop();
+        infoCou.initJCrop();
     });
 
     $("#saveCutImage").on("click",function(){
-        cou.updateCutImage(cou.cutCtrl.customData);
+        infoCou.updateCutImage(infoCou.cutCtrl.customData);
         $('#cutImageModal').modal('close');
     });
 
     $("#infoChildCancel").click(function(){
-        cou.showInfoChildMgr();
+        infoCou.showInfoChildMgr();
     });
 
     $("#infoChildSave").click(function(){
-        cou.infoChildSave();
+        infoCou.infoChildSave();
     });
 
 
     /*****************************预览部分************************/
     $("#previewModal").modal();
     $("#previewBtn").click(function(){
-        /*var submitData=cou.getSubmitData();
+        var submitData=infoCou.getSubmitData();
 
-        $("#pInfoCategory").text(submitData.category);
-        $("#pInfoType").text(submitData.marketType);
-        $("#pInfoMarketDate").text(submitData.marketDate);
-        $("#pInfoBrand").text(submitData.brand);
-        $("#pImage").attr("src",submitData.imageChanPin);
+        $("#pInfoCategory").text($("#infoCategory option:selected").text());
+        $("#pInfoType").text($("input[name='infoMarketType']:checked").next().text());
+        $("#pInfoMarketDate").text(submitData.onSaleDate);
+        $("#pInfoBrand").text($("#infoBrand option:selected").text());
+        $("#pImage").attr("src",submitData.imageUrl1);
         $("#pInfoTexture").text(submitData.texture.join(','));
         $("#pInfoMainColor").css("background",submitData.color[0]);
         $("#pInfoAssistColor1").css("background",submitData.color[1]);
         $("#pInfoAssistColor2").css("background",submitData.color[2]);
         $("#pInfoStyle").text(submitData.style.join(","));
-        $("#pInfoModal").attr("href",submitData.modal).text(submitData.modal);
+        $("#pInfoModal").attr("href",submitData.modalUrl).text(submitData.modalUrl);
 
-        cou.setHtmlForInfoChildTable(submitData.componentInfo,$("#pInfoChildTable tbody"));*/
+        infoCou.setHtmlForInfoChildTable(JSON.parse(submitData.componentInfos),$("#pInfoChildTable tbody"));
 
         $("#previewModal").modal("open");
     });
     $("#pChangeImage").change(function(){
-        /*if($(this).prop("checked")){
-            $("#pImage").attr("src",cou.submitData.imageXianXin);
+        if($(this).prop("checked")){
+            $("#pImage").attr("src",infoCou.submitData.imageUrl1);
         }else{
-            $("#pImage").attr("src",cou.submitData.imageChanPin);
-        }*/
+            $("#pImage").attr("src",infoCou.submitData.imageUrl2);
+        }
     });
     $("#pInfoChildTableSearch").change(function(){
-        cou.filterInfoChildTable($(this).val(),$("#pInfoChildTable tbody"));
+        infoCou.filterInfoChildTable($(this).val(),$("#pInfoChildTable tbody"));
     });
     $("#saveBtn").click(function(){
-        if(!cou.submitData){
-            cou.getSubmitData();
+        if(!infoCou.submitData){
+            infoCou.getSubmitData();
         }
 
-        formHandler.submitForm(cou.submitData,id);
+        formHandler.submitForm($("#infoCOUForm"),
+            infoCou.submitData,id,{vehicleInfo:JSON.stringify(infoCou.submitData)});
 
     });
 

@@ -26,7 +26,7 @@ $(document).ready(function() {
                     { "mDataProp": "description"},
                     { "mDataProp": "opt",
                         "fnRender":function(oObj){
-                            return  '<a href="texture/textureCOU?'+oObj.aData.id+'">编辑</a>&nbsp;&nbsp;'+
+                            return  '<a href="texture/textureCOU/'+oObj.aData.id+'">编辑</a>&nbsp;&nbsp;'+
                                 '<a href="'+oObj.aData.id+'" class="remove">删除</a>';
                         }
                     }
@@ -49,8 +49,6 @@ $(document).ready(function() {
                                 var json = {
                                     "sEcho": response.sEcho
                                 };
-
-                                productMgr.loadedData = {};
 
                                 for (var i = 0, iLen = response.aaData.length; i < iLen; i++) {
                                     response.aaData[i].opt = "opt";

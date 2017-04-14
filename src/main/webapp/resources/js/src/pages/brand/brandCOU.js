@@ -1,6 +1,6 @@
 $(document).ready(function(){
     if(id){
-        ZYCtrlDataHandler.getDataForUpdate(config.ajaxUrls.brandGetDetail,{id:id},function(data){
+        ZYCtrlDataHandler.getDataForUpdate(config.ajaxUrls.brandDetail,{id:id},function(data){
             $("#name").val(data.name);
             $("#description").val(data.description);
             $("#image").val(data.icon);

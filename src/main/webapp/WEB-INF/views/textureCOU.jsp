@@ -32,13 +32,13 @@
             <div class="zyPanelTitle">新建/修改 纹理</div>
             <div class="zyPanelContent zyPd20">
                 <form class="zyForm" id="myForm" action="#">
-                    <div class="row">
+                    <div class="row" id="uploadContainer">
                         <label class="zyFormLabel">图像：</label>
-                        <div class="btn">
+                        <div class="btn" id="uploadBtn">
                             上传
                         </div>
                         <img id="imageShow" style="margin-left: 50px;width:100px;vertical-align: top"
-                             src="resources/image/defaultTexture.png">
+                             src="resources/images/defaultTexture.png">
                         <input type="hidden" name="icon" id="image">
                     </div>
                     <div class="row">

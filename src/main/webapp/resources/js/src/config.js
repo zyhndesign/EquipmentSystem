@@ -18,19 +18,19 @@ var config={
         brandDelete:"brand/deleteBrand",
         brandCreate:"brand/createBrand",
         brandUpdate:"brand/updateBrand",
-        brandGetDetail:"brand/getBrandById",
+        brandDetail:"brand/getBrandById",
         colorGetAll:"color/getAllColor",
         colorGetByPage:"color/getDataByCondition",
-        colorDelete:"color/getDataByCondition",
-        colorCreate:"color/deleteColor",
-        colorUpdate:"color/createColor",
+        colorDelete:"color/deleteColor",
+        colorCreate:"color/createColor",
+        colorUpdate:"color/updateColor",
         colorDetail:"color/getColorById",
         textureGetAll:"texture/getAllTexture",
         textureGetByPage:"texture/getDataByCondition",
         textureDelete:"texture/deleteTexture",
         textureCreate:"texture/createTexture",
         textureUpdate:"texture/updateTexture",
-        textureGetDetail:"texture/getTextureById",
+        textureDetail:"texture/getTextureById",
         categoryGetAll:"category/getAllCategory",
         categoryCreate:"category/createCategory",
         categoryUpdate:"category/updateCategory",
@@ -50,12 +50,12 @@ var config={
         swfUrl:"resources/js/lib/Moxie.swf",
         sizes:{
             all:"5120m",
-            img:"2m"
+            img:"4m"
         },
         filters:{
             all:"*",
             zip:"zip,rar",
-            img:"jpg,JPG,jpeg,JPEG,png,PNG",
+            img:"jpg,JPG,jpeg,JPEG,png,PNG,svg",
             pdf:"pdf,PDF"
         },
         qiNiu:{
@@ -108,7 +108,7 @@ var config={
     ].join(''),
     colorAllOptionTpl:[
         '{@each items as item}',
-        '<option value="$${item.value}">${item.name}</option>',
+        '<option value="$${item.colorValue}">${item.name}</option>',
         '{@/each}'
     ].join(''),
     infoChildTrsTpl:[
@@ -140,12 +140,12 @@ var config={
     categoryAllOptionTpl:[
         '<option value="">请选择产品类别</option>',
         '{@each items as item,index}',
-        '<option value="${item.name}">${item.name}</option>',
+        '<option value="${item.id}">${item.name}</option>',
         '{@/each}'
     ].join(""),
     categoryAllCheckboxTpl:[
         '{@each items as item,index}',
-        '<input class="filled-in" name="category" value="${item.name}" ',
+        '<input class="filled-in" name="category" value="${item.id}" ',
             'type="checkbox" id="category${idFlag}${index}"  />',
         '<label for="category${idFlag}${index}"  style="margin-right: 10px;">${item.name}</label>',
         '{@/each}'
@@ -155,7 +155,7 @@ var config={
         '{@each items as item,index}',
         '<optgroup label="${item.name}">',
             '{@each item.childs as ic}',
-                '<option value="${ic.name}">${ic.name}</option>',
+                '<option value="${ic.id}">${ic.name}</option>',
             '{@/each}',
         '</optgroup>',
         '{@/each}'
@@ -163,19 +163,19 @@ var config={
     brandAllOptionTpl:[
         '<option value="">请选择品牌</option>',
         '{@each items as item,index}',
-        '<option value="${item.name}" data-value="${item.image}">${item.name}</option>',
+        '<option value="${item.id}" data-value="${item.icon}">${item.name}</option>',
         '{@/each}'
     ].join(""),
     brandAllCheckboxTpl:[
         '{@each items as item,index}',
-        '<input class="filled-in" name="brand" value="${item.name}" type="checkbox" id="brand${idFlag}${index}"  />',
+        '<input class="filled-in" name="brand" value="${item.id}" type="checkbox" id="brand${idFlag}${index}"  />',
         '<label for="brand${idFlag}${index}"  style="margin-right: 10px;">',
-        '<img src="${item.image}">${item.name}</label>',
+        '<img src="${item.icon}">${item.name}</label>',
         '{@/each}'
     ].join(""),
     textureAllCheckboxTpl:[
         '{@each items as item,index}',
-        '<input class="filled-in" name="texture" value="${item.name}" ',
+        '<input class="filled-in" name="texture" value="${item.id}" ',
         'type="checkbox" id="texture${idFlag}${index}"  />',
         '<label for="texture${idFlag}${index}" style="margin-right: 10px;">${item.name}</label>',
         '{@/each}'
@@ -216,17 +216,18 @@ var config={
                 description:"亮光亮光亮光亮光亮光亮光亮光",opt:""}
         ],
         category:[
-            { id:"00", pId:0, name:"结构类别", open:true, isParent:true},
-            { id:1, pId:"00", name:"起重机",isParent:true},
-            { id:3, pId:1, name:"上车",isParent:true},
-            { id:4, pId:1, name:"下车",isParent:true},
-            { id:5, pId:3, name:"驾驶室",isLeaf:true},
-            { id:6, pId:3, name:"前脸",isLeaf:true},
-            { id:7, pId:3, name:"操纵室",isLeaf:true},
-            { id:8, pId:3, name:"转台",isLeaf:true},
-            { id:9, pId:4, name:"侧护板",isLeaf:true},
-            { id:10, pId:4, name:"支腿",isLeaf:true},
-            { id:11, pId:4, name:"尾部",isLeaf:true}
+            { id:0, name:"结构类别", open:true},
+            { id:1, parentId:0, name:"起重机"},
+            { id:3, parentId:1, name:"上车"},
+            { id:4, parentId:1, name:"下车"},
+            { id:5, parentId:3, name:"驾驶室"},
+            { id:6, parentId:3, name:"前脸"},
+            { id:7, parentId:3, name:"操纵室"},
+            { id:8, parentId:3, name:"转台"},
+            { id:9, parentId:4, name:"侧护板"},
+            { id:10, parentId:4, name:"支腿"},
+            { id:11, parentId:4, name:"尾部"},
+            { id:12, parentId:0, name:"推土机"}
         ],
         mgr:[
             {

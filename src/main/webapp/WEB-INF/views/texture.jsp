@@ -59,13 +59,13 @@
 <script>
     var pageName="texture";
 </script>
-<script src="/static/js/lib/jquery-2.0.3.min.js"></script>
-<script src="/static/js/lib/materialize.min.js"></script>
-<script src="/static/js/lib/jquery.dataTables.min.js"></script>
-<script src="/static/js/src/config.js"></script>
-        <script src="/static/js/src/functions.js"></script>
-<script src="/static/js/src/ZYTableHandler.js"></script>
-<script src="/static/js/src/pages/texture/texture.js"></script>
+<script src="resources/js/lib/jquery-2.0.3.min.js"></script>
+<script src="resources/js/lib/materialize.min.js"></script>
+<script src="resources/js/lib/jquery.dataTables.min.js"></script>
+<script src="resources/js/src/config.js"></script>
+        <script src="resources/js/src/functions.js"></script>
+<script src="resources/js/src/ZYTableHandler.js"></script>
+<script src="resources/js/src/pages/texture/texture.js"></script>
 </body>
 </html>
 

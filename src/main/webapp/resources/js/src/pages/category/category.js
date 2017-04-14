@@ -3,9 +3,10 @@ $(document).ready(function(){
         newDefaultName:"新结构",
         removeUrl:config.ajaxUrls.categoryDelete,
         renameUrl:config.ajaxUrls.categoryUpdate,
-        addUrl:config.ajaxUrls.categoryCreate,
-        init:function(data){
-            $.fn.zTree.init($("#zyTree"), treeHandler.getSettings(),data);
-        }
+        addUrl:config.ajaxUrls.categoryCreate
     });
+    treeHandler.getNodes(function(data){
+        $.fn.zTree.init($("#zyTree"), treeHandler.getSettings(), data);
+    });
+
 });

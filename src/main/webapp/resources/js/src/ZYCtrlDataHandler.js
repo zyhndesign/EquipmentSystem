@@ -2,7 +2,7 @@ var ZYCtrlDataHandler={
     getDataForUpdate:function(url,data,callback){
         $.ajax({
             dataType:"json",
-            type:"get",
+            type:"post",
             url:url,
             data:data,
             success:function(response){
@@ -69,7 +69,7 @@ var ZYCtrlDataHandler={
             }
         })
     },
-    generateCategoryGroupOptions:function(list,callback){
+    generateCategoryGroupOptions:function(list,categoryId,callback){
         var items=[],item,string,
             parentIndexMap={};
 
@@ -79,7 +79,7 @@ var ZYCtrlDataHandler={
             if(item.id===0){
                 continue;
             }
-            if(item.parentId===0){
+            if(item.parentId==categoryId){
                 item.childs=[];
                 items.push(item);
                 parentIndexMap[item.id]=items.length-1;
@@ -87,7 +87,7 @@ var ZYCtrlDataHandler={
                 continue;
             }
 
-            if(item.id===0&&item.parentId!==0){
+            if(config.findInArray(items,"id",item.parentId)!=-1){
                 items[parentIndexMap[item.parentId]].childs.push(item);
             }
         }
@@ -96,14 +96,16 @@ var ZYCtrlDataHandler={
             items:items
         });
 
+        this.categoryGroupData=items;
+
         if(callback){
             callback(string);
         }
     },
-    getCategoryGroupOptions:function(callback){
+    getCategoryGroupOptions:function(categoryId,callback){
         var me=this;
         if(me.categoryData){
-            me.generateCategoryGroupOptions(me.categoryData,callback);
+            me.generateCategoryGroupOptions(me.categoryData,categoryId,callback);
             return ;
         }
 
@@ -114,7 +116,7 @@ var ZYCtrlDataHandler={
             success:function(response){
                 if(response.success){
                     me.categoryData=response.object;
-                    me.generateCategoryGroupOptions(me.categoryData,callback);
+                    me.generateCategoryGroupOptions(me.categoryData,categoryId,callback);
                 }else{
                     functions.ajaxReturnErrorHandler(response.message);
                 }
@@ -175,7 +177,7 @@ var ZYCtrlDataHandler={
             idFlag:idFlag,
             items:list
         });
-        stringCheckbox=juicer(config.brandAllCheckboxTpl,{
+        stringCheckbox=juicer(config.textureAllCheckboxTpl,{
             idFlag:idFlag,
             items:list
         });
@@ -226,7 +228,7 @@ var ZYCtrlDataHandler={
             callback(stringOption,stringCheckbox);
         }
     },
-    getColorItems:function(type,idFlag,callback){
+    getColorItems:function(idFlag,callback){
         var me=this;
         if(me.colorData){
             me.generateColorItems(me.colorData,idFlag,callback);
@@ -235,7 +237,7 @@ var ZYCtrlDataHandler={
         $.ajax({
             dataType:"json",
             type:"post",
-            url:config.ajaxUrls.textureGetAll,
+            url:config.ajaxUrls.colorGetAll,
             success:function(response){
                 if(response.success){
                     me.colorData=response.object;

@@ -46,7 +46,7 @@ pageEncoding="UTF-8" %>
     <li class="tab "><a href="#infoChild">2.部件信息</a></li>
 </ul>
 <div id="info" class="zyTabPanel">
-    <div class="zyForm">
+    <form class="zyForm" id="infoCOUForm">
         <div class="row">
             <label class="zyFormLabel zyRequired">产品类别：</label>
             <select class="zyInput zyActionRequired" id="infoCategory">
@@ -58,10 +58,10 @@ pageEncoding="UTF-8" %>
 
             <div class="zyFormAllInlineCtrl">
 
-                <input class="with-gap" name="infoMarketType" value="上市产品" type="radio" id="type1" checked/>
+                <input class="with-gap" name="infoMarketType" value="1" type="radio" id="type1" checked/>
                 <label for="type1">上市产品</label>
 
-                <input class="with-gap" name="infoMarketType" value="概念产品" type="radio" id="type2"/>
+                <input class="with-gap" name="infoMarketType" value="2" type="radio" id="type2"/>
                 <label style="margin-left: 50px" for="type2">概念产品</label>
             </div>
         </div>
@@ -88,17 +88,15 @@ pageEncoding="UTF-8" %>
             <div class="zyFormChildCtrl">
                 <label class="zyFormLabel zyRequired zyFormLabelHasSub">产品图像<br>&nbsp;&nbsp;&nbsp;&nbsp;(svg)</label>
 
-                <div class="zyImageUpload">
-                    <img src="resources/images/upload.png">
-                    <input type="file" name="infoImage">
+                <div class="zyImageUpload"  id="uploadChanPinImageContainer">
+                    <img src="resources/images/upload.png" id="uploadChanPinImageBtn">
                     <input type="hidden" class="zyActionRequired" id="infoImageChanPin">
                 </div>
                 <label style="margin-left: 40px" class="zyFormLabel
         zyFormLabelHasSub">特征线图像<br>&nbsp;&nbsp;&nbsp;&nbsp;(svg)</label>
 
-                <div class="zyImageUpload">
-                    <img src="resources/images/upload.png">
-                    <input type="file" name="infoImage">
+                <div class="zyImageUpload" id="uploadXianXinImageContainer">
+                    <img src="resources/images/upload.png" id="uploadXianXinImageBtn">
                     <input type="hidden" id="infoImageXianXin">
                 </div>
             </div>
@@ -157,17 +155,16 @@ pageEncoding="UTF-8" %>
                 </div>-->
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="uploadModalContainer">
             <label class="zyFormLabel">模型：</label>
 
-            <div class="btn">
-                <span>上传FBX</span>
-                <input type="file" id="uploadModal">
+            <div class="btn" id="uploadModalBtn">
+                上传FBX
             </div>
             <span style="margin-left: 20px;" id="infoModalShow"></span>
             <input type="hidden" id="infoModal" value="">
         </div>
-    </div>
+    </form>
 </div>
 
 
@@ -518,6 +515,8 @@ pageEncoding="UTF-8" %>
 <script src="resources/js/lib/jquery.Jcrop.min.js"></script>
 <script src="resources/js/lib/jquery.form.js"></script>
 <script src="resources/js/lib/juicer-min.js"></script>
+    <script src="resources/js/lib/plupload.full.min.js"></script>
+    <script src="resources/js/lib/qiniu.js"></script>
 <script src="resources/js/src/config.js"></script>
 <script src="resources/js/src/functions.js"></script>
 <script src="resources/js/src/ZYCtrlDataHandler.js"></script>
