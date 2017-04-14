@@ -543,7 +543,7 @@ $(document).ready(function () {
         }
 
         formHandler.submitForm(null,
-            id, JSON.stringify({vehicleInfo: infoCou.submitData}), true);
+            id, JSON.stringify(infoCou.submitData), true);
 
     });
 
