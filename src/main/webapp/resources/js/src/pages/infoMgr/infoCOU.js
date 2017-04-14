@@ -543,7 +543,7 @@ $(document).ready(function () {
         }
 
         formHandler.submitForm(null,
-            id, JSON.stringify(infoCou.submitData), true);
+            id, infoCou.submitData, true);
 
     });
 

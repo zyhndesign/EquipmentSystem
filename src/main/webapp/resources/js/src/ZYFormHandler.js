@@ -6,17 +6,17 @@ function ZYFormHandler(params){
 ZYFormHandler.prototype.submitForm=function(form,editId,data,isJsonString){
     var me=this;
     functions.showLoading();
-    if(editId){
-        data=data||{};
-        data.id=editId;
-    }
     if(isJsonString){
+        if(editId){
+            data=data||{};
+            data.id=editId;
+        }
         $.ajax({
             dataType:"json",
             type:"post",
             url:editId?me.updateUrl:me.createUrl,
             contentType :"application/json; charset=UTF-8",
-            data:data,
+            data:JSON.stringify(data),
             success:function(response){
                 if(response.success){
                     Materialize.toast(config.messages.optSuccRedirect, 4000);
@@ -32,6 +32,10 @@ ZYFormHandler.prototype.submitForm=function(form,editId,data,isJsonString){
             }
         })
     }else{
+        if(editId){
+            data=data||{};
+            data.id=editId;
+        }
         $(form).ajaxSubmit({
             url:editId?me.updateUrl:me.createUrl,
             dataType:"json",
