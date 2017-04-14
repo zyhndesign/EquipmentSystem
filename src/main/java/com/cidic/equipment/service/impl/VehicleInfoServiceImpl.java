@@ -28,6 +28,7 @@ public class VehicleInfoServiceImpl implements VehicleInfoService {
 	@Override
 	public int createVehicleInfo(VehicleInfo vehicleInfo) {
 		try{
+			
 			vehicleInfoDaoImpl.createVehicleInfo(vehicleInfo);
 			return ResponseCodeUtil.DB_OPERATION_SUCCESS;
 		}

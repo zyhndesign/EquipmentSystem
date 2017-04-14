@@ -1,4 +1,6 @@
 package com.cidic.equipment.model;
+// default package
+// Generated 2017-4-14 17:05:01 by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,10 +19,6 @@ import javax.persistence.Table;
 @Table(name = "vehicle_texture", catalog = "equipment")
 public class VehicleTexture implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private VehicleInfo vehicleInfo;
 	private int textureId;
@@ -35,6 +33,7 @@ public class VehicleTexture implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
+
 	@Column(name = "Id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
@@ -47,7 +46,7 @@ public class VehicleTexture implements java.io.Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "vehicleId", nullable = false)
 	public VehicleInfo getVehicleInfo() {
-		return vehicleInfo;
+		return this.vehicleInfo;
 	}
 
 	public void setVehicleInfo(VehicleInfo vehicleInfo) {

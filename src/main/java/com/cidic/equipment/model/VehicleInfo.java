@@ -1,8 +1,12 @@
 package com.cidic.equipment.model;
+// default package
+// Generated 2017-4-14 17:05:01 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,10 +25,6 @@ import javax.persistence.TemporalType;
 @Table(name = "vehicle_info", catalog = "equipment")
 public class VehicleInfo implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private int categoryId;
 	private int brandId;
@@ -33,32 +33,39 @@ public class VehicleInfo implements java.io.Serializable {
 	private String imageUrl2;
 	private String style;
 	private String modelUrl;
-	private Date createTime;
-	private String componentInfos; //部件信息
 	private Date onSaleDate;
-	
+	private Date createTime;
+	private String componentInfo;
 	private Set<VehicleColor> vehicleColors = new HashSet<VehicleColor>(0);
 	private Set<VehicleTexture> vehicleTextures = new HashSet<VehicleTexture>(0);
-	
+
 	public VehicleInfo() {
 	}
 
-	public VehicleInfo(int categoryId, byte entry, String style, String modelUrl) {
+	public VehicleInfo(int categoryId, int brandId, byte entry, String style, Date createTime, String componentInfo) {
 		this.categoryId = categoryId;
+		this.brandId = brandId;
 		this.entry = entry;
 		this.style = style;
-		this.modelUrl = modelUrl;
+		this.createTime = createTime;
+		this.componentInfo = componentInfo;
 	}
 
-	public VehicleInfo(int categoryId, byte entry, String imageUrl1, String imageUrl2, String style, String modelUrl,
-			Set<VehicleColor> vehicleColors) {
+	public VehicleInfo(int categoryId, int brandId, byte entry, String imageUrl1, String imageUrl2, String style,
+			String modelUrl, Date onSaleDate, Date createTime, String componentInfo, Set<VehicleColor> vehicleColors,
+			Set<VehicleTexture> vehicleTextures) {
 		this.categoryId = categoryId;
+		this.brandId = brandId;
 		this.entry = entry;
 		this.imageUrl1 = imageUrl1;
 		this.imageUrl2 = imageUrl2;
 		this.style = style;
 		this.modelUrl = modelUrl;
+		this.onSaleDate = onSaleDate;
+		this.createTime = createTime;
+		this.componentInfo = componentInfo;
 		this.vehicleColors = vehicleColors;
+		this.vehicleTextures = vehicleTextures;
 	}
 
 	@Id
@@ -84,7 +91,7 @@ public class VehicleInfo implements java.io.Serializable {
 
 	@Column(name = "brandId", nullable = false)
 	public int getBrandId() {
-		return brandId;
+		return this.brandId;
 	}
 
 	public void setBrandId(int brandId) {
@@ -127,7 +134,7 @@ public class VehicleInfo implements java.io.Serializable {
 		this.style = style;
 	}
 
-	@Column(name = "modelUrl", nullable = false)
+	@Column(name = "modelUrl")
 	public String getModelUrl() {
 		return this.modelUrl;
 	}
@@ -136,7 +143,36 @@ public class VehicleInfo implements java.io.Serializable {
 		this.modelUrl = modelUrl;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vehicleInfo")
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "on_sale_date", length = 19)
+	public Date getOnSaleDate() {
+		return this.onSaleDate;
+	}
+
+	public void setOnSaleDate(Date onSaleDate) {
+		this.onSaleDate = onSaleDate;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "create_time", nullable = false, length = 19)
+	public Date getCreateTime() {
+		return this.createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	@Column(name = "component_info", nullable = false, length = 65535)
+	public String getComponentInfo() {
+		return this.componentInfo;
+	}
+
+	public void setComponentInfo(String componentInfo) {
+		this.componentInfo = componentInfo;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "vehicleInfo")
 	public Set<VehicleColor> getVehicleColors() {
 		return this.vehicleColors;
 	}
@@ -145,45 +181,13 @@ public class VehicleInfo implements java.io.Serializable {
 		this.vehicleColors = vehicleColors;
 	}
 
-	@Column(name = "component_info", nullable = false, length = 65535)
-	public String getComponentInfos() {
-		return componentInfos;
+	@OneToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL}, mappedBy = "vehicleInfo")
+	public Set<VehicleTexture> getVehicleTextures() {
+		return this.vehicleTextures;
 	}
 
-	public void setComponentInfos(String componentInfos) {
-		this.componentInfos = componentInfos;
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vehicleInfo")
-	public Set<VehicleTexture> getVehicleTextures() {
-		return vehicleTextures;
-	}
-	
 	public void setVehicleTextures(Set<VehicleTexture> vehicleTextures) {
 		this.vehicleTextures = vehicleTextures;
 	}
 
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "create_time", nullable = false, length = 19)
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "on_sale_date", nullable = false, length = 19)
-	public Date getOnSaleDate() {
-		return onSaleDate;
-	}
-
-	
-	public void setOnSaleDate(Date onSaleDate) {
-		this.onSaleDate = onSaleDate;
-	}
-
-	
 }

@@ -1,4 +1,6 @@
 package com.cidic.equipment.model;
+// default package
+// Generated 2017-4-14 17:05:01 by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,10 +19,6 @@ import javax.persistence.Table;
 @Table(name = "vehicle_color", catalog = "equipment")
 public class VehicleColor implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private VehicleInfo vehicleInfo;
 	private int colorId;
