@@ -1,6 +1,7 @@
 package com.cidic.equipment.dao;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.cidic.equipment.model.Category;
@@ -20,4 +21,6 @@ public interface CategoryDao {
 	public List<Category> getAllCategory();
 	
 	public Optional<Category> getDataByCategoryId(int id);
+	
+	public Map<Integer, String> getCategoryMap();
 }

@@ -1,6 +1,9 @@
 package com.cidic.equipment.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cidic.equipment.dao.BrandDao;
+import com.cidic.equipment.dao.CategoryDao;
 import com.cidic.equipment.dao.VehicleInfoDao;
 import com.cidic.equipment.model.VehicleInfo;
 import com.cidic.equipment.model.VehicleInfoTableModel;
@@ -24,6 +29,14 @@ public class VehicleInfoServiceImpl implements VehicleInfoService {
 	@Autowired
 	@Qualifier("vehicleInfoDaoImpl")
 	private VehicleInfoDao vehicleInfoDaoImpl;
+	
+	@Autowired
+	@Qualifier("brandDaoImpl")
+	private BrandDao brandDaoImpl;
+	
+	@Autowired
+	@Qualifier("categoryDaoImpl")
+	private CategoryDao categoryDaoImpl;
 	
 	@Override
 	public int createVehicleInfo(VehicleInfo vehicleInfo) {
@@ -60,12 +73,21 @@ public class VehicleInfoServiceImpl implements VehicleInfoService {
 	}
 
 	@Override
-	public VehicleInfoTableModel getVehicleInfoByPage(int offset, int limit) {
+	public VehicleInfoTableModel getVehicleInfoByPage(int offset, int limit){
 		VehicleInfoTableModel vehicleInfoTableModel = new VehicleInfoTableModel();
 		List<VehicleInfo> list = vehicleInfoDaoImpl.getVehicleInfoByPage(offset, limit);
 		int count = vehicleInfoDaoImpl.getVehicleInfoCount();
+		Map<Integer,String> brandMap = brandDaoImpl.getBrandMap();
+		Map<Integer,String> categoryMap = categoryDaoImpl.getCategoryMap();
+		for (VehicleInfo vehicleInfo : list){
+			vehicleInfo.setBrandName(brandMap.get(vehicleInfo.getBrandId()));
+			vehicleInfo.setCategoryName(categoryMap.get(vehicleInfo.getCategoryId()));
+	       
+		}
 		vehicleInfoTableModel.setList(list);
 		vehicleInfoTableModel.setCount(count);
+		
+		
 		return vehicleInfoTableModel;
 	}
 

@@ -1,6 +1,8 @@
 package com.cidic.equipment.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.hibernate.Query;
@@ -99,6 +101,21 @@ public class CategoryDaoImpl implements CategoryDao {
         else{
         	return Optional.empty();
         }
+	}
+
+	@Override
+	public Map<Integer, String> getCategoryMap() {
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = " from Category";
+		final Query query = session.createQuery(hql);  
+        @SuppressWarnings("unchecked")
+		final List<Category> list = query.list(); 
+		Map<Integer,String> map = new HashMap<Integer,String>();
+		for (Category category : list){
+			map.put(category.getId(), category.getName());
+		}
+		
+		return map;
 	}
 
 }

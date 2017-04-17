@@ -1,6 +1,8 @@
 package com.cidic.equipment.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.hibernate.Query;
@@ -98,6 +100,21 @@ public class BrandDaoImpl implements BrandDao {
         else{
         	return Optional.empty();
         }
+	}
+
+	@Override
+	public Map<Integer, String> getBrandMap() {
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = " from Brand";
+		final Query query = session.createQuery(hql);  
+        @SuppressWarnings("unchecked")
+		final List<Brand> list = query.list(); 
+		Map<Integer,String> map = new HashMap<Integer,String>();
+		for (Brand brand : list){
+			map.put(brand.getId(), brand.getName());
+		}
+		
+		return map;
 	}
 
 }
