@@ -51,6 +51,14 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 	@Override
 	public void updateVehicleInfo(VehicleInfo vehicleInfo) {
 		Session session = this.getSessionFactory().getCurrentSession();
+		for (VehicleColor color : vehicleInfo.getVehicleColors()){
+			color.setVehicleInfo(vehicleInfo);
+		
+		}
+		
+		for (VehicleTexture textures : vehicleInfo.getVehicleTextures()){
+			textures.setVehicleInfo(vehicleInfo);
+		}
 		session.update(vehicleInfo);
 	}
 
