@@ -131,7 +131,7 @@ var config={
         '<td>$${imageString}</td>',
         '<td>${name}</td>',
         '<td>$${colorString}</td>',
-        '<td>${texture}</td>',
+        '<td>${textureText}</td>',
         '<td>${hasBiaoZhi}</td>',
         '<td>$${infoFullString}</td>',
         '<td><a href="${id}" class="zyActionEdit">编辑</a></td>',

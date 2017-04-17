@@ -2,7 +2,7 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
 
     return {
         cutCtrl: null,
-        componentInfos: [],
+        componentInfo: [],
         changeMainBtnStatus: function (showSave) {
 
             if (showSave) {
@@ -131,8 +131,8 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
                 for (var j = 0, jLen = parent.childs.length; j < jLen; j++) {
                     item = parent.childs[j];
 
-                    if (config.findInArray(this.componentInfos, "id", item.id) == -1) {
-                        this.componentInfos.push({
+                    if (config.findInArray(this.componentInfo, "id", item.id) == -1) {
+                        this.componentInfo.push({
                             id: item.id,
                             image: {},
                             name: parent.name + "/" + item.name,
@@ -145,20 +145,20 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
                 }
             }
 
-            this.setHtmlForInfoChildTable(this.componentInfos, tableTBody);
+            this.setHtmlForInfoChildTable(this.componentInfo, tableTBody);
         },
         filterInfoChildTable: function (filter, tableTbody) {
             var arr = [];
-            for (var i = 0, len = this.componentInfos.length; i < len; i++) {
-                if (this.componentInfos[i].id.indexOf(filter) != -1) {
-                    arr.push(this.componentInfos[i]);
+            for (var i = 0, len = this.componentInfo.length; i < len; i++) {
+                if (this.componentInfo[i].id.indexOf(filter) != -1) {
+                    arr.push(this.componentInfo[i]);
                 }
             }
 
             this.setHtmlForInfoChildTable(arr, tableTbody);
         },
         infoChildSave: function () {
-            var component = this.componentInfos[this.infoChildIndex];
+            var component = this.componentInfo[this.infoChildIndex];
 
             if (this.cutCtrl && this.cutCtrl.customData) {
                 component.image.src = this.cutCtrl.customData.src;
@@ -169,7 +169,10 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
             component.color = $("#iCAddColor").val();
             component.texture = $("#iCAddTexture input:checked").map(function () {
                 return $(this).val();
-            }).get().join(',');
+            });
+            component.textureText = $("#iCAddTexture input:checked").map(function () {
+                return $(this).next().text();
+            }).get().join(",");
             component.infoFull = component.image.src && component.color && component.hasBiaoZhi && component.texture ? 1 : 0;
             component.appraise = $("#iCAddAppraise").val();
 
@@ -195,7 +198,7 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
             }
         },
         initICAdd: function () {
-            var component = this.componentInfos[this.infoChildIndex];
+            var component = this.componentInfo[this.infoChildIndex];
             $("#iCAddColor").val(component.color).prev().css("background", component.color);
             $("#iCAddTexture input[type='checkbox']").each(function (index, el) {
                 if (component.texture.indexOf($(this).val()) != -1) {
@@ -253,7 +256,7 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
                 {colorId: $("#infoAssistColor1").val()},
                 {colorId: $("#infoAssistColor2").val()}
             ];
-            data.componentInfos = JSON.stringify(this.componentInfos);
+            data.componentInfo = JSON.stringify(this.componentInfo);
 
             this.submitData = data;
 
@@ -262,7 +265,7 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
         },
         initCtrlData: function (data) {
 
-            this.componentInfos = JSON.parse(data.componentInfos);
+            this.componentInfo = JSON.parse(data.componentInfo);
             $("#infoCategory").val(data.category);
             $("input[name='infoMarketType']").val(data.marketType);
             $("#infoMarketDate").val(data.marketDate);
@@ -436,7 +439,7 @@ $(document).ready(function () {
     /**********************************分结构信息*******************************/
     $("#infoChildTable").on("click", ".zyActionEdit", function () {
         infoCou.currentInfoChildTr = $(this).parents("tr");
-        infoCou.infoChildIndex = config.findInArray(infoCou.componentInfos, "id", $(this).attr("href"));
+        infoCou.infoChildIndex = config.findInArray(infoCou.componentInfo, "id", $(this).attr("href"));
         infoCou.hideInfoChildMgr();
         return false;
     });
@@ -523,7 +526,7 @@ $(document).ready(function () {
         $("#pInfoStyle").text(JSON.parse(submitData.style).join(","));
         $("#pInfoModal").attr("href", submitData.modelUrl).text(submitData.modelUrl);
 
-        infoCou.setHtmlForInfoChildTable(JSON.parse(submitData.componentInfos), $("#pInfoChildTable tbody"));
+        infoCou.setHtmlForInfoChildTable(JSON.parse(submitData.componentInfo), $("#pInfoChildTable tbody"));
 
         $("#previewModal").modal("open");
     });
