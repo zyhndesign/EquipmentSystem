@@ -36,11 +36,6 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 	@Override
 	public void createVehicleInfo(VehicleInfo vehicleInfo) {
 		Session session = this.getSessionFactory().getCurrentSession();
-		System.out.println("=======1:"+vehicleInfo.getVehicleColors().size());
-		System.out.println("=======1:"+vehicleInfo.getVehicleTextures().size());
-		System.out.println("=======1:"+vehicleInfo.getOnSaleDate());
-		System.out.println("=======1:"+vehicleInfo.getCreateTime());
-		System.out.println("=======1:"+vehicleInfo.getComponentInfo());
 		
 		for (VehicleColor color : vehicleInfo.getVehicleColors()){
 			color.setVehicleInfo(vehicleInfo);
