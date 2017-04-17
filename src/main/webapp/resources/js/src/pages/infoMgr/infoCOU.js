@@ -137,6 +137,7 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
                             image: {},
                             name: parent.name + "/" + item.name,
                             texture: [],
+                            textureText:"",
                             color: [],
                             hasBiaoZhi: "无",
                             infoFull: 0
@@ -167,12 +168,13 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
             }
             component.hasBiaoZhi = $("#infoChildAdd input[name='biaoZhi']").val();
             component.color = $("#iCAddColor").val();
-            component.texture = $("#iCAddTexture input:checked").map(function () {
-                return $(this).val();
+            component.textureText=[];
+            component.texture=[];
+            $("#iCAddTexture input:checked").each(function () {
+                component.texture.push($(this).val());
+                component.textureText.push($(this).next().text());
             });
-            component.textureText = $("#iCAddTexture input:checked").map(function () {
-                return $(this).next().text();
-            }).get().join(",");
+            component.textureText = component.textureText.join(",");
             component.infoFull = component.image.src && component.color && component.hasBiaoZhi && component.texture ? 1 : 0;
             component.appraise = $("#iCAddAppraise").val();
 
@@ -249,12 +251,12 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
             data.modelUrl = $("#infoModal").val();
             data.vehicleTextures = [];
             $("#infoTexture").find("input[type='checkbox']").each(function (index, el) {
-                data.vehicleTextures.push({textureId: $(el).val()});
+                data.vehicleTextures.push({texture: {id: $(el).val()}});
             });
             data.vehicleColors = [
-                {colorId: $("#infoMainColor").val()},
-                {colorId: $("#infoAssistColor1").val()},
-                {colorId: $("#infoAssistColor2").val()}
+                {color: {id: $("#infoMainColor").val()}},
+                {color: {id: $("#infoAssistColor1").val()} },
+                {color: {id: $("#infoAssistColor2").val()}}
             ];
             data.componentInfo = JSON.stringify(this.componentInfo);
 
@@ -264,20 +266,30 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
 
         },
         initCtrlData: function (data) {
+            var textureArr=[];
+            data.vehicleColors.sort(function(a,b){
+                return b.id- a.id;
+            });
+            for(var i= 0,len=data.vehicleTextures.length;i<len;i++){
+                textureArr.push(data.vehicleTextures[i].texture.id);
+            }
 
             this.componentInfo = JSON.parse(data.componentInfo);
-            $("#infoCategory").val(data.category);
-            $("input[name='infoMarketType']").val(data.marketType);
-            $("#infoMarketDate").val(data.marketDate);
-            $("#infoBrand").val(data.brand);
-            $("#infoImageChanPin").val(data.imageChanPin).parent().find("img").attr("src", data.imageChanPin);
-            $("#infoImageXianXin").val(data.imageXianXin).parent().find("img").attr("src", data.imageXianXin);
-            $("#infoMainColor").val(data.color[0]).parent().removeClass("zyNoSelect").find(".zySShow").css("background", data.color[0]);
-            $("#infoAssistColor1").val(data.color[1]).parent().removeClass("zyNoSelect").find(".zySShow").css("background", data.color[1]);
-            $("#infoAssistColor2").val(data.color[2]).parent().removeClass("zyNoSelect").find(".zySShow").css("background", data.color[2]);
+            $("#infoCategory").val(data.categoryId);
+            $("input[name='infoMarketType']").val(data.entry);
+            $("#infoMarketDate").val(data.onSaleDate);
+            $("#infoBrand").val(data.brandId);
+            $("#infoImageChanPin").val(data.imageUrl1).parent().find("img").attr("src", data.imageUrl1);
+            $("#infoImageXianXin").val(data.imageUrl2).parent().find("img").attr("src", data.imageUrl2);
+            $("#infoMainColor").val(data.vehicleColors[0].color.id).
+                parent().removeClass("zyNoSelect").find(".zySShow").css("background", data.vehicleColors[0].color.colorValue);
+            $("#infoAssistColor1").val(data.vehicleColors[1].color.id).
+                parent().removeClass("zyNoSelect").find(".zySShow").css("background", data.vehicleColors[1].color.colorValue);
+            $("#infoAssistColor2").val(data.vehicleColors[2].color.id).
+                parent().removeClass("zyNoSelect").find(".zySShow").css("background", data.vehicleColors[2].color.colorValue);
             $("#infoTexture input[type='checkbox']").each(function (index, el) {
                 el = $(el);
-                if (data.texture.indexOf(el.val()) != -1) {
+                if (textureArr.indexOf(parseInt(el.val())) != -1) {
                     el.prop("checked", true);
                 }
             });
@@ -315,7 +327,7 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
             if (id) {
                 ZYCtrlDataHandler.getDataForUpdate(config.ajaxUrls.infoGetDetail, {id: id}, function (data) {
                     me.initCtrlData(data);
-
+                    me.initChildInfo(data.categoryId);
                 });
             }
 
@@ -499,14 +511,14 @@ $(document).ready(function () {
 
         var textures = [], colors = [], index;
 
-        for (var i = 0, len = submitData.vehicleTextures; i < len; i++) {
-            index = config.findInArray(ZYCtrlDataHandler.textureData, "id", submitData.vehicleTextures[i].textureId);
+        for (var i = 0, len = submitData.vehicleTextures.length; i < len; i++) {
+            index = config.findInArray(ZYCtrlDataHandler.textureData, "id", submitData.vehicleTextures[i].texture.id);
             if (index != -1) {
                 textures.push(ZYCtrlDataHandler.textureData[index]);
             }
         }
-        for (var j = 0, jLen = submitData.vehicleColors; j < jLen; j++) {
-            index = config.findInArray(ZYCtrlDataHandler.colorData, "id", submitData.vehicleColors[j].colorId);
+        for (var j = 0, jLen = submitData.vehicleColors.length; j < jLen; j++) {
+            index = config.findInArray(ZYCtrlDataHandler.colorData, "id", submitData.vehicleColors[j].color.id);
             if (index != -1) {
                 colors.push(ZYCtrlDataHandler.colorData[index]);
             }
@@ -520,7 +532,7 @@ $(document).ready(function () {
         $("#pInfoMainColor").css("background", colors[0].colorValue);
         $("#pInfoAssistColor1").css("background", colors[1].colorValue);
         $("#pInfoAssistColor2").css("background", colors[2].colorValue);
-        $("#pInfoTexture").html(juicer(config.textureItems, {
+        $("#pInfoTexture").html(juicer(config.textureItemsTpl, {
             items: textures
         }));
         $("#pInfoStyle").text(JSON.parse(submitData.style).join(","));

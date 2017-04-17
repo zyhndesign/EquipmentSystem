@@ -117,7 +117,7 @@ var config={
         '<td>$${item.imageString}</td>',
         '<td>${item.name}</td>',
         '<td>$${item.colorString}</td>',
-        '<td>${item.texture}</td>',
+        '<td>${item.textureText}</td>',
         '<td>${item.hasBiaoZhi}</td>',
         '<td>$${item.infoFullString}</td>',
         '{@if type=="infoChild"}',
@@ -180,7 +180,7 @@ var config={
         '<label for="texture${idFlag}${index}" style="margin-right: 10px;">${item.name}</label>',
         '{@/each}'
     ].join(''),
-    textureItems:[
+    textureItemsTpl:[
         '{@each items as item,index}',
         '<div class="zyTextureItem">',
         '<label class="zyFormLabel">${item.name}</label>',
@@ -190,7 +190,7 @@ var config={
         '</div>',
         '</div>',
         '{@/each}'
-    ],
+    ].join(''),
     styleAllTpl:[
         '{@each items as item,index}',
         '<div class="chip">',

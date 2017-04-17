@@ -8,6 +8,72 @@
 var functions = (function (config) {
     return {
         /**
+         * 格式化日期
+         * @param format {string} 格式化
+         * y:四位数的年份
+         * m:两位数的月份
+         * d:两位数的日期
+         * h:两位数的时间
+         * i:两位数的分钟
+         * s:两位数的秒钟
+         * 支持格式:
+         * @param dateTime {number} 毫秒表示的日期
+         * @returns string {string}格式好的字符串日期，默认是2014-09-10 12:03:23格式
+         */
+        formatDate:function(format,dateTime){
+            var string,currentDate,year,month,day, h, m, s,fYear,fMonth,fDay,fH,fM,fS;
+
+            if(typeof format ==="number"){
+                dateTime=format;
+                format=null;
+            }
+
+            currentDate =dateTime?new Date(dateTime):new Date();
+            fYear=currentDate.getFullYear();
+            year=fYear.toString().slice(2);
+            fMonth=month=currentDate.getMonth()+1;
+            fDay=day=currentDate.getDate();
+            fH=h=currentDate.getHours();
+            fM=m=currentDate.getMinutes();
+            fS=s=currentDate.getSeconds();
+
+            if(fMonth<10){
+                fMonth="0"+fMonth;
+            }
+            if(fDay<10){
+                fDay="0"+fDay;
+            }
+            if(fH<10){
+                fH="0"+fH;
+            }
+            if(fM<10){
+                fM="0"+fM;
+            }
+            if(fS<10){
+                fS="0"+fS;
+            }
+
+            switch(format){
+                case "y-m-d":
+                    string=fYear+"-"+fMonth+"-"+fDay;
+                    break;
+                case "y-m-d h:m":
+                    string=fYear+"-"+fMonth+"-"+fDay+" "+fH+":"+fM;
+                    break;
+                case "y/m/d h:m:s":
+                    string=fYear+"/"+fYear+"/"+day+" "+fH+":"+fH+":"+fH;
+                    break;
+                case "y/m/d h:m":
+                    string=fYear+"/"+fMonth+"/"+fDay+" "+fH+":"+fM;
+                    break;
+                default :
+                    string=fYear+"-"+fMonth+"-"+fDay+" "+fH+":"+fM+":"+fS;
+                    break;
+            }
+
+            return string;
+        },
+        /**
          * 显示loading遮盖层
          */
         showLoading: function () {

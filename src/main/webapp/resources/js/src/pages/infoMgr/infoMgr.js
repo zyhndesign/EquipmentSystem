@@ -96,27 +96,39 @@ $(document).ready(function(){
                     "sUrl":config.dataTable.langUrl
                 },
                 aoColumns: [
-                    { "mDataProp": "imageChanPin",
+                    { "mDataProp": "imageUrl1",
                         "fnRender":function(oObj){
-                            return  "<img class='thumb' src='"+oObj.aData.imageChanPin+"'>";
+                            return  "<img class='thumb' src='"+oObj.aData.imageUrl1+"'>";
                         }
                     },
-                    { "mDataProp": "brand"},
-                    { "mDataProp": "category"},
-                    { "mDataProp": "texture",
+                    { "mDataProp": "brandName"},
+                    { "mDataProp": "categoryName"},
+                    { "mDataProp": "vehicleTextures",
                         "fnRender":function(oObj){
-                            return  oObj.aData.texture.join("/");
+                            var arr=[];
+                            for(var i= 0,len=oObj.aData.vehicleTextures.length;i<len;i++){
+                                arr.push(oObj.aData.vehicleTextures[i].texture.name);
+                            }
+
+                            return arr.join(",");
                         }},
-                    { "mDataProp":"marketDate"},
-                    { "mDataProp": "color",
+                    { "mDataProp":"onSaleDate"},
+                    { "mDataProp": "vehicleColors",
                         "fnRender":function(oObj){
+                            oObj.aData.vehicleColors.sort(function(a,b){
+                                return b.id-a.id;
+                            });
+                            var arr=[];
+                            for(var i= 0,len=oObj.aData.vehicleColors.length;i<len;i++){
+                                arr.push(oObj.aData.vehicleColors[i].color.colorValue);
+                            }
                             return juicer(config.colorItemsTpl,{
-                                items:oObj.aData.color
-                            })
+                                items:arr
+                            });
                         }},
                     { "mDataProp": "opt",
                         "fnRender":function(oObj){
-                            return  '<a href="vehicleInfo/infoCOU.html?'+oObj.aData.id+'">编辑</a>&nbsp;&nbsp;'+
+                            return  '<a href="vehicleInfo/infoCOU/'+oObj.aData.id+'">编辑</a>&nbsp;&nbsp;'+
                                 '<a href="'+oObj.aData.id+'" class="remove">删除</a>';
                         }
                     }
@@ -163,7 +175,7 @@ $(document).ready(function(){
     });
 
     $("#myTable").on("click","a.remove",function(){
-        mgr.table.delete({id:$(this).attr("href")});
+        infoMgr.table.delete({id:$(this).attr("href")});
         return false;
     })
 });
