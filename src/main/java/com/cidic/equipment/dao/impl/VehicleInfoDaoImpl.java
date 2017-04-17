@@ -53,7 +53,6 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 		Session session = this.getSessionFactory().getCurrentSession();
 		for (VehicleColor color : vehicleInfo.getVehicleColors()){
 			color.setVehicleInfo(vehicleInfo);
-		
 		}
 		
 		for (VehicleTexture textures : vehicleInfo.getVehicleTextures()){
