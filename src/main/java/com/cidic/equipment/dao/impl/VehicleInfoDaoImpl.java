@@ -108,4 +108,22 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
         }
 	}
 
+	@Override
+	public void deleteVehicleColor(int vehicleId) {
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = " delete from VehicleColor t where t.vehicleInfo.id = ? ";
+		Query query = session.createQuery(hql);
+        query.setParameter(0, vehicleId); 
+		query.executeUpdate();
+	}
+
+	@Override
+	public void deleteVehicleTexture(int vehicleId) {
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = " delete from VehicleTexture t where t.vehicleInfo.id = ? ";
+		Query query = session.createQuery(hql);
+        query.setParameter(0, vehicleId); 
+		query.executeUpdate();
+	}
+
 }

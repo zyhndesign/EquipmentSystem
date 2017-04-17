@@ -95,7 +95,7 @@ public class VehicleInfoController {
 	public ResultModel updateVehicleInfo(HttpServletRequest request, HttpServletResponse response,@RequestBody VehicleInfo vehicleInfo) {
 		WebRequestUtil.AccrossAreaRequestSet(request, response);
 		resultModel = new ResultModel();
-		
+		vehicleInfo.setCreateTime(new Date());
 		int result = vehicleInfoServiceImpl.updateVehicleInfo(vehicleInfo);
 		if (result == ResponseCodeUtil.DB_OPERATION_SUCCESS) {
 			resultModel.setResultCode(200);

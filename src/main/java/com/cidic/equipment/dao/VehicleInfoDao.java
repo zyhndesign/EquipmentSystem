@@ -18,4 +18,8 @@ public interface VehicleInfoDao {
 	public int getVehicleInfoCount();
 	
 	public Optional<VehicleInfo> getDataByVehicleInfoId(int id);
+	
+	public void deleteVehicleColor(int vehicleId);
+	
+	public void deleteVehicleTexture(int vehicleId);
 }

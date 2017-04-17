@@ -53,6 +53,8 @@ public class VehicleInfoServiceImpl implements VehicleInfoService {
 	@Override
 	public int updateVehicleInfo(VehicleInfo vehicleInfo) {
 		try{
+			vehicleInfoDaoImpl.deleteVehicleColor(vehicleInfo.getId());
+			vehicleInfoDaoImpl.deleteVehicleTexture(vehicleInfo.getId());
 			vehicleInfoDaoImpl.updateVehicleInfo(vehicleInfo);
 			return ResponseCodeUtil.DB_OPERATION_SUCCESS;
 		}
