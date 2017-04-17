@@ -39,6 +39,7 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 		
 		for (VehicleColor color : vehicleInfo.getVehicleColors()){
 			color.setVehicleInfo(vehicleInfo);
+		
 		}
 		
 		for (VehicleTexture textures : vehicleInfo.getVehicleTextures()){
@@ -67,6 +68,8 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 		Session session = this.getSessionFactory().getCurrentSession();
 		String hql = " from VehicleInfo";
 		final Query query = session.createQuery(hql);  
+		query.setFirstResult(offset);    
+	    query.setMaxResults(limit); 
         @SuppressWarnings("unchecked")
 		final List<VehicleInfo> list = query.list(); 
 		return list;
