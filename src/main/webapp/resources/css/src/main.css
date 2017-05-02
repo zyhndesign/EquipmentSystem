@@ -25,7 +25,7 @@ label.error{
     margin-left: 104px;
 }
 label img{
-    vertical-align: top;
+    vertical-align: middle;
 }
 ul{
     margin: 0px;
@@ -523,6 +523,17 @@ textarea.zyTextarea{
 }
 .select-wrapper select.zyInput{
     display: none;
+}
+[type="checkbox"]+label{
+    height: 100%;
+}
+[type="checkbox"].filled-in:not(:checked)+label:after,[type="checkbox"].filled-in:checked+label:after{
+    top:50%;
+    transform: translateY(-50%);
+}
+[type="checkbox"].filled-in:not(:checked)+label:before,[type="checkbox"].filled-in:checked+label:before{
+    top:50%;
+    margin-top:-8px;
 }
 
 
