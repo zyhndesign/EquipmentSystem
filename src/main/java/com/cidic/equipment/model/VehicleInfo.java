@@ -43,7 +43,7 @@ public class VehicleInfo implements java.io.Serializable {
 	private String imageUrl2;
 	private String style;
 	private String modelUrl;
-	private Date onSaleDate;
+	private String onSaleDate;
 	private Date createTime;
 	private String componentInfo;
 	private Set<VehicleColor> vehicleColors = new HashSet<VehicleColor>(0);
@@ -62,7 +62,7 @@ public class VehicleInfo implements java.io.Serializable {
 	}
 
 	public VehicleInfo(int categoryId, int brandId, byte entry, String imageUrl1, String imageUrl2, String style,
-			String modelUrl, Date onSaleDate, Date createTime, String componentInfo, Set<VehicleColor> vehicleColors,
+			String modelUrl, String onSaleDate, Date createTime, String componentInfo, Set<VehicleColor> vehicleColors,
 			Set<VehicleTexture> vehicleTextures) {
 		this.categoryId = categoryId;
 		this.brandId = brandId;
@@ -153,13 +153,12 @@ public class VehicleInfo implements java.io.Serializable {
 		this.modelUrl = modelUrl;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "on_sale_date", length = 19)
-	public Date getOnSaleDate() {
+	@Column(name = "on_sale_date", length = 4)
+	public String getOnSaleDate() {
 		return this.onSaleDate;
 	}
 
-	public void setOnSaleDate(Date onSaleDate) {
+	public void setOnSaleDate(String onSaleDate) {
 		this.onSaleDate = onSaleDate;
 	}
 
