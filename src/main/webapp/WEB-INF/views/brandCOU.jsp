@@ -34,12 +34,11 @@
             <div class="zyPanelContent zyPd20">
                 <form class="zyForm" id="myForm" action="#">
                     <div class="row" id="uploadContainer">
-                        <label class="zyFormLabel">文件：</label>
+                        <label class="zyFormLabel">商标：</label>
                         <div class="btn" id="uploadBtn">
-                            上传LOGO
+                            上传
                         </div>
-                        <img id="imageShow" style="margin-left: 50px;width:100px;vertical-align: top"
-                            src="resources/images/defaultBrand.png">
+                        <img id="imageShow" style="margin-left: 50px;width:100px;vertical-align: top">
                         <input type="hidden" name="icon" id="image">
                     </div>
                     <div class="row">
@@ -47,7 +46,7 @@
                         <input class="zyInput" id="name" type="text" name="name">
                     </div>
                     <div class="row">
-                        <label class="zyFormLabel">描述：</label>
+                        <label class="zyFormLabel">企业简介：</label>
                         <textarea class="zyTextarea" id="description" name="description"></textarea>
                     </div>
                     <div class="row zyFormSubmitRow">

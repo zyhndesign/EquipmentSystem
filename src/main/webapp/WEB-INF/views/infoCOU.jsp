@@ -66,8 +66,41 @@ pageEncoding="UTF-8" %>
             </div>
         </div>
         <div class="row">
-            <label class="zyFormLabel zyRequired">上市日期：</label>
-            <input class="zyInput zyActionRequired" type="date" id="infoMarketDate">
+            <label class="zyFormLabel zyRequired">量产时间：</label>
+            <select class="zyInput zyActionRequired" id="infoMarketDate">
+                <option value="">请选择</option>
+                <option value="2030">2030</option>
+                <option value="2029">2029</option>
+                <option value="2028">2028</option>
+                <option value="2027">2027</option>
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+                <option value="2014">2014</option>
+                <option value="2013">2013</option>
+                <option value="2012">2012</option>
+                <option value="2011">2011</option>
+                <option value="2010">2010</option>
+                <option value="2009">2009</option>
+                <option value="2008">2008</option>
+                <option value="2007">2007</option>
+                <option value="2006">2006</option>
+                <option value="2005">2005</option>
+                <option value="2004">2004</option>
+                <option value="2003">2003</option>
+                <option value="2002">2002</option>
+                <option value="2001">2001</option>
+                <option value="2000">2000</option>
+            </select>
         </div>
         <div class="row">
             <label class="zyFormLabel zyRequired">品牌：</label>
@@ -86,14 +119,14 @@ pageEncoding="UTF-8" %>
             <br>
 
             <div class="zyFormChildCtrl">
-                <label class="zyFormLabel zyRequired zyFormLabelHasSub">产品图像<br>&nbsp;&nbsp;&nbsp;&nbsp;(svg)</label>
+                <label class="zyFormLabel zyRequired zyFormLabelHasSub">图片1<br>&nbsp;&nbsp;&nbsp;&nbsp;(svg)</label>
 
                 <div class="zyImageUpload"  id="uploadChanPinImageContainer">
                     <img src="resources/images/upload.png" id="uploadChanPinImageBtn">
                     <input type="hidden" class="zyActionRequired" id="infoImageChanPin">
                 </div>
                 <label style="margin-left: 40px" class="zyFormLabel
-        zyFormLabelHasSub">特征线图像<br>&nbsp;&nbsp;&nbsp;&nbsp;(svg)</label>
+                    zyFormLabelHasSub">图片2<br>&nbsp;&nbsp;&nbsp;&nbsp;(svg)</label>
 
                 <div class="zyImageUpload" id="uploadXianXinImageContainer">
                     <img src="resources/images/upload.png" id="uploadXianXinImageBtn">
@@ -196,34 +229,8 @@ pageEncoding="UTF-8" %>
             </tr>
             </thead>
             <tbody data-type="infoChild">
-            <!--<tr>
-            <td><img class="thumb" src="/images/brand.png"></td>
-            <td>上车/操纵室</td>
-            <td>
-            <div class="zyColorItem">
-            <span class="zyColorShow" style="background: red;"></span>
-            <span class="zyColorName">红色</span>
-            </div>
-            </td>
-            <td>亮光</td>
-            <td>有</td>
-            <td><i class="material-icons green-text">done</i></td>
-            <td><a href="0" class="zyActionEdit">编辑</a></td>
-            </tr>
-            <tr>
-            <td><img class="thumb" src="/images/brand.png"></td>
-            <td>上车/操纵室</td>
-            <td>
-            <div class="zyColorItem">
-            <span class="zyColorShow" style="background: red;"></span>
-            <span class="zyColorName">红色</span>
-            </div>
-            </td>
-            <td>亮光</td>
-            <td>有</td>
-            <td><i class="material-icons red-text">close</i></td>
-            <td><a href="1" class="zyActionEdit">编辑</a></td>
-            </tr>-->
+
+
             </tbody>
         </table>
     </div>
@@ -296,8 +303,8 @@ pageEncoding="UTF-8" %>
     </div>
     <div class="modal-content">
         <div id="cutImageType" class="zyGroupButtons">
-            <span class="zyGBItem zyGBItemActive" data-type="tezhengxian">特征线图片</span>
-            <span class="zyGBItem" data-type="changpin">产品照片</span>
+            <span class="zyGBItem zyGBItemActive" data-type="tezhengxian">图片2</span>
+            <span class="zyGBItem" data-type="changpin">图片1</span>
         </div>
         <div class="zyTabPanel">
             <img id="toCutImage" style="width: 600px" src="">
@@ -392,7 +399,7 @@ pageEncoding="UTF-8" %>
 
                             <input type="checkbox" id="pChangeImage">
                             <span class="lever"></span>
-                            显示特征线
+                            显示图片2
                         </label>
                     </div>
                     <img src="resources/images/upload.png" id="pImage" class="zyPCenter"
@@ -489,6 +496,7 @@ pageEncoding="UTF-8" %>
 <script src="resources/js/src/functions.js"></script>
 <script src="resources/js/src/ZYCtrlDataHandler.js"></script>
 <script src="resources/js/src/ZYFormHandler.js"></script>
+    <script src="resources/js/src/ZYPreviewHandler.js"></script>
 <script src="resources/js/src/pages/infoMgr/infoCOU.js"></script>
 
 </body>

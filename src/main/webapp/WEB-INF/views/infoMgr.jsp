@@ -29,8 +29,8 @@
         <div class="zyPanel">
      <!--   <div class="zyPanelTitle">知识库</div>  -->
             <div class="zyPanelContent">
-            
-                
+
+
 <div class="zySearch" id="search">
     <div class="zySearchRow">
         <a class="waves-effect waves-light btn" href="vehicleInfo/infoCOU">
@@ -154,6 +154,143 @@
 </div>
 
 
+<div id="previewModal" class="modal zyModal">
+    <div class="modal-header">
+        预览
+    </div>
+    <div class="modal-content">
+        <ul class="tabs">
+            <li class="tab"><a class="active" href="#pInfo">整体信息</a></li>
+            <li class="tab"><a href="#pInfoChild">分结构信息</a></li>
+        </ul>
+        <div id="pInfo" class="zyTabPanel">
+            <div class="row zyForm" style="padding: 10px 0px !important;position: relative">
+                <div class="col s6">
+                    <div class="zyBgFFFFFF zyPd10">
+                        <div class="row">
+                            <label class="zyFormLabel">产品类别:</label>
+                            <label class="zyFormLabel" id="pInfoCategory">xxx</label>
+                        </div>
+                        <div class="row">
+                            <label class="zyFormLabel">条目类别:</label>
+                            <label class="zyFormLabel" id="pInfoType">xxxx</label>
+                        </div>
+                        <div class="row">
+                            <label class="zyFormLabel">上市日期:</label>
+                            <label class="zyFormLabel" id="pInfoMarketDate">xxx</label>
+                        </div>
+                        <div class="row">
+                            <label class="zyFormLabel">品牌:</label>
+                            <label class="zyFormLabel" id="pInfoBrand">xxx</label>
+                        </div>
+                        <div class="row">
+                            <label class="zyFormLabel">风格：</label>
+                            <label class="zyFormLabel" id="pInfoStyle">xxx,xxxx</label>
+                        </div>
+                        <div class="row">
+                            <label class="zyFormLabel">模型：</label>
+                            <%--<a class="zyFormLabel" id="pInfoModal" href="#">xxxx</a>--%>
+                        </div>
+                    </div>
+                    <div class="zyMT20 zyPanelWrapper">
+                        <div class="row zyBgFFFFFF zyColorPanel zyPd10">
+                            <label class="zyFormLabel">颜色:</label>
+
+                            <div class="row">
+                                <span class="zySName" style="margin-right:8px;">主色:</span>
+
+                                <div class="zyColorItem">
+                                    <span class="zyColorShow" id="pInfoMainColor" style="background: orange"></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <span class="zySName">辅色1:</span>
+
+                                <div class="zyColorItem">
+                                    <span class="zyColorShow" id="pInfoAssistColor1" style="background: orange"></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <span class="zySName">辅色2:</span>
+
+                                <div class="zyColorItem">
+                                    <span class="zyColorShow" id="pInfoAssistColor2" style="background: orange"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row zyBgFFFFFF zyTexturePanel zyPd10">
+                            <label class="zyFormLabel">纹理:</label>
+
+                            <div id="pInfoTexture">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col s6 zyBgFFFFFF" style="position: absolute;left:50%;top:10px;bottom:10px">
+                    <div class="switch">
+                        <label>
+                            <input type="checkbox" id="pChangeImage">
+                            <span class="lever"></span>
+                            显示图片2
+                        </label>
+                    </div>
+                    <img src="resources/images/upload.png" id="pImage" class="zyPCenter"
+                        style="width: 100%;height: auto">
+                </div>
+            </div>
+        <!--
+        <div class="row">
+        <div class="col s6 offset-s6">
+        <div class="switch">
+        <label>
+
+        <input type="checkbox" id="pChangeImage">
+        <span class="lever"></span>
+        显示特征线
+        </label>
+        </div>
+        </div>
+        </div>
+        -->
+        </div>
+        <div id="pInfoChild" class="zyTabPanel">
+            <select class="zyInput right input-field zyActionCategory" id="pInfoChildTableSearch">
+            <!--<optgroup label="team 1">
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            </optgroup>
+            <optgroup label="team 2">
+            <option value="3">Option 3</option>
+            <option value="4">Option 4</option>
+            </optgroup>-->
+            </select>
+
+            <table class="dataTable" id="pInfoChildTable">
+                <thead>
+                    <tr>
+                        <th>图片</th>
+                        <th>名称</th>
+                        <th>颜色</th>
+                        <th>纹理</th>
+                        <th>标识</th>
+                        <th>信息完整</th>
+                    </tr>
+                </thead>
+                <tbody data-type="pInfoChild">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer center-align">
+        <a class="modal-action modal-close btn">关闭</a>
+    </div>
+</div>
 
 <!-- Compiled and minified JavaScript -->
 <script>
@@ -167,6 +304,7 @@
         <script src="resources/js/src/functions.js"></script>
 <script src="resources/js/src/ZYTableHandler.js"></script>
 <script src="resources/js/src/ZYCtrlDataHandler.js"></script>
+        <script src="resources/js/src/ZYPreviewHandler.js"></script>
 <script src="resources/js/src/pages/infoMgr/infoMgr.js"></script>
 
 </body>

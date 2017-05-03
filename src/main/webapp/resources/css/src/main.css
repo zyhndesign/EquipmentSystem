@@ -344,9 +344,15 @@ table.dataTable td .zyColorItem .zyColorShow{
     width: 20px;
     height: 20px;
 }
-table.dataTable .thumb{
-    height: 100px;
-    width: auto;
+table.dataTable .zyWidthFixed{
+    width: 300px;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+table.dataTable .zyThumb{
+    max-width: 100px;
+    height: auto;
     vertical-align: middle;
 }
 .dataTables_paginate{

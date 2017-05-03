@@ -128,7 +128,8 @@ $(document).ready(function(){
                         }},
                     { "mDataProp": "opt",
                         "fnRender":function(oObj){
-                            return  '<a href="vehicleInfo/infoCOU/'+oObj.aData.id+'">编辑</a>&nbsp;&nbsp;'+
+                            return  '<a class="preview" href="'+oObj.aData.id+'">预览</a>&nbsp;&nbsp;'+
+                                '<a href="vehicleInfo/infoCOU/'+oObj.aData.id+'">编辑</a>&nbsp;&nbsp;'+
                                 '<a href="'+oObj.aData.id+'" class="remove">删除</a>';
                         }
                     }
@@ -177,5 +178,7 @@ $(document).ready(function(){
     $("#myTable").on("click","a.remove",function(){
         infoMgr.table.delete({id:$(this).attr("href")});
         return false;
-    })
+    }).on("click","a.preview",function(){
+            return false;
+        });
 });

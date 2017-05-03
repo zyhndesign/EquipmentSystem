@@ -19,11 +19,11 @@ $(document).ready(function() {
                 aoColumns: [
                     { "mDataProp": "icon",
                         "fnRender":function(oObj){
-                            return  "<img src='"+oObj.aData.icon+"'>";
+                            return  "<img class='zyThumb' src='"+oObj.aData.icon+"'>";
                         }
                     },
                     { "mDataProp": "name"},
-                    { "mDataProp": "description"},
+                    { "mDataProp": "description","sClass":"zyWidthFixed"},
                     { "mDataProp": "opt",
                         "fnRender":function(oObj){
                             return  '<a href="texture/textureCOU/'+oObj.aData.id+'">编辑</a>&nbsp;&nbsp;'+

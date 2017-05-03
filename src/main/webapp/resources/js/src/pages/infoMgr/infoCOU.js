@@ -150,12 +150,15 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
         },
         filterInfoChildTable: function (filter, tableTbody) {
             var arr = [];
-            for (var i = 0, len = this.componentInfo.length; i < len; i++) {
-                if (this.componentInfo[i].id.indexOf(filter) != -1) {
-                    arr.push(this.componentInfo[i]);
+            if(filter!=""){
+                for (var i = 0, len = this.componentInfo.length; i < len; i++) {
+                    if (this.componentInfo[i].id == filter) {
+                        arr.push(this.componentInfo[i]);
+                    }
                 }
+            }else{
+                arr=this.componentInfo;
             }
-
             this.setHtmlForInfoChildTable(arr, tableTbody);
         },
         infoChildSave: function () {
@@ -212,7 +215,6 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
             $("#cutImageTitle").text("图像裁剪----" + component.name);
             if (component.image.customData) {
                 this.updateCutImage(component.image.customData);
-                this.cutCtrl.customData = component.image.customData;
             }
         },
         showInfoChildMgr: function () {
@@ -363,9 +365,7 @@ $(document).ready(function () {
         uploadedCb: function (info, file, up) {
             $("#infoModal").val(info.url);
 
-            $("#infoModalShow").attr("src", file.name);
-
-            $(".error[for='image']").remove();
+            $("#infoModalShow").text(file.name);
         }
     });
     functions.createQiNiuUploader({
@@ -421,13 +421,6 @@ $(document).ready(function () {
 
         $(this).next().val(url);
         $(this).prev().attr("src", url);
-    });
-    $("#uploadModal").change(function () {
-        var name = this.files[0].name,
-            url = "/data/" + name;
-
-        $("#infoModal").val(url);
-        $("#infoModalShow").text(name);
     });
     $("#infoAddStyle").click(function () {
         var value = $("#infoStyleInput").val();
@@ -505,7 +498,7 @@ $(document).ready(function () {
 
 
     /*****************************预览部分************************/
-    $("#previewModal").modal();
+    var zyPreview=new ZYPreviewHandler();
     $("#previewBtn").click(function () {
         var submitData = infoCou.getSubmitData();
 
@@ -524,33 +517,20 @@ $(document).ready(function () {
             }
         }
 
-        $("#pInfoCategory").text($("#infoCategory option:selected").text());
-        $("#pInfoType").text($("input[name='infoMarketType']:checked").next().text());
-        $("#pInfoMarketDate").text(submitData.onSaleDate);
-        $("#pInfoBrand").text($("#infoBrand option:selected").text());
-        $("#pImage").attr("src", submitData.imageUrl1);
-        $("#pInfoMainColor").css("background", colors[0].colorValue);
-        $("#pInfoAssistColor1").css("background", colors[1].colorValue);
-        $("#pInfoAssistColor2").css("background", colors[2].colorValue);
-        $("#pInfoTexture").html(juicer(config.textureItemsTpl, {
-            items: textures
-        }));
-        $("#pInfoStyle").text(JSON.parse(submitData.style).join(","));
-        $("#pInfoModal").attr("href", submitData.modelUrl).text(submitData.modelUrl);
-
-        infoCou.setHtmlForInfoChildTable(JSON.parse(submitData.componentInfo), $("#pInfoChildTable tbody"));
-
-        $("#previewModal").modal("open");
-    });
-    $("#pChangeImage").change(function () {
-        if ($(this).prop("checked")) {
-            $("#pImage").attr("src", infoCou.submitData.imageUrl1);
-        } else {
-            $("#pImage").attr("src", infoCou.submitData.imageUrl2);
-        }
-    });
-    $("#pInfoChildTableSearch").change(function () {
-        infoCou.filterInfoChildTable($(this).val(), $("#pInfoChildTable tbody"));
+        zyPreview.show({
+            category:$("#infoCategory option:selected").text(),
+            type:$("input[name='infoMarketType']:checked").next().text(),
+            onSaleDate:submitData.onSaleDate,
+            brand:$("#infoBrand option:selected").text(),
+            imageUrl1:submitData.imageUrl1,
+            color1:colors[0].colorValue,
+            color2:colors[1].colorValue,
+            color3:colors[2].colorValue,
+            textures:textures,
+            style:submitData.style,
+            modelUrl:submitData.modelUrl,
+            componentInfo:submitData.componentInfo
+        });
     });
     $("#saveBtn").click(function () {
         if (!infoCou.submitData) {
