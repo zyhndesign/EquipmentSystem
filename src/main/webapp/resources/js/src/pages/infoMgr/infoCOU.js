@@ -1,6 +1,7 @@
 var infoCou = (function (config, ZYCtrlDataHandler) {
 
     return {
+        zyPreview:null,
         cutCtrl: null,
         componentInfo: [],
         changeMainBtnStatus: function (showSave) {
@@ -90,34 +91,6 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
 
             return valid;
         },
-        setHtmlForInfoChildTable: function (list, tableTBody) {
-
-            var item;
-            for (var j = 0, jLen = list.length; j < jLen; j++) {
-                item = list[j];
-
-                //imageString在编辑的时候会处理
-                if (!item.imageString) {
-                    item.imageString = "";
-                }
-
-                if (!item.infoFullString) {
-                    item.infoFullString = item.infoFull == 1 ? '<i class="material-icons green-text">done</i>' : '<i class="material-icons red-text">close</i>';
-                }
-
-                if (!item.colorString) {
-                    item.colorString = item.color ? '<div class="zyColorItem">' +
-                        '<span class="zyColorShow" style="width: 20px;height: 20px;background: ' + item.color + '"></span>' +
-                        '</div>' : "";
-                }
-
-            }
-
-            tableTBody.html(juicer(config.infoChildTrsTpl, {
-                type: tableTBody.data("type"),
-                items: list
-            }));
-        },
         /**
          * 填充子部件信息，这里每次都要生成，以免用户更改了category的树结构，导致数据不对
          * @param tableTBody
@@ -146,20 +119,10 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
                 }
             }
 
-            this.setHtmlForInfoChildTable(this.componentInfo, tableTBody);
-        },
-        filterInfoChildTable: function (filter, tableTbody) {
-            var arr = [];
-            if(filter!=""){
-                for (var i = 0, len = this.componentInfo.length; i < len; i++) {
-                    if (this.componentInfo[i].id == filter) {
-                        arr.push(this.componentInfo[i]);
-                    }
-                }
-            }else{
-                arr=this.componentInfo;
+            if(!this.zyPreview){
+                this.zyPreview=new ZYPreviewHandler();
             }
-            this.setHtmlForInfoChildTable(arr, tableTbody);
+            this.zyPreview.setHtmlForInfoChildTable(this.componentInfo, tableTBody);
         },
         infoChildSave: function () {
             var component = this.componentInfo[this.infoChildIndex];
@@ -337,10 +300,9 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
         initChildInfo: function (categoryId) {
             var me = this;
             ZYCtrlDataHandler.getCategoryGroupOptions(categoryId, function (string) {
-                $(".zyActionCategory").html(string).material_select();
+                $("#infoChildSearch").html(string).material_select();
+                me.initInfoChildTable($("#infoChildTable tbody"));
             });
-
-            me.initInfoChildTable($("#infoChildTable tbody"));
         }
     }
 })(config, ZYCtrlDataHandler);
@@ -449,7 +411,7 @@ $(document).ready(function () {
         return false;
     });
     $("#infoChildSearch").change(function () {
-        infoCou.filterInfoChildTable($(this).val(), $("#infoChildTable tbody"));
+        infoCou.zyPreview.filterInfoChildTable(infoCou.componentInfo,$(this).val(), $("#infoChildTable tbody"));
     });
 
     $('#cutImageModal').modal();
@@ -498,7 +460,6 @@ $(document).ready(function () {
 
 
     /*****************************预览部分************************/
-    var zyPreview=new ZYPreviewHandler();
     $("#previewBtn").click(function () {
         var submitData = infoCou.getSubmitData();
 
@@ -507,26 +468,26 @@ $(document).ready(function () {
         for (var i = 0, len = submitData.vehicleTextures.length; i < len; i++) {
             index = config.findInArray(ZYCtrlDataHandler.textureData, "id", submitData.vehicleTextures[i].texture.id);
             if (index != -1) {
-                textures.push(ZYCtrlDataHandler.textureData[index]);
+                textures.push({texture:ZYCtrlDataHandler.textureData[index]});
             }
         }
         for (var j = 0, jLen = submitData.vehicleColors.length; j < jLen; j++) {
             index = config.findInArray(ZYCtrlDataHandler.colorData, "id", submitData.vehicleColors[j].color.id);
             if (index != -1) {
-                colors.push(ZYCtrlDataHandler.colorData[index]);
+                colors.push({color:ZYCtrlDataHandler.colorData[index]});
             }
         }
 
-        zyPreview.show({
-            category:$("#infoCategory option:selected").text(),
-            type:$("input[name='infoMarketType']:checked").next().text(),
+        infoCou.zyPreview.show({
+            categoryId:$("#infoCategory").val(),
+            categoryName:$("#infoCategory option:selected").text(),
+            entry:$("input[name='infoMarketType']:checked").next().text(),
             onSaleDate:submitData.onSaleDate,
-            brand:$("#infoBrand option:selected").text(),
+            brandName:$("#infoBrand option:selected").text(),
             imageUrl1:submitData.imageUrl1,
-            color1:colors[0].colorValue,
-            color2:colors[1].colorValue,
-            color3:colors[2].colorValue,
-            textures:textures,
+            imageUrl2:submitData.imageUrl2,
+            vehicleColors:colors,
+            vehicleTextures:textures,
             style:submitData.style,
             modelUrl:submitData.modelUrl,
             componentInfo:submitData.componentInfo

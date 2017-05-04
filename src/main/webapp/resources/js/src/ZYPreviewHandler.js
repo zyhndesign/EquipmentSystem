@@ -1,7 +1,7 @@
-function ZYPreviewHandler(){
-
+function ZYPreviewHandler() {
+    this.initEvent();
 }
-ZYPreviewHandler.prototype.setHtmlForInfoChildTable=function(list, tableTBody){
+ZYPreviewHandler.prototype.setHtmlForInfoChildTable = function (list, tableTBody) {
     var item;
     for (var j = 0, jLen = list.length; j < jLen; j++) {
         item = list[j];
@@ -28,50 +28,63 @@ ZYPreviewHandler.prototype.setHtmlForInfoChildTable=function(list, tableTBody){
         items: list
     }));
 }
-ZYPreviewHandler.prototype.show=function(data){
-    $("#pInfoCategory").text(data.category);
-    $("#pInfoType").text(data.type);
-    $("#pInfoMarketDate").text(data.onSaleDate);
-    $("#pInfoBrand").text(data.brand);
-    $("#pImage").attr("src", data.imageUrl1);
-    $("#pChangeImage").prop("checked",false);
-    $("#pInfoMainColor").css("background", data.color1);
-    $("#pInfoAssistColor1").css("background", data.color2);
-    $("#pInfoAssistColor2").css("background", data.color3);
-    $("#pInfoTexture").html(juicer(config.textureItemsTpl, {
-        items: data.textures
-    }));
-    $("#pInfoStyle").text(JSON.parse(data.style).join(","));
-    $("#pInfoModal").attr("href", data.modelUrl).text(data.modelUrl);
+ZYPreviewHandler.prototype.show = function (data) {
+    var vehicleTextures = [], me = this;
+    data.componentInfo=JSON.parse(data.componentInfo);
 
-    infoCou.setHtmlForInfoChildTable(JSON.parse(data.componentInfo), $("#pInfoChildTable tbody"));
+    ZYCtrlDataHandler.getCategoryGroupOptions(data.categoryId, function (string) {
+        $("#pInfoChildTableSearch").html(string).material_select();
 
-    $("#previewModal").modal("open");
+        $("#pInfoCategory").text(data.categoryName);
+        $("#pInfoType").text(data.entry);
+        $("#pInfoMarketDate").text(data.onSaleDate);
+        $("#pInfoBrand").text(data.brandName);
+        $("#pImage").attr("src", data.imageUrl1);
+        $("#pChangeImage").prop("checked", false);
+        $("#pInfoMainColor").css("background", data.vehicleColors[0].color.colorValue);
+        $("#pInfoAssistColor1").css("background", data.vehicleColors[1].color.colorValue);
+        $("#pInfoAssistColor2").css("background", data.vehicleColors[2].color.colorValue);
+        for (var i = 0, len = data.vehicleTextures.length; i < len; i++) {
+            vehicleTextures.push(data.vehicleTextures[i].texture);
+        }
+        $("#pInfoTexture").html(juicer(config.textureItemsTpl, {
+            items: vehicleTextures
+        }));
+        $("#pInfoStyle").text(JSON.parse(data.style).join(","));
+        $("#pInfoModal").attr("href", data.modelUrl).text(data.modelUrl);
+
+        me.setHtmlForInfoChildTable(data.componentInfo, $("#pInfoChildTable tbody"));
+
+        me.showData=data;
+
+        $("#previewModal").modal("open");
+    });
+
 }
-ZYPreviewHandler.prototype.filterInfoChildTable=function(componentInfo,filter,tableTBody){
+ZYPreviewHandler.prototype.filterInfoChildTable = function (componentInfo, filter, tableTBody) {
     var arr = [];
-    if(filter!=""){
+    if (filter != "") {
         for (var i = 0, len = componentInfo.length; i < len; i++) {
             if (componentInfo[i].id == filter) {
                 arr.push(componentInfo[i]);
             }
         }
-    }else{
-        arr=componentInfo;
+    } else {
+        arr = componentInfo;
     }
     this.setHtmlForInfoChildTable(arr, tableTBody);
 }
-ZYPreviewHandler.prototype.initEvent=function(form,editId,data,isJsonString){
-    var me=this;
+ZYPreviewHandler.prototype.initEvent = function () {
+    var me = this;
     $("#previewModal").modal();
     $("#pChangeImage").change(function () {
         if ($(this).prop("checked")) {
-            $("#pImage").attr("src", infoCou.submitData.imageUrl2);
+            $("#pImage").attr("src", me.showData.imageUrl2);
         } else {
-            $("#pImage").attr("src", infoCou.submitData.imageUrl1);
+            $("#pImage").attr("src", me.showData.imageUrl1);
         }
     });
     $("#pInfoChildTableSearch").change(function () {
-        me.filterInfoChildTable($(this).val(), $("#pInfoChildTable tbody"));
+        me.filterInfoChildTable(me.showData.componentInfo,$(this).val(), $("#pInfoChildTable tbody"));
     });
 };

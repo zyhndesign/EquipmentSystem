@@ -490,13 +490,13 @@ pageEncoding="UTF-8" %>
 <script src="resources/js/lib/jquery.Jcrop.min.js"></script>
 <script src="resources/js/lib/jquery.form.js"></script>
 <script src="resources/js/lib/juicer-min.js"></script>
-    <script src="resources/js/lib/plupload.full.min.js"></script>
-    <script src="resources/js/lib/qiniu.js"></script>
+<script src="resources/js/lib/plupload.full.min.js"></script>
+<script src="resources/js/lib/qiniu.js"></script>
 <script src="resources/js/src/config.js"></script>
 <script src="resources/js/src/functions.js"></script>
 <script src="resources/js/src/ZYCtrlDataHandler.js"></script>
 <script src="resources/js/src/ZYFormHandler.js"></script>
-    <script src="resources/js/src/ZYPreviewHandler.js"></script>
+<script src="resources/js/src/ZYPreviewHandler.js"></script>
 <script src="resources/js/src/pages/infoMgr/infoCOU.js"></script>
 
 </body>
