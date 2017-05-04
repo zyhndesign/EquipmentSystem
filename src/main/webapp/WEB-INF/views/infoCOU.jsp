@@ -338,7 +338,7 @@ pageEncoding="UTF-8" %>
                             <label class="zyFormLabel" id="pInfoType">xxxx</label>
                         </div>
                         <div class="row">
-                            <label class="zyFormLabel">上市日期:</label>
+                            <label class="zyFormLabel">量产时间:</label>
                             <label class="zyFormLabel" id="pInfoMarketDate">xxx</label>
                         </div>
                         <div class="row">
