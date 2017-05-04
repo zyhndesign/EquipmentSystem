@@ -170,7 +170,7 @@ var config={
         '{@each items as item,index}',
         '<input class="filled-in" name="brand" value="${item.id}" type="checkbox" id="brand${idFlag}${index}"  />',
         '<label for="brand${idFlag}${index}"  style="margin-right: 10px;">',
-        '<img src="${item.icon}">${item.name}</label>',
+        '<img class="zyImgHeightFixed" src="${item.icon}">${item.name}</label>',
         '{@/each}'
     ].join(""),
     textureAllCheckboxTpl:[

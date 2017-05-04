@@ -81,6 +81,10 @@ li{
     overflow:hidden;
     display: inline-block;
 }
+.zyImgHeightFixed{
+    height: 30px;
+    width: auto;
+}
 /************************************按钮组****************************/
 .zyGroupButtons{
     text-align: center;
