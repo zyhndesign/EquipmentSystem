@@ -46,6 +46,8 @@ public class VehicleInfo implements java.io.Serializable {
 	private String onSaleDate;
 	private Date createTime;
 	private String componentInfo;
+	private String productCategory;
+	private String videoUrl;
 	private Set<VehicleColor> vehicleColors = new HashSet<VehicleColor>(0);
 	private Set<VehicleTexture> vehicleTextures = new HashSet<VehicleTexture>(0);
 
@@ -217,6 +219,24 @@ public class VehicleInfo implements java.io.Serializable {
 
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
+	}
+
+	@Column(name = "product_category")
+	public String getProductCategory() {
+		return productCategory;
+	}
+
+	public void setProductCategory(String productCategory) {
+		this.productCategory = productCategory;
+	}
+
+	@Column(name = "videoUrl")
+	public String getVideoUrl() {
+		return videoUrl;
+	}
+
+	public void setVideoUrl(String videoUrl) {
+		this.videoUrl = videoUrl;
 	}
 
 	
