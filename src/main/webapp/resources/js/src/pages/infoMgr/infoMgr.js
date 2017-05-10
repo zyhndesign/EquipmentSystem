@@ -102,6 +102,7 @@ $(document).ready(function () {
                     },
                     { "mDataProp": "brandName"},
                     { "mDataProp": "categoryName"},
+                    { "mDataProp": "productCategory"},
                     { "mDataProp": "vehicleTextures",
                         "fnRender": function (oObj) {
                             var arr = [];

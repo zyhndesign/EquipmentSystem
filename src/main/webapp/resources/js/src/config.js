@@ -56,7 +56,8 @@ var config={
             all:"*",
             zip:"zip,rar",
             img:"jpg,JPG,jpeg,JPEG,png,PNG,svg",
-            pdf:"pdf,PDF"
+            pdf:"pdf,PDF",
+            mp4:"mp4,MP4"
         },
         qiNiu:{
             upTokenUrl:"qiniu/getUploadKey",

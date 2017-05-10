@@ -114,6 +114,10 @@ pageEncoding="UTF-8" %>
 
         </div>
         <div class="row">
+            <label class="zyFormLabel">产品型号：</label>
+            <input class="zyInput" id="infoProductCategory">
+        </div>
+        <div class="row">
             <label class="zyFormLabel zyRequired">图像：</label>
             <font class="zyFormHelp">（上传两张不同角度的图像）</font>
             <br>
@@ -196,6 +200,16 @@ pageEncoding="UTF-8" %>
             </div>
             <span style="margin-left: 20px;" id="infoModalShow"></span>
             <input type="hidden" id="infoModal" value="">
+        </div>
+        <div class="row" id="uploadVideoContainer">
+            <label class="zyFormLabel">视频：</label>
+
+            <div class="btn" id="uploadVideoBtn">
+            上传视频（MP4）
+            </div>
+            <span style="margin-left: 20px;" id="infoVideoShow"></span>
+            <input type="hidden" id="infoVideo" value="">
+            <button class="btn waves-effect waves-light zyHidden" id="infoVideoPlay">预览</button>
         </div>
     </div>
 </div>
@@ -342,6 +356,10 @@ pageEncoding="UTF-8" %>
                             <label class="zyFormLabel" id="pInfoMarketDate">xxx</label>
                         </div>
                         <div class="row">
+                            <label class="zyFormLabel">产品型号:</label>
+                            <label class="zyFormLabel" id="pInfoProductCategory">xxx</label>
+                        </div>
+                        <div class="row">
                             <label class="zyFormLabel">品牌:</label>
                             <label class="zyFormLabel" id="pInfoBrand">xxx</label>
                         </div>
@@ -351,7 +369,7 @@ pageEncoding="UTF-8" %>
                         </div>
                         <div class="row">
                             <label class="zyFormLabel">模型：</label>
-                            <%--<a class="zyFormLabel" id="pInfoModal" href="#">xxxx</a>--%>
+                            <a class="zyFormLabel" target="_blank" id="pInfoModal" href="#"></a>
                         </div>
                     </div>
                     <div class="zyMT20 zyPanelWrapper">
@@ -393,17 +411,20 @@ pageEncoding="UTF-8" %>
 
 
                 </div>
-                <div class="col s6 zyBgFFFFFF" style="position: absolute;left:50%;top:10px;bottom:10px">
-                    <div class="switch">
-                        <label>
-
-                            <input type="checkbox" id="pChangeImage">
-                            <span class="lever"></span>
-                            显示图片2
-                        </label>
+                <div class="col s6 " style="position: absolute;left:50%;top:10px;bottom:10px">
+                    <div class="zyBgFFFFFF">
+                        <div class="switch">
+                            <label>
+                                <input type="checkbox" id="pChangeImage">
+                                <span class="lever"></span>
+                                显示图片2
+                            </label>
+                        </div>
+                        <img src="resources/images/upload.png" id="pImage"
+                            style="width: 100%;height: auto">
                     </div>
-                    <img src="resources/images/upload.png" id="pImage" class="zyPCenter"
-                         style="width: 100%;height: auto">
+
+                    <video class="zyMT20" style="width:100%" id="pInfoVideo" controls src=""></video>
                 </div>
             </div>
             <!--
@@ -474,6 +495,19 @@ pageEncoding="UTF-8" %>
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="modal-footer center-align">
+        <a class="modal-action modal-close btn">关闭</a>
+    </div>
+</div>
+
+
+<div id="videoModal" class="modal zyModal">
+    <div class="modal-header">
+        预览视频
+    </div>
+    <div class="modal-content" id="zyVideoModalContent">
+
     </div>
     <div class="modal-footer center-align">
         <a class="modal-action modal-close btn">关闭</a>

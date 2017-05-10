@@ -1,4 +1,4 @@
-var infoCou = (function (config, ZYCtrlDataHandler) {
+var infoCou = (function (config, functions, ZYCtrlDataHandler) {
 
     return {
         zyPreview:null,
@@ -214,6 +214,8 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
             });
             data.style = JSON.stringify(data.style);
             data.modelUrl = $("#infoModal").val();
+            data.videoUrl = $("#infoVideo").val();
+            data.productCategory = $("#infoProductCategory").val();
             data.vehicleTextures = [];
             $("#infoTexture").find("input[type='checkbox']").each(function (index, el) {
                 data.vehicleTextures.push({texture: {id: $(el).val()}});
@@ -262,7 +264,14 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
                 items: JSON.parse(data.style)
             }));
 
-            $("#infoModal").val(data.modal).prev().text(data.modal);
+            if(data.modal){
+                $("#infoModal").val(data.modal).prev().text(functions.getFileInfo(data.modal)["filename"]);
+            }
+
+            if(data.videoUrl){
+                $("#infoVideo").val(data.videoUrl).prev().text(functions.getFileInfo(data.videoUrl)["filename"]);
+                $("#infoVideoPlay").removeClass("zyHidden");
+            }
 
         },
         initData: function () {
@@ -305,7 +314,7 @@ var infoCou = (function (config, ZYCtrlDataHandler) {
             });
         }
     }
-})(config, ZYCtrlDataHandler);
+})(config, functions, ZYCtrlDataHandler);
 $(document).ready(function () {
     var formHandler = new ZYFormHandler({
         redirectUrl: "vehicleInfo/infoMgr",
@@ -322,12 +331,29 @@ $(document).ready(function () {
         multiSelection: false,
         multipartParams: null,
         uploadContainer: "uploadModalContainer",
-        fileAddCb: null,
+        filesAddCb: null,
         progressCb: null,
         uploadedCb: function (info, file, up) {
             $("#infoModal").val(info.url);
 
             $("#infoModalShow").text(file.name);
+        }
+    });
+    functions.createQiNiuUploader({
+        maxSize: config.uploader.sizes.all,
+        filter: config.uploader.filters.mp4,
+        uploadBtn: "uploadVideoBtn",
+        multiSelection: false,
+        multipartParams: null,
+        uploadContainer: "uploadVideoContainer",
+        filesAddCb: null,
+        progressCb: function(){
+            $("#infoVideoShow").text("上传中...");
+        },
+        uploadedCb: function (info, file, up) {
+            $("#infoVideo").val(info.url);
+            $("#infoVideoShow").text(file.name);
+            $("#infoVideoPlay").removeClass("zyHidden");
         }
     });
     functions.createQiNiuUploader({
@@ -401,6 +427,17 @@ $(document).ready(function () {
         if ($(this).val()) {
             infoCou.initChildInfo($(this).val());
         }
+    });
+
+    $("#videoModal").modal({
+        complete: function() {
+            $("#zyVideoModalContent").html("");
+        }
+    });
+    $("#infoVideoPlay").click(function(){
+        $("#zyVideoModalContent").html(
+            "<video style='width: auto;margin: auto;display: block;' " +
+                "autoplay controls src='"+$("#infoVideo").val()+"'></video>").modal("open");
     });
 
     /**********************************分结构信息*******************************/
@@ -481,6 +518,7 @@ $(document).ready(function () {
         infoCou.zyPreview.show({
             categoryId:$("#infoCategory").val(),
             categoryName:$("#infoCategory option:selected").text(),
+            productCategory:submitData.productCategory,
             entry:$("input[name='infoMarketType']:checked").next().text(),
             onSaleDate:submitData.onSaleDate,
             brandName:$("#infoBrand option:selected").text(),
@@ -489,6 +527,7 @@ $(document).ready(function () {
             vehicleColors:colors,
             vehicleTextures:textures,
             style:submitData.style,
+            videoUrl:submitData.videoUrl,
             modelUrl:submitData.modelUrl,
             componentInfo:submitData.componentInfo
         });

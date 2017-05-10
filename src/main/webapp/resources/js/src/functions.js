@@ -74,6 +74,20 @@ var functions = (function (config) {
             return string;
         },
         /**
+         * 获取文件的信息
+         * @param fileName
+         * @returns {{filePath: string, filename:string, ext: string}}
+         */
+        getFileInfo:function(fileName){
+            var extPos=fileName.lastIndexOf(".");
+            var pathPost=fileName.lastIndexOf("/");
+            return {
+                filePath:pathPost!=-1?fileName.substring(0,pathPost+1):"",
+                filename:fileName.substring(pathPost+1),
+                ext:fileName.substring(extPos+1)
+            }
+        },
+        /**
          * 显示loading遮盖层
          */
         showLoading: function () {

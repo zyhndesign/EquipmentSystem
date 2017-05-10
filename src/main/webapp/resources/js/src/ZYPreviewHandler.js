@@ -40,6 +40,7 @@ ZYPreviewHandler.prototype.show = function (data) {
         $("#pInfoMarketDate").text(data.onSaleDate);
         $("#pInfoBrand").text(data.brandName);
         $("#pImage").attr("src", data.imageUrl1);
+        $("#pInfoProductCategory").text(data.productCategory);
         $("#pChangeImage").prop("checked", false);
         $("#pInfoMainColor").css("background", data.vehicleColors[0].color.colorValue);
         $("#pInfoAssistColor1").css("background", data.vehicleColors[1].color.colorValue);
@@ -52,6 +53,7 @@ ZYPreviewHandler.prototype.show = function (data) {
         }));
         $("#pInfoStyle").text(JSON.parse(data.style).join(","));
         $("#pInfoModal").attr("href", data.modelUrl).text(data.modelUrl);
+        $("#pInfoVideo").attr("src",data.videoUrl);
 
         me.setHtmlForInfoChildTable(data.componentInfo, $("#pInfoChildTable tbody"));
 
@@ -76,7 +78,11 @@ ZYPreviewHandler.prototype.filterInfoChildTable = function (componentInfo, filte
 }
 ZYPreviewHandler.prototype.initEvent = function () {
     var me = this;
-    $("#previewModal").modal();
+    $("#previewModal").modal({
+        complete:function(){
+            $("#pInfoVideo").removeAttr("src");
+        }
+    });
     $("#pChangeImage").change(function () {
         if ($(this).prop("checked")) {
             $("#pImage").attr("src", me.showData.imageUrl2);

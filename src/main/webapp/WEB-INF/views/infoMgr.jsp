@@ -196,6 +196,7 @@
         <th>图片</th>
         <th>品牌</th>
         <th>类型</th>
+        <th>型号</th>
         <th>纹理</th>
         <th>时间</th>
         <th>颜色</th>
@@ -250,12 +251,16 @@
                             <label class="zyFormLabel" id="pInfoBrand">xxx</label>
                         </div>
                         <div class="row">
+                            <label class="zyFormLabel">产品型号:</label>
+                            <label class="zyFormLabel" id="pInfoProductCategory">xxx</label>
+                        </div>
+                        <div class="row">
                             <label class="zyFormLabel">风格：</label>
                             <label class="zyFormLabel" id="pInfoStyle">xxx,xxxx</label>
                         </div>
                         <div class="row">
                             <label class="zyFormLabel">模型：</label>
-                            <%--<a class="zyFormLabel" id="pInfoModal" href="#">xxxx</a>--%>
+                            <a class="zyFormLabel" target="_blank" id="pInfoModal" href="#">xxxx</a>
                         </div>
                     </div>
                     <div class="zyMT20 zyPanelWrapper">
@@ -297,16 +302,20 @@
 
 
                 </div>
-                <div class="col s6 zyBgFFFFFF" style="position: absolute;left:50%;top:10px;bottom:10px">
-                    <div class="switch">
-                        <label>
-                            <input type="checkbox" id="pChangeImage">
-                            <span class="lever"></span>
-                            显示图片2
-                        </label>
-                    </div>
-                    <img src="resources/images/upload.png" id="pImage" class="zyPCenter"
+                <div class="col s6" style="position: absolute;left:50%;top:10px;bottom:10px">
+                    <div class="zyBgFFFFFF">
+                        <div class="switch">
+                            <label>
+                                <input type="checkbox" id="pChangeImage">
+                                <span class="lever"></span>
+                                显示图片2
+                            </label>
+                        </div>
+                        <img src="resources/images/upload.png" id="pImage"
                         style="width: 100%;height: auto">
+                    </div>
+
+                    <video class="zyMT20" style="width:100%" id="pInfoVideo" controls src=""></video>
                 </div>
             </div>
         <!--
