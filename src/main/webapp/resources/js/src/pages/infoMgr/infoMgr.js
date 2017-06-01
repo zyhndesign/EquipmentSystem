@@ -109,7 +109,6 @@ $(document).ready(function () {
                             for (var i = 0, len = oObj.aData.vehicleTextures.length; i < len; i++) {
                                 arr.push(oObj.aData.vehicleTextures[i].texture.name);
                             }
-
                             return arr.join(",");
                         }},
                     { "mDataProp": "onSaleDate"},

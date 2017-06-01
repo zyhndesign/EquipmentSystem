@@ -1,6 +1,7 @@
 $(document).ready(function() {
     var table=new ZYTableHandler({
         keyName:"texture",
+        removeUrl:config.ajaxUrls.textureDelete,
         ownTable:function(data){
             var dtTable=$('#myTable').dataTable( {
                 "bServerSide": true,

@@ -218,7 +218,11 @@ var infoCou = (function (config, functions, ZYCtrlDataHandler) {
             data.productCategory = $("#infoProductCategory").val();
             data.vehicleTextures = [];
             $("#infoTexture").find("input[type='checkbox']").each(function (index, el) {
-                data.vehicleTextures.push({texture: {id: $(el).val()}});
+            	if($(this).prop("checked")) 
+            	{ 
+            		data.vehicleTextures.push({texture: {id: $(el).val()}}); 
+            	} 
+                
             });
             data.vehicleColors = [
                 {color: {id: $("#infoMainColor").val()}},
@@ -257,6 +261,7 @@ var infoCou = (function (config, functions, ZYCtrlDataHandler) {
             $("#infoTexture input[type='checkbox']").each(function (index, el) {
                 el = $(el);
                 if (textureArr.indexOf(parseInt(el.val())) != -1) {
+                	
                     el.prop("checked", true);
                 }
             });
