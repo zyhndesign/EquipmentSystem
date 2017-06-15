@@ -46,6 +46,7 @@ pageEncoding="UTF-8"%>
     <script src="resources/js/src/functions.js"></script>
 <script src="resources/js/src/ZYTreeHandler.js"></script>
 <script src="resources/js/src/pages/category/category.js"></script>
+<script src="resources/js/src/header.js"></script>
 </body>
 </html>
 

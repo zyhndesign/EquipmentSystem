@@ -3,7 +3,7 @@
 
         <li class="item">
             <a data-page-name="mgr" class="link" href="vehicleInfo/infoMgr">
-                <i class="material-icons">list</i>
+                <i class="material-icons">book</i>
                 知识库
             </a>
         </li>

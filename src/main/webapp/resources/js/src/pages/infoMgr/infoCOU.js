@@ -250,6 +250,7 @@ var infoCou = (function (config, functions, ZYCtrlDataHandler) {
             $("input[name='infoMarketType']").val(data.entry);
             $("#infoMarketDate").val(data.onSaleDate);
             $("#infoBrand").val(data.brandId);
+            $("#infoProductCategory").val(data.productCategory);
             $("#infoImageChanPin").val(data.imageUrl1).parent().find("img").attr("src", data.imageUrl1);
             $("#infoImageXianXin").val(data.imageUrl2).parent().find("img").attr("src", data.imageUrl2);
             $("#infoMainColor").val(data.vehicleColors[0].color.id).

@@ -64,7 +64,7 @@
 <script src="resources/js/src/ZYFormHandler.js"></script>
         <script src="resources/js/src/ZYCtrlDataHandler.js"></script>
 <script src="resources/js/src/pages/color/colorCOU.js"></script>
-
+<script src="resources/js/src/header.js"></script>
 </body>
 </html>
 

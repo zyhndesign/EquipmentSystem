@@ -5,15 +5,19 @@
     color: #fff;
     margin:0px;
     padding: 10px 0px;
-    display: inline-block;
+    height:60px;
 }
 .zyLogo a{
     color: #fff;
-    padding-left: 45px;
-    display:block;
+    left: 60px;
     font-size:21px;
-    line-height: 32px;
-    background:url(../../../../images/logo.png) no-repeat;
-    background-size: 30px 30px;
-    background-position: 8px,6px; 
+    line-height: 25px;
+    position:absolute;
+    top:15px;
+}
+
+.zyLogo img{
+    padding-left: 15px;
+    line-height: 25px;
+    float:left;
 }

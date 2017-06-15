@@ -75,7 +75,7 @@
 <script src="resources/js/src/ZYCtrlDataHandler.js"></script>
 <script src="resources/js/src/ZYFormHandler.js"></script>
 <script src="resources/js/src/pages/brand/brandCOU.js"></script>
-
+<script src="resources/js/src/header.js"></script>
 </body>
 </html>
 

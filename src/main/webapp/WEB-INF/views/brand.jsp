@@ -67,7 +67,7 @@
         <script src="resources/js/src/functions.js"></script>
 <script src="resources/js/src/ZYTableHandler.js"></script>
 <script src="resources/js/src/pages/brand/brand.js"></script>
-
+<script src="resources/js/src/header.js"></script>
 </body>
 </html>
 
