@@ -15,10 +15,11 @@
 <body>
 
 
-        <%@ include file="header.jsp"%>
+        
 
         <div class="zyMain">
-        <div class="zyLeft">
+        <%@ include file="header.jsp"%>
+        <div id="slide-out" class="zyLeft side-nav">
 
         <%@ include file="menu.jsp"%>
 
@@ -64,7 +65,7 @@
 <script src="resources/js/lib/materialize.min.js"></script>
 <script src="resources/js/lib/jquery.dataTables.min.js"></script>
 <script src="resources/js/src/config.js"></script>
-        <script src="resources/js/src/functions.js"></script>
+<script src="resources/js/src/functions.js"></script>
 <script src="resources/js/src/ZYTableHandler.js"></script>
 <script src="resources/js/src/pages/brand/brand.js"></script>
 <script src="resources/js/src/header.js"></script>

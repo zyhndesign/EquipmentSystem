@@ -1,23 +1,29 @@
 .zyHeader{
     background: #3e3a39;
+    position: relative;
 }
 .zyLogo{
     color: #fff;
     margin:0px;
-    padding: 10px 0px;
+    width:60px;
     height:60px;
+    line-height: 20px;
+    padding:20px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
-.zyLogo a{
-    color: #fff;
-    left: 60px;
-    font-size:21px;
-    line-height: 25px;
-    position:absolute;
-    top:15px;
-}
-
 .zyLogo img{
-    padding-left: 15px;
-    line-height: 25px;
-    float:left;
+    width: 100%;
+    
+}
+.zyTitle{
+    text-align: center;
+    font-size: 24px;
+}
+.zyTitle a{
+    line-height: 60px;
+    color: #fff;
+    text-decoration: none;
 }

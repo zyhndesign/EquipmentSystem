@@ -20,54 +20,54 @@ var functions = (function (config) {
          * @param dateTime {number} 毫秒表示的日期
          * @returns string {string}格式好的字符串日期，默认是2014-09-10 12:03:23格式
          */
-        formatDate:function(format,dateTime){
-            var string,currentDate,year,month,day, h, m, s,fYear,fMonth,fDay,fH,fM,fS;
+        formatDate: function (format, dateTime) {
+            var string, currentDate, year, month, day, h, m, s, fYear, fMonth, fDay, fH, fM, fS;
 
-            if(typeof format ==="number"){
-                dateTime=format;
-                format=null;
-            }
-
-            currentDate =dateTime?new Date(dateTime):new Date();
-            fYear=currentDate.getFullYear();
-            year=fYear.toString().slice(2);
-            fMonth=month=currentDate.getMonth()+1;
-            fDay=day=currentDate.getDate();
-            fH=h=currentDate.getHours();
-            fM=m=currentDate.getMinutes();
-            fS=s=currentDate.getSeconds();
-
-            if(fMonth<10){
-                fMonth="0"+fMonth;
-            }
-            if(fDay<10){
-                fDay="0"+fDay;
-            }
-            if(fH<10){
-                fH="0"+fH;
-            }
-            if(fM<10){
-                fM="0"+fM;
-            }
-            if(fS<10){
-                fS="0"+fS;
+            if (typeof format === "number") {
+                dateTime = format;
+                format = null;
             }
 
-            switch(format){
+            currentDate = dateTime ? new Date(dateTime) : new Date();
+            fYear = currentDate.getFullYear();
+            year = fYear.toString().slice(2);
+            fMonth = month = currentDate.getMonth() + 1;
+            fDay = day = currentDate.getDate();
+            fH = h = currentDate.getHours();
+            fM = m = currentDate.getMinutes();
+            fS = s = currentDate.getSeconds();
+
+            if (fMonth < 10) {
+                fMonth = "0" + fMonth;
+            }
+            if (fDay < 10) {
+                fDay = "0" + fDay;
+            }
+            if (fH < 10) {
+                fH = "0" + fH;
+            }
+            if (fM < 10) {
+                fM = "0" + fM;
+            }
+            if (fS < 10) {
+                fS = "0" + fS;
+            }
+
+            switch (format) {
                 case "y-m-d":
-                    string=fYear+"-"+fMonth+"-"+fDay;
+                    string = fYear + "-" + fMonth + "-" + fDay;
                     break;
                 case "y-m-d h:m":
-                    string=fYear+"-"+fMonth+"-"+fDay+" "+fH+":"+fM;
+                    string = fYear + "-" + fMonth + "-" + fDay + " " + fH + ":" + fM;
                     break;
                 case "y/m/d h:m:s":
-                    string=fYear+"/"+fYear+"/"+day+" "+fH+":"+fH+":"+fH;
+                    string = fYear + "/" + fYear + "/" + day + " " + fH + ":" + fH + ":" + fH;
                     break;
                 case "y/m/d h:m":
-                    string=fYear+"/"+fMonth+"/"+fDay+" "+fH+":"+fM;
+                    string = fYear + "/" + fMonth + "/" + fDay + " " + fH + ":" + fM;
                     break;
-                default :
-                    string=fYear+"-"+fMonth+"-"+fDay+" "+fH+":"+fM+":"+fS;
+                default:
+                    string = fYear + "-" + fMonth + "-" + fDay + " " + fH + ":" + fM + ":" + fS;
                     break;
             }
 
@@ -78,13 +78,13 @@ var functions = (function (config) {
          * @param fileName
          * @returns {{filePath: string, filename:string, ext: string}}
          */
-        getFileInfo:function(fileName){
-            var extPos=fileName.lastIndexOf(".");
-            var pathPost=fileName.lastIndexOf("/");
+        getFileInfo: function (fileName) {
+            var extPos = fileName.lastIndexOf(".");
+            var pathPost = fileName.lastIndexOf("/");
             return {
-                filePath:pathPost!=-1?fileName.substring(0,pathPost+1):"",
-                filename:fileName.substring(pathPost+1),
-                ext:fileName.substring(extPos+1)
+                filePath: pathPost != -1 ? fileName.substring(0, pathPost + 1) : "",
+                filename: fileName.substring(pathPost + 1),
+                ext: fileName.substring(extPos + 1)
             }
         },
         /**
@@ -98,6 +98,33 @@ var functions = (function (config) {
          */
         hideLoading: function () {
             $("#loading").addClass("hidden");
+        },
+        /**
+         * 显示blackout遮盖层
+         */
+        showBlackout: function (targetSelector) {
+            if ($(targetSelector + ">.zyBlackout").length == 0) {
+                $(targetSelector).append("<div class='zyBlackout'></div>");
+            }
+
+            $(targetSelector + ">.zyBlackout").stop().clearQueue().animate({
+                opacity: 0.6
+            }, 200, function () {
+                $(this).on("click", function () {
+                    $(".zyLeft.zySideNav").removeClass("active");
+                    functions.hideBlackout(".zyMain");
+                })
+            })
+        },
+        /**
+         * 隐藏blackout遮盖层
+         */
+        hideBlackout: function (targetSelector) {
+            $(targetSelector + ">.zyBlackout").stop().clearQueue().animate({
+                opacity: 0
+            }, 200, function () {
+                $(this).remove()
+            })
         },
         /**
          * ajax网络错误处理
@@ -114,9 +141,8 @@ var functions = (function (config) {
             var me = this;
             var message = "";
             switch (errorCode) {
-                default :
-                    message = config.messages.systemError;
-                    break;
+                default: message = config.messages.systemError;
+                break;
             }
             this.hideLoading();
             Materialize.toast(message, 4000);
@@ -127,65 +153,68 @@ var functions = (function (config) {
          * @param params
          * @returns {*}
          */
-        createQiNiuUploader:function(params){
+        createQiNiuUploader: function (params) {
             var uploader = Qiniu.uploader({
-                runtimes: 'html5',    //上传模式,依次退化
-                browse_button: params.uploadBtn,       //上传选择的点选按钮，**必需**
-                uptoken_url:  config.uploader.qiNiu.upTokenUrl,
-                multi_selection:params.multiSelection,
+                runtimes: 'html5', //上传模式,依次退化
+                browse_button: params.uploadBtn, //上传选择的点选按钮，**必需**
+                uptoken_url: config.uploader.qiNiu.upTokenUrl,
+                multi_selection: params.multiSelection,
                 domain: config.uploader.qiNiu.uploadDomain,
-                container: params.uploadContainer,//上传区域DOM ID，默认是browser_button的父元素，
+                container: params.uploadContainer, //上传区域DOM ID，默认是browser_button的父元素，
                 filters: {
-                    mime_types : [
-                        { title : "media files", extensions : params.filter }
+                    mime_types: [
+                        {
+                            title: "media files",
+                            extensions: params.filter
+                        }
                     ]
                     //max_file_size:'1m'
                 },
-                multipart_params:params.multipartParams,
-                max_file_size: params.maxSize,    //最大文件体积限制,qiniu中需要写在这里，而不是卸载filters中
-                max_retries: 3,                   //上传失败最大重试次数
-                chunk_size: '4mb',                //分块上传时，每片的体积
-                auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+                multipart_params: params.multipartParams,
+                max_file_size: params.maxSize, //最大文件体积限制,qiniu中需要写在这里，而不是卸载filters中
+                max_retries: 3, //上传失败最大重试次数
+                chunk_size: '4mb', //分块上传时，每片的体积
+                auto_start: true, //选择文件后自动上传，若关闭需要自己绑定事件触发上传
                 init: {
-                    'Init':function(up,info){
+                    'Init': function (up, info) {
                         //console.log(up.getOption("max_file_size"));
                     },
-                    'FilesAdded': function(up, files) {
-                        if(typeof params.filesAddedCb ==="function"){
-                            params.filesAddedCb(files,up);
+                    'FilesAdded': function (up, files) {
+                        if (typeof params.filesAddedCb === "function") {
+                            params.filesAddedCb(files, up);
                         }
                     },
-                    'BeforeUpload':function(up,file){
+                    'BeforeUpload': function (up, file) {
 
                     },
-                    'UploadProgress': function(up, file) {
-                        if(typeof params.progressCb ==="function"){
+                    'UploadProgress': function (up, file) {
+                        if (typeof params.progressCb === "function") {
                             params.progressCb(file);
                         }
                     },
-                    'FileUploaded': function(up, file, info) {
-                        if(typeof params.uploadedCb === "function"){
+                    'FileUploaded': function (up, file, info) {
+                        if (typeof params.uploadedCb === "function") {
                             var response = JSON.parse(info);
-                            response.url=config.uploader.qiNiu.bucketDomain + response.key;
-                            params.uploadedCb(response,file,up);
+                            response.url = config.uploader.qiNiu.bucketDomain + response.key;
+                            params.uploadedCb(response, file, up);
                         }
                     },
-                    'Error': function(up, err, errTip) {
+                    'Error': function (up, err, errTip) {
                         Materialize.toast(errTip, 4000);
 
                         up.refresh();
                     },
-                    'Key': function(up, file) {
+                    'Key': function (up, file) {
 
                         // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
                         // 该配置必须要在 unique_names: false , save_key: false 时才生效
-                        var random=Math.floor(Math.random()*10+1)*(new Date().getTime());
-                        var filename=file.name;
-                        var extPos=filename.lastIndexOf(".");
+                        var random = Math.floor(Math.random() * 10 + 1) * (new Date().getTime());
+                        var filename = file.name;
+                        var extPos = filename.lastIndexOf(".");
 
 
                         // do something with key here
-                        return random+filename.substring(extPos);
+                        return random + filename.substring(extPos);
 
                         //return file.name;
                     }

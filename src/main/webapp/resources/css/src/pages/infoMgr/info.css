@@ -1,5 +1,13 @@
 .zySearch{
     padding: 6px 0px 8px 30px;
+    transition: all 0.2s ease-out;
+    box-sizing: border-box;
+    opacity: 1;
+    height:auto;
+}
+.zySearch.hidden{
+    height: 0;
+    opacity: 0;
 }
 .zySearchRow{
     margin-top: 0px;
@@ -7,8 +15,10 @@
     clear: both;
     border-bottom: 1px #eee solid;
     min-height: 40px;
-    box-sizing: content-box;
+    box-sizing: border-box;
+    
 }
+
 .zySearchRow .right{
     float: none !important;
 }

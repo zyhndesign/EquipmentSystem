@@ -1,39 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<%@ include file="head.jsp"%>
-<link href="resources/css/lib/materialicons.css" rel="stylesheet">
-<link rel="stylesheet" href="resources/css/lib/materialize.min.css">
-<link rel="stylesheet" href="resources/css/src/main.css">
-<link rel="stylesheet" href="resources/css/src/components/header/header.css">
-<link rel="stylesheet" href="resources/css/src/components/menu/menu.css">
-</head>
-<body>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+        <!DOCTYPE html>
+        <html lang="en">
 
-	<%@ include file="header.jsp"%>
+        <head>
+            <%@ include file="head.jsp"%>
+                <link href="resources/css/lib/materialicons.css" rel="stylesheet">
+                <link rel="stylesheet" href="resources/css/lib/materialize.min.css">
+                <link rel="stylesheet" href="resources/css/src/main.css">
+                <link rel="stylesheet" href="resources/css/src/components/header/header.css">
+                <link rel="stylesheet" href="resources/css/src/components/menu/menu.css">
+        </head>
 
-	<div class="zyMain">
-		<div class="zyLeft">
+        <body>
+                <div class="zyMain">
+                <%@ include file="header.jsp"%>
+                
+                <div id="slide-out" class="zyLeft side-nav">
+                    <%@ include file="menu.jsp"%>
+                </div>
 
-			<%@ include file="menu.jsp"%>
+                    <div class="zyRight">
+                        <div class="zyPanel">
+                            <div class="zyPanelTitle">欢迎使用此系统。</div>
+                        </div>
 
-		</div>
+                    </div>
+                    
+                </div>
 
-		<div class="zyRight">
-			<div class="zyPanel">
-				<div class="zyPanelTitle">欢迎使用此系统。</div>
-			</div>
+                <script>
+                    var pageName = "index";
 
-		</div>
-	</div>
+                </script>
+                <script src="resources/js/lib/jquery-2.0.3.min.js"></script>
+                <script src="resources/js/lib/materialize.min.js"></script>
+                <script src="resources/js/src/config.js"></script>
+                <script src="resources/js/src/functions.js"></script>
+                <script src="resources/js/src/header.js"></script>
+        </body>
 
-	<script>
-		var pageName = "index";
-	</script>
-	<script src="resources/js/lib/jquery-2.0.3.min.js"></script>
-	<script src="resources/js/src/config.js"></script>
-	<script src="resources/js/src/header.js"></script>
-</body>
-</html>
+        </html>

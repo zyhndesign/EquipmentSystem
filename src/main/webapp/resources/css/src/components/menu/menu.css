@@ -8,18 +8,30 @@
 .menu .item {
     border-bottom: 1px solid #ddd;
     background: #f9f9f9;
+
+}
+.menu .item.title{
+    
+}
+.menu .item.title h3{
+    font-size: 14px;
+    padding:60px;
+    text-align: center;
+    background: #ae4127 url(../../../../images/heavy_equipment.svg) no-repeat center;
+    background-size: 70%;
+    font-size: 0;
 }
 .menu .item .link{
     font-size: 16px;
-    line-height: 40px;
+    line-height: 48px;
     color: #727171;
     display: block;
-    padding-left: 5px;
+    padding: 0 20px;
 }
 .menu .material-icons{
     line-height: 40px;
     vertical-align: top;
-    margin-right: 5px;
+    margin-right: 16px !important;
 }
 .material-icons .right2{
     line-height: 40px;
@@ -47,7 +59,7 @@
     font-size: 14px;
     color: #b5b5b6;
     display: block;
-    padding-left: 40px;
+    padding-left: 60px;
     height: 35px;
     line-height: 35px;
     position: relative;
@@ -67,7 +79,7 @@
     font-size: 0px;
     position: absolute;
     display: block;
-    left:13px;
+    left:32px;
     top:50%;
     margin-top: -5px;
 }

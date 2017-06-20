@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-    <ul class="menu">
-
+<ul class="menu">
+        <li class="item title">
+            <h3>高端装备设计知识库系统</h3>
+        </li>
         <li class="item">
             <a data-page-name="mgr" class="link" href="vehicleInfo/infoMgr">
                 <i class="material-icons">book</i>
