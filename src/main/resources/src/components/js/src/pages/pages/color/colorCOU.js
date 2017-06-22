@@ -1,0 +1,37 @@
+$(document).ready(function(){
+    if(id){
+        ZYCtrlDataHandler.getDataForUpdate(config.ajaxUrls.colorGetDetail,{id:id},function(data){
+            $("#name").val(data.name);
+            $("#color").val(data.colorValue);
+        });
+    }
+    var formHandler=new ZYFormHandler({
+        redirectUrl:"color/color",
+        createUrl:config.ajaxUrls.colorCreate,
+        updateUrl:config.ajaxUrls.colorUpdate
+    });
+    $("#myForm").validate({
+        ignore:[],
+        rules:{
+            name:{
+                required:true,
+                maxlength:32
+            },
+            colorValue:{
+                required:true
+            }
+        },
+        messages:{
+            name:{
+                required:config.validErrors.required,
+                maxlength:config.validErrors.maxLength.replace("${max}",32)
+            },
+            colorValue:{
+                required:config.validErrors.required
+            }
+        },
+        submitHandler:function(form) {
+            formHandler.submitForm(form,id);
+        }
+    });
+});

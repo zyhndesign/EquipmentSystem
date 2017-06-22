@@ -28,7 +28,7 @@ pageEncoding="UTF-8"%>
                     </div>
                     <div class="zyRight zyPd20">
                         <div class="zyPanel zyBd2">
-                            <div class="zyPanelTitle">产品类别</div>
+                            <div class="zyPanelTitle">品类与结构设置</div>
                             <div class="zyPanelContent zyPd20">
                                 <ul id="zyTree" class="ztree"></ul>
                             </div>
@@ -49,8 +49,8 @@ pageEncoding="UTF-8"%>
             <script src="resources/js/src/config.js"></script>
             <script src="resources/js/src/functions.js"></script>
             <script src="resources/js/src/ZYTreeHandler.js"></script>
+            <script src="resources/js/src/common_init.js"></script>
             <script src="resources/js/src/pages/category/category.js"></script>
-            <script src="resources/js/src/header.js"></script>
         </body>
 
         </html>

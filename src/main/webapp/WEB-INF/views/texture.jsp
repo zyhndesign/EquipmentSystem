@@ -29,10 +29,10 @@
 
                     <div class="zyRight zyPd20">
                         <div class="zyPanel zyBd2">
-                            <div class="zyPanelTitle">纹理设置</div>
+                            <div class="zyPanelTitle">纹理列表</div>
                             <div class="zyPanelContent zyPd20">
                                 <a class="waves-effect waves-light btn" href="texture/textureCOU">
-                                    <i class="material-icons left">add</i>新建
+                                    <i class="material-icons left">add</i>新建纹理
                                 </a>
 
                                 <table id="myTable" class="dataTable">
@@ -69,8 +69,8 @@
             <script src="resources/js/src/config.js"></script>
             <script src="resources/js/src/functions.js"></script>
             <script src="resources/js/src/ZYTableHandler.js"></script>
+            <script src="resources/js/src/common_init.js"></script>
             <script src="resources/js/src/pages/texture/texture.js"></script>
-            <script src="resources/js/src/header.js"></script>
         </body>
 
         </html>

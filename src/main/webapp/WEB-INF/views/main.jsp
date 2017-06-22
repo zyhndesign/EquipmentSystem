@@ -37,7 +37,7 @@
                 <script src="resources/js/lib/materialize.min.js"></script>
                 <script src="resources/js/src/config.js"></script>
                 <script src="resources/js/src/functions.js"></script>
-                <script src="resources/js/src/header.js"></script>
+                <script src="resources/js/src/common_init.js"></script>
         </body>
 
         </html>

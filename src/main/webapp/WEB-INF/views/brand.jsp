@@ -27,10 +27,10 @@
 
     <div class="zyRight zyPd20">
         <div class="zyPanel zyBd2">
-            <div class="zyPanelTitle">品牌设置</div>
+            <div class="zyPanelTitle">品牌列表</div>
             <div class="zyPanelContent zyPd20">
                 <a class="waves-effect waves-light btn" href="brand/brandCOU">
-                    <i class="material-icons left">add</i>新建
+                    <i class="material-icons left">add</i>新增品牌
                 </a>
 
                 <table id="myTable" class="dataTable">
@@ -67,8 +67,8 @@
 <script src="resources/js/src/config.js"></script>
 <script src="resources/js/src/functions.js"></script>
 <script src="resources/js/src/ZYTableHandler.js"></script>
+<script src="resources/js/src/common_init.js"></script>
 <script src="resources/js/src/pages/brand/brand.js"></script>
-<script src="resources/js/src/header.js"></script>
 </body>
 </html>
 

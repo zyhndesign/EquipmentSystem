@@ -29,10 +29,10 @@
 
                     <div class="zyRight zyPd20">
                         <div class="zyPanel zyBd2">
-                            <div class="zyPanelTitle">颜色设置</div>
+                            <div class="zyPanelTitle">颜色列表</div>
                             <div class="zyPanelContent zyPd20">
                                 <a class="waves-effect waves-light btn" href="color/colorCOU">
-                                    <i class="material-icons left">add</i>新建
+                                    <i class="material-icons left">add</i>新建颜色
                                 </a>
 
                                 <table id="myTable" class="dataTable">
@@ -70,8 +70,8 @@
             <script src="resources/js/src/config.js"></script>
             <script src="resources/js/src/functions.js"></script>
             <script src="resources/js/src/ZYTableHandler.js"></script>
+            <script src="resources/js/src/common_init.js"></script>
             <script src="resources/js/src/pages/color/color.js"></script>
-            <script src="resources/js/src/header.js"></script>
         </body>
 
         </html>

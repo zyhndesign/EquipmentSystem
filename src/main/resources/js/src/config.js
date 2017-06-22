@@ -1,0 +1,288 @@
+/**
+ * Created with JetBrains WebStorm.
+ * User: ty
+ * Date: 14-10-5
+ * Time: 下午5:34
+ * To change this template use File | Settings | File Templates.
+ */
+var config={
+    baseUrl:"",
+    ajaxUrls:{
+        infoGetByPage:"vehicleInfo/getDataByCondition",
+        infoDelete:"vehicleInfo/deleteVehicleInfo",
+        infoCreate:"vehicleInfo/createVehicleInfo",
+        infoUpdate:"vehicleInfo/updateVehicleInfo",
+        infoGetDetail:"vehicleInfo/getVehicleInfoById",
+        brandGetAll:"brand/getAllBrand",
+        brandGetByPage:"brand/getDataByCondition",
+        brandDelete:"brand/deleteBrand",
+        brandCreate:"brand/createBrand",
+        brandUpdate:"brand/updateBrand",
+        brandDetail:"brand/getBrandById",
+        colorGetAll:"color/getAllColor",
+        colorGetByPage:"color/getDataByCondition",
+        colorDelete:"color/deleteColor",
+        colorCreate:"color/createColor",
+        colorUpdate:"color/updateColor",
+        colorDetail:"color/getColorById",
+        textureGetAll:"texture/getAllTexture",
+        textureGetByPage:"texture/getDataByCondition",
+        textureDelete:"texture/deleteTexture",
+        textureCreate:"texture/createTexture",
+        textureUpdate:"texture/updateTexture",
+        textureDetail:"texture/getTextureById",
+        categoryGetAll:"category/getAllCategory",
+        categoryCreate:"category/createCategory",
+        categoryUpdate:"category/updateCategory",
+        categoryDelete:"category/deleteCategory"
+    },
+    status:{
+
+    },
+    dataTable:{
+        langUrl:"resources/lang/de_DE.txt"
+    },
+    perLoadCounts:{
+        table:10
+    },
+    uploader:{
+        url:"#",
+        swfUrl:"resources/js/lib/Moxie.swf",
+        sizes:{
+            all:"5120m",
+            img:"4m"
+        },
+        filters:{
+            all:"*",
+            zip:"zip,rar",
+            img:"jpg,JPG,jpeg,JPEG,png,PNG,svg",
+            pdf:"pdf,PDF",
+            mp4:"mp4,MP4"
+        },
+        qiNiu:{
+            upTokenUrl:"qiniu/getUploadKey",
+            uploadDomain:"http://qiniu-plupload.qiniudn.com/",
+            bucketDomain:"http://oobviza1s.bkt.clouddn.com/"
+        }
+    },
+    validErrors:{
+        required:"请输入此字段！",
+        email:"请输入正确的邮箱格式！",
+        emailExist:"邮箱已经存在！",
+        uploadImg:"请上传图片！",
+        number:"请输入数字",
+        maxLength:"此字段最多输入${max}个字！",
+        minLength:"此字段最少输入${min}个字！",
+        rangLength:"此字段只能输入${min}-${max}个字！",
+        rang:"此字段只能输入${min}-${max}之间的整数！",
+        pwdNotEqual:"两次输入的密码不一样！"
+    },
+    messages:{
+        successTitle:"成功提示",
+        errorTitle:"错误提示",
+        optSuccess:"操作成功！",
+        noData:"没有数据",
+        progress:"处理中...",
+        uploaded:"上传完成！",
+        confirmDelete:"确定删除吗？",
+        confirm:"确定执行此操作吗？",
+        noSelected:"没有选中任何记录！",
+        notFound:"资源丢失！",
+        loadDataError:"请求数据失败！",
+        networkError:"网络异常，请稍后重试！",
+        systemError:"系统错误，请稍后重试或者联系cidic@cidic.cn！",
+        optSuccRedirect:"操作成功,3秒后跳转到管理页！",
+        timeout:"登录超时，3秒后自动跳到登陆页！",
+        optError:"服务器端异常，请稍后重试！",
+        uploadSizeError:"最大文件大小${value}！",
+        uploadExtensionError:"只允许上传${value}！",
+        uploadIOError:"上传出错，请稍后重试！",
+        imageSizeError:"图片大小不符合！",
+        pleaseFillRequired:"请填写所有的必要字段！"
+    },
+    colorItemsTpl:[
+        '{@each items as item}',
+        '<div class="zyColorItem">',
+        '<span class="zyColorShow" style="background:$${item}"></span>',
+        '</div>',
+        '{@/each}'
+    ].join(''),
+    colorAllOptionTpl:[
+        '{@each items as item}',
+        '<option value="$${item.id}" data-value="$${item.colorValue}">${item.name}</option>',
+        '{@/each}'
+    ].join(''),
+    infoChildTrsTpl:[
+        '{@each items as item,index}',
+        '<tr>',
+        '<td>$${item.imageString}</td>',
+        '<td>${item.name}</td>',
+        '<td>$${item.colorString}</td>',
+        '<td>${item.textureText}</td>',
+        '<td>${item.hasBiaoZhi}</td>',
+        '<td>$${item.infoFullString}</td>',
+        '{@if type=="infoChild"}',
+        '<td><a href="${item.id}" class="zyActionEdit">编辑</a></td>',
+        '{@/if}',
+        '</tr>',
+        '{@/each}'
+    ].join(''),
+    infoChildTrTpl:[
+        '<tr>',
+        '<td>$${imageString}</td>',
+        '<td>${name}</td>',
+        '<td>$${colorString}</td>',
+        '<td>${textureText}</td>',
+        '<td>${hasBiaoZhi}</td>',
+        '<td>$${infoFullString}</td>',
+        '<td><a href="${id}" class="zyActionEdit">编辑</a></td>',
+        '</tr>'
+    ].join(''),
+    categoryAllOptionTpl:[
+        '<option value="">请选择产品类别</option>',
+        '{@each items as item,index}',
+        '<option value="${item.id}">${item.name}</option>',
+        '{@/each}'
+    ].join(""),
+    categoryAllCheckboxTpl:[
+        '{@each items as item,index}',
+        '<input class="filled-in" name="category" value="${item.id}" ',
+            'type="checkbox" id="category${idFlag}${index}"  />',
+        '<label for="category${idFlag}${index}"  style="margin-right: 10px;">${item.name}</label>',
+        '{@/each}'
+    ].join(""),
+    categoryTreeTpl:[
+        '<option value="">全部结构</option>',
+        '{@each items as item,index}',
+        '<optgroup label="${item.name}">',
+            '{@each item.childs as ic}',
+                '<option value="${ic.id}">${ic.name}</option>',
+            '{@/each}',
+        '</optgroup>',
+        '{@/each}'
+    ].join(''),
+    brandAllOptionTpl:[
+        '<option value="">请选择品牌</option>',
+        '{@each items as item,index}',
+        '<option value="${item.id}" data-value="${item.icon}">${item.name}</option>',
+        '{@/each}'
+    ].join(""),
+    brandAllCheckboxTpl:[
+        '{@each items as item,index}',
+        '<input class="filled-in" name="brand" value="${item.id}" type="checkbox" id="brand${idFlag}${index}"  />',
+        '<label for="brand${idFlag}${index}"  style="margin-right: 10px;">',
+        '<img class="zyImgHeightFixed" src="${item.icon}">${item.name}</label>',
+        '{@/each}'
+    ].join(""),
+    textureAllCheckboxTpl:[
+        '{@each items as item,index}',
+        '<input class="filled-in" name="texture" value="${item.id}" ',
+        'type="checkbox" id="texture${idFlag}${index}"  />',
+        '<label for="texture${idFlag}${index}" style="margin-right: 10px;">${item.name}</label>',
+        '{@/each}'
+    ].join(''),
+    textureItemsTpl:[
+        '{@each items as item,index}',
+        '<div class="zyTextureItem">',
+        '<label class="zyFormLabel">${item.name}</label>',
+
+        '<div class="zyTextureImg">',
+        '<img src="${item.icon}">',
+        '</div>',
+        '</div>',
+        '{@/each}'
+    ].join(''),
+    styleAllTpl:[
+        '{@each items as item,index}',
+        '<div class="chip">',
+        '${item}',
+        '<i class="close material-icons">close</i>',
+        '<input type="hidden" value="${item}" name="infoStyle">',
+        '</div>',
+        '{@/each}'
+    ].join(''),
+    styleTpl:[
+        '<div class="chip">',
+        '${data}',
+        '<i class="close material-icons">close</i>',
+        '<input type="hidden" value="${data}" name="infoStyle">',
+        '</div>'
+    ].join(''),
+    cutImageTpl:[
+        '<div style="width:${showWidth}px;height:${showHeight}px;overflow: hidden;display: inline-block">',
+            '<img src="${src}" style="width:${realW}px;height: ${realH}px;margin-left: ${marginL}px;margin-top: ${marginT}px">',
+        '</div>'
+    ].join(''),
+    initData:{
+        brand:[
+            {id:0, image:"/data/brand.png", name:"中联",
+                description:"中联是湖南省的著名企业，专注于工程机械","opt":""}
+        ],
+        color:[
+            {id:0,value:"red",name:"红色",opt:""}
+        ],
+        texture:[
+            { id:0, name:"亚光", image:"/data/texture.png",
+                description:"亚光亚光亚光亚光亚光亚光",opt:""},
+            { id:0, name:"亮光", image:"/data/texture.png",
+                description:"亮光亮光亮光亮光亮光亮光亮光",opt:""}
+        ],
+        category:[
+            { id:0, name:"结构类别", open:true},
+            { id:1, parentId:0, name:"起重机"},
+            { id:3, parentId:1, name:"上车"},
+            { id:4, parentId:1, name:"下车"},
+            { id:5, parentId:3, name:"驾驶室"},
+            { id:6, parentId:3, name:"前脸"},
+            { id:7, parentId:3, name:"操纵室"},
+            { id:8, parentId:3, name:"转台"},
+            { id:9, parentId:4, name:"侧护板"},
+            { id:10, parentId:4, name:"支腿"},
+            { id:11, parentId:4, name:"尾部"},
+            { id:12, parentId:0, name:"推土机"}
+        ],
+        mgr:[
+            {
+                id:0,
+                opt:"",
+                imageChanPin:"/data/product1.svg",
+                imageXianXin:"/data/product1.svg",
+                brand:"Edinburgh",
+                category:"起重机",
+                marketType:"上市产品",
+                marketDate:"2016.3.1",
+                style:["简约","时尚"],
+                modal:"xxxxx.fbx",
+                texture:["亚光"],
+                color:["red","blue","blue"],
+                componentInfo:[
+                    {
+                        image:{
+                            src:"/data/product1.svg",
+                            customData:{boundW: 600, boundH: 600, x: 0.20333333333333334, y: 0.20833333333333334, ratio: 1}
+                        },
+                        name:"上车/摇臂",
+                        texture:["亚光"],
+                        color:["red"],
+                        hasBiaoZhi:"",
+                        infoFull:0,
+                        appraise:"xxxxx"
+                    }
+                ]
+            }
+        ]
+    },
+    findInArray:function(list,key,keyValue){
+        var index=-1;
+        for(var i=0,len=list.length;i<len;i++){
+            if(list[i][key]==keyValue){
+                index=i;
+                break;
+            }
+        }
+
+        return index;
+    }
+
+};
+

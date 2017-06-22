@@ -485,8 +485,8 @@
             <script src="resources/js/src/ZYCtrlDataHandler.js"></script>
             <script src="resources/js/src/ZYFormHandler.js"></script>
             <script src="resources/js/src/ZYPreviewHandler.js"></script>
+            <script src="resources/js/src/common_init.js"></script>
             <script src="resources/js/src/pages/infoMgr/infoCOU.js"></script>
-            <script src="resources/js/src/header.js"></script>
         </body>
 
         </html>
