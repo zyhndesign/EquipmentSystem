@@ -10,6 +10,7 @@
                 <link rel="stylesheet" href="resources/css/lib/materialize.min.css">
                 <link rel="stylesheet" href="resources/css/lib/jquery.dataTables.css">
                 <link rel="stylesheet" href="resources/css/src/main.css">
+                <link rel="stylesheet" href="resources/css/src/media-query.css">
                 <link rel="stylesheet" href="resources/css/src/components/header/header.css">
                 <link rel="stylesheet" href="resources/css/src/components/menu/menu.css">
 
@@ -22,14 +23,14 @@
         <body>
             <div class="zyMain">
                 <%@ include file="header.jsp"%>
-                    <div id="slide-out" class="zyLeft side-nav">
+                    <div id="slide-out" class="zyLeft side-nav fixed">
 
                         <%@ include file="menu.jsp"%>
 
                     </div>
 
                     <div class="zyRight zyPd20">
-                        <div class="zyPanel zyBd2">
+                        <div class="zyPanel">
                             <div class="zyPanelTitle">新建/修改 品牌</div>
                             <div class="zyPanelContent zyPd20">
                                 <form class="zyForm" id="myForm" action="#">

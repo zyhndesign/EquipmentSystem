@@ -62,14 +62,16 @@ li{
     right: 0;
     top: 0;
     bottom: 0;
+    padding-left:250px;
 }
 
 .zyLeft{
     
 }
+
 .zyRight {
     border-left: 1px solid #ccc;
-    background: #f9f9f9;
+    background: #fff;
     min-height: 100%;
 }
 .zyLine{
@@ -84,17 +86,6 @@ li{
 .zyImgHeightFixed{
     height: 30px;
     width: auto;
-}
-.zyLeft.zySideNav{
-    width:250px;
-    transform: translateX(-250px);
-    transition: all 0.3s ease-out;
-    z-index: 100;
-    height:100%;
-    background:#fff;
-}
-.zyLeft.zySideNav.active{
-    transform: translateX(0)
 }
 .zyBlackout{
     position: fixed;
@@ -433,11 +424,33 @@ table.dataTable .zyWidthFixed{
     padding: 0px;
     text-align: center;
 }
+table.dataTable .alignL{
+    text-align: left;
+}
+table.dataTable .alignR{
+    text-align: right;
+}
+table.dataTable .w300{
+    min-width:300px;
+}
+table.dataTable .w200{
+    min-width:200px;
+}
+table.dataTable .w150{
+    min-width:150px;
+}
+table.dataTable .w100{
+    min-width:100px;
+}
+table.dataTable .w50{
+    min-width:50px;
+}
 table.dataTable .zyThumb{
     max-width: 100px;
     height: auto;
     vertical-align: middle;
 }
+
 .dataTables_paginate{
     position: absolute;
     bottom:-55px;
@@ -451,12 +464,12 @@ table.dataTable .zyThumb{
     left:0;
     height:40px;
     line-height: 40px;
-    margin-left: 36px;
+/*    margin-left: 36px;*/
 }
 .paging_full_numbers{
     height: 40px;
     line-height: 1;
-    margin-right: 50px;
+/*    margin-right: 50px;*/
 }
 .paging_full_numbers a.paginate_button, .paging_full_numbers a.paginate_active{
     height:40px;

@@ -9,6 +9,7 @@
                 <link rel="stylesheet" href="resources/css/lib/materialize.min.css">
                 <link rel="stylesheet" href="resources/css/lib/jquery.Jcrop.min.css">
                 <link rel="stylesheet" href="resources/css/src/main.css">
+                <link rel="stylesheet" href="resources/css/src/media-query.css">
                 <link rel="stylesheet" href="resources/css/src/components/header/header.css">
                 <link rel="stylesheet" href="resources/css/src/components/menu/menu.css">
                 <link rel="stylesheet" href="resources/css/src/pages/infoMgr/info.css">
@@ -25,7 +26,7 @@
 
             <div class="zyMain">
                 <%@ include file="header.jsp"%>
-                    <div id="slide-out" class="zyLeft side-nav">
+                    <div id="slide-out" class="zyLeft side-nav fixed">
 
                         <%@ include file="menu.jsp"%>
 

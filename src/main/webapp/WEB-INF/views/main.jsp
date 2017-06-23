@@ -8,6 +8,7 @@
                 <link href="resources/css/lib/materialicons.css" rel="stylesheet">
                 <link rel="stylesheet" href="resources/css/lib/materialize.min.css">
                 <link rel="stylesheet" href="resources/css/src/main.css">
+                <link rel="stylesheet" href="resources/css/src/media-query.css">
                 <link rel="stylesheet" href="resources/css/src/components/header/header.css">
                 <link rel="stylesheet" href="resources/css/src/components/menu/menu.css">
         </head>
@@ -16,12 +17,12 @@
                 <div class="zyMain">
                 <%@ include file="header.jsp"%>
                 
-                <div id="slide-out" class="zyLeft side-nav">
+                <div id="slide-out" class="zyLeft side-nav fixed">
                     <%@ include file="menu.jsp"%>
                 </div>
 
                     <div class="zyRight">
-                        <div class="zyPanel">
+                        <div class="zyPanel zyPd20">
                             <div class="zyPanelTitle">欢迎使用此系统。</div>
                         </div>
 

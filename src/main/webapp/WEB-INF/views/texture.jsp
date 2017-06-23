@@ -21,14 +21,14 @@
 
             <div class="zyMain">
                 <%@ include file="header.jsp"%>
-                    <div id="slide-out" class="zyLeft side-nav">
+                    <div id="slide-out" class="zyLeft side-nav fixed">
 
                         <%@ include file="menu.jsp"%>
 
                     </div>
 
                     <div class="zyRight zyPd20">
-                        <div class="zyPanel zyBd2">
+                        <div class="zyPanel">
                             <div class="zyPanelTitle">纹理列表</div>
                             <div class="zyPanelContent zyPd20">
                                 <a class="waves-effect waves-light btn" href="texture/textureCOU">

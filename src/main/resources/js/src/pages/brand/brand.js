@@ -18,13 +18,14 @@ $(document).ready(function() {
                 },
                 aoColumns: [
                     { "mDataProp": "icon",
+                        "sClass":"w150",    
                         "fnRender":function(oObj){
                             return  "<img class='thumb' src='"+oObj.aData.icon+"'>";
                         }
                     },
-                    { "mDataProp": "name"},
-                    { "mDataProp": "description","sClass":"zyWidthFixed"},
-                    { "mDataProp": "opt",
+                    { "mDataProp": "name","sClass":"w150"},
+                    { "mDataProp": "description","sClass":"w100 alignL"},
+                    { "mDataProp": "opt","sClass":"w100",
                         "fnRender":function(oObj){
                             return  '<a href="brand/brandCOU/'+oObj.aData.id+'">编辑</a>&nbsp;&nbsp;'+
                                 '<a href="'+oObj.aData.id+'" class="remove">删除</a>';
