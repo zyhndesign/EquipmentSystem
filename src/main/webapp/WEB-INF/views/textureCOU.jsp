@@ -34,7 +34,6 @@
 
                     <div class="zyRight zyPd20">
                         <div class="zyPanel">
-                            <div class="zyPanelTitle">新建/修改 纹理</div>
                             <div class="zyPanelContent zyPd20">
                                 <form class="zyForm" id="myForm" action="#">
                                     <div class="row" id="uploadContainer">
@@ -67,6 +66,7 @@
             <!-- Compiled and minified JavaScript -->
             <script>
                 var pageName = "texture";
+                var pageTitle = "新建／修改纹理"
 
             </script>
             <script src="resources/js/lib/jquery-2.0.3.min.js"></script>

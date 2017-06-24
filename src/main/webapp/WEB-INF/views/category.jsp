@@ -29,7 +29,6 @@ pageEncoding="UTF-8"%>
                     </div>
                     <div class="zyRight zyPd20">
                         <div class="zyPanel">
-                            <div class="zyPanelTitle">品类与结构设置</div>
                             <div class="zyPanelContent zyPd20">
                                 <ul id="zyTree" class="ztree"></ul>
                             </div>
@@ -42,6 +41,8 @@ pageEncoding="UTF-8"%>
             <!-- Compiled and minified JavaScript -->
             <script>
                 var pageName = "category";
+                var pageTitle = "品类与结构设置"
+
 
             </script>
             <script src="resources/js/lib/jquery-2.0.3.min.js"></script>

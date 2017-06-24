@@ -10,6 +10,7 @@
                 <link rel="stylesheet" href="resources/css/lib/materialize.min.css">
                 <link rel="stylesheet" href="resources/css/lib/jquery.dataTables.css">
                 <link rel="stylesheet" href="resources/css/src/main.css">
+                <link rel="stylesheet" href="resources/css/src/media-query.css">
                 <link rel="stylesheet" href="resources/css/src/components/header/header.css">
                 <link rel="stylesheet" href="resources/css/src/components/menu/menu.css">
         </head>
@@ -29,10 +30,9 @@
 
                     <div class="zyRight zyPd20">
                         <div class="zyPanel">
-                            <div class="zyPanelTitle">纹理列表</div>
                             <div class="zyPanelContent zyPd20">
                                 <a class="waves-effect waves-light btn" href="texture/textureCOU">
-                                    <i class="material-icons left">add</i>新建纹理
+                                    <i class="material-icons left">add</i>新增纹理
                                 </a>
 
                                 <table id="myTable" class="dataTable">
@@ -61,6 +61,8 @@
             <!-- Compiled and minified JavaScript -->
             <script>
                 var pageName = "texture";
+                var pageTitle = "纹理列表"
+
 
             </script>
             <script src="resources/js/lib/jquery-2.0.3.min.js"></script>

@@ -10,7 +10,7 @@
             </a>
         </li>
         <li class="item">
-            <a class="collapsible-header">
+            <a class="collapsible-header link">
                 <i class="material-icons">settings</i>
                 基础设置
                 <i class="material-icons right">keyboard_arrow_down</i>

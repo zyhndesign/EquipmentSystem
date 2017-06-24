@@ -18,14 +18,14 @@ $(document).ready(function() {
                     "sUrl":config.dataTable.langUrl
                 },
                 aoColumns: [
-                    { "mDataProp": "icon",
+                    { "mDataProp": "icon","sClass":"w150 alignL",
                         "fnRender":function(oObj){
                             return  "<img class='zyThumb' src='"+oObj.aData.icon+"'>";
                         }
                     },
-                    { "mDataProp": "name"},
-                    { "mDataProp": "description","sClass":"zyWidthFixed"},
-                    { "mDataProp": "opt",
+                    { "mDataProp": "name","sClass":"w100"},
+                    { "mDataProp": "description","sClass":"w100 alignL"},
+                    { "mDataProp": "opt","sClass":"w100",
                         "fnRender":function(oObj){
                             return  '<a href="texture/textureCOU/'+oObj.aData.id+'">编辑</a>&nbsp;&nbsp;'+
                                 '<a href="'+oObj.aData.id+'" class="remove">删除</a>';

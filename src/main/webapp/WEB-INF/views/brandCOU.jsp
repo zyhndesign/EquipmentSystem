@@ -31,7 +31,6 @@
 
                     <div class="zyRight zyPd20">
                         <div class="zyPanel">
-                            <div class="zyPanelTitle">新建/修改 品牌</div>
                             <div class="zyPanelContent zyPd20">
                                 <form class="zyForm" id="myForm" action="#">
                                     <div class="row" id="uploadContainer">
@@ -64,6 +63,8 @@
             <!-- Compiled and minified JavaScript -->
             <script>
                 var pageName = "brand";
+                var pageTitle = "新增／修改品牌"
+
 
             </script>
             <script src="resources/js/lib/jquery-2.0.3.min.js"></script>

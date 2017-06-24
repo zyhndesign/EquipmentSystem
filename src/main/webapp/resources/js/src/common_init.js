@@ -1,17 +1,20 @@
 $(document).ready(function () {
-    //根据页面名称初始化链接状态
+    //根据页面名称初始化状态
     if (pageName) {
         var target = $("a[data-page-name='" + pageName + "']");
         if (target) {
             target.addClass("active");
-            
+
             if (target.parents(".subMenu")) {
                 target.parents(".subMenu").prev(".collapsible-header").addClass("active");
             }
         }
-
+    }
+    if(pageTitle){
+        $(".zySubTitle").html(pageTitle)
     }
     
+
     $(".button-collapse").sideNav({
         menuWidth: 250, // Default is 300
         edge: 'left', // Choose the horizontal origin
@@ -20,8 +23,8 @@ $(document).ready(function () {
     });
     $('.collapsible').collapsible();
 
-    
-    
+
+
     $("input[type='text'],input[type='email']").blur(function () {
         $(this).val($(this).val().trim());
     });
@@ -55,6 +58,6 @@ $(document).ready(function () {
         }
     });
 
-    
+
 
 });

@@ -31,12 +31,12 @@
                     <div class="zyRight">
                         <div class="zyPanel">
                             <!--   <div class="zyPanelTitle">知识库</div>  -->
-                            <div class="zyPanelContent">
+                            <div class="zyPanelContent zyPd20">
 
 
                                 <div class="zySearch" id="search">
                                     <div class="zySearchRow">
-                                        <a class="waves-effect waves-light btn" href="vehicleInfo/infoCOU"> <i class="material-icons left">backup</i>新建
+                                        <a class="waves-effect waves-light btn" href="vehicleInfo/infoCOU"> <i class="material-icons left">backup</i>新增
                                         </a>
 
                                         <div class="right">
@@ -225,7 +225,7 @@
                     <div id="pInfo" class="zyTabPanel">
                         <div class="row zyForm" style="padding: 10px 0px !important; position: relative">
                             <div class="col s6">
-                                <div class="zyBgFFFFFF zyPd10">
+                                <div class="zyBgFFFFFF zyPd10 zyProfilePanel">
                                     <div class="row">
                                         <label class="zyFormLabel">产品类别:</label> <label class="zyFormLabel" id="pInfoCategory">xxx</label>
                                     </div>
@@ -253,26 +253,25 @@
                                         <label class="zyFormLabel">颜色:</label>
 
                                         <div class="row">
-                                            <span class="zySName" style="margin-right: 8px;">主色:</span>
+                                            <label class="zySName zyFormLabel">主色</label>
 
                                             <div class="zyColorItem">
-                                                <span class="zyColorShow" id="pInfoMainColor" style="background: orange"></span>
+                                                <span class="zyColorShow" id="pInfoMainColor" style="background: gray"></span>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <span class="zySName">辅色1:</span>
+                                            <label class="zySName zyFormLabel">辅色1</label>
 
                                             <div class="zyColorItem">
-                                                <span class="zyColorShow" id="pInfoAssistColor1" style="background: orange"></span>
+                                                <span class="zyColorShow" id="pInfoAssistColor1" style="background: gray"></span>
                                             </div>
                                         </div>
-
                                         <div class="row">
-                                            <span class="zySName">辅色2:</span>
+                                            <label class="zySName zyFormLabel">辅色2</label>
 
                                             <div class="zyColorItem">
-                                                <span class="zyColorShow" id="pInfoAssistColor2" style="background: orange"></span>
+                                                <span class="zyColorShow" id="pInfoAssistColor2" style="background: gray"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -350,6 +349,8 @@
             <!-- Compiled and minified JavaScript -->
             <script>
                 var pageName = "mgr";
+                var pageTitle = "数据检索"
+
 
             </script>
             <script src="resources/js/lib/jquery-2.0.3.min.js"></script>

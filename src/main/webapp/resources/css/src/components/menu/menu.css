@@ -6,8 +6,7 @@
     background: #fff;
 }
 .menu .item {
-    border-bottom: 1px solid #ddd;
-    background: #f9f9f9;
+    border-top: rgba(0,0,0,0.2) 1px solid;
 
 }
 .menu .item.title{
@@ -15,20 +14,21 @@
 }
 .menu .item.title h3{
     font-size: 14px;
-    padding:60px;
+    padding:100px 60px;
     text-align: center;
-    background: #ae4127 url(../../../../images/heavy_equipment.svg) no-repeat center;
+    background: url(../../../../images/heavy_equipment.svg) no-repeat center;
     background-size: 70%;
     font-size: 0;
 }
 .menu .item .link{
     font-size: 16px;
     line-height: 48px;
-    color: #727171;
+    color: rgba(255,255,255,0.6);
     display: block;
     padding: 0 20px;
 }
 .menu .material-icons{
+    color: rgba(255,255,255,0.6) !important;
     line-height: 40px;
     vertical-align: top;
     margin-right: 16px !important;
@@ -41,23 +41,26 @@
 }
 
 .menu .item .link:hover,.menu .item .link.active{
-    background: #ffffff;
-    color: #ae4127;
+    background: rgba(0,0,0,0.2) !important;
+    color: #fff;
     cursor: pointer;
 }
-.menu .item .link.active+.subMenu{
+.menu .item .link:hover .material-icons,
+.menu .item .link.active .material-icons{
+    color:#fff !important;
+}
+/*.menu .item .link.active+.subMenu{
     display: block;
-}
+}*/
 .menu .subMenu{
-    background: #ffffff;
-    display: none;
+    background: rgba(0,0,0,0.2) !important;
+    padding:0;
+    /*display: none;*/
 }
-.menu .subMenu .sItem{
-    border-top: 1px solid #ddd;
-}
+
 .menu .subMenu .sItem .sLink{
     font-size: 14px;
-    color: #b5b5b6;
+    color: rgba(255,255,255,0.6);
     display: block;
     padding-left: 60px;
     height: 35px;
@@ -65,10 +68,10 @@
     position: relative;
 }
 .menu .subMenu .sItem .sLink:hover{
-    background-color: #eee;
+    background-color: transparent;
 }
 .menu .subMenu .sItem .sLink:hover,.menu .subMenu .sItem .sLink.active{
-    color: #ae4127;
+    color: #fff;
 }
 .menu .subMenu .sItem .sLink:before {
     content:"";
@@ -84,5 +87,5 @@
     margin-top: -5px;
 }
 .menu .subMenu .sItem .sLink:hover:before,.menu .subMenu .sItem .sLink.active:before{
-    background: #ae4127;
+    background: #fff;
 }

@@ -23,7 +23,6 @@
 
                     <div class="zyRight">
                         <div class="zyPanel zyPd20">
-                            <div class="zyPanelTitle">欢迎使用此系统。</div>
                         </div>
 
                     </div>
@@ -32,6 +31,7 @@
 
                 <script>
                     var pageName = "index";
+                    var pageTitle = "欢迎使用此系统"
 
                 </script>
                 <script src="resources/js/lib/jquery-2.0.3.min.js"></script>

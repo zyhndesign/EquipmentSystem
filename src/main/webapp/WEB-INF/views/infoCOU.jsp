@@ -34,8 +34,7 @@
 
                     <div class="zyRight">
                         <div class="zyPanel">
-                            <div class="zyPanelTitle" style="height: 40px; line-height: 36px;">
-                                知识库上传
+                            <div class="zyPanelTitle">
                                 <button id="saveBtn" class="btn right hide">上传</button>
                                 <button id="previewBtn" class="btn right hide">预览</button>
 
@@ -311,7 +310,7 @@
                     <div id="pInfo" class="zyTabPanel">
                         <div class="row zyForm" style="padding: 10px 0px !important; position: relative">
                             <div class="col s6">
-                                <div class="zyBgFFFFFF zyPd10">
+                                <div class="zyBgFFFFFF zyPd10 zyProfilePanel">
                                     <div class="row">
                                         <label class="zyFormLabel">产品类别:</label> <label class="zyFormLabel" id="pInfoCategory">xxx</label>
                                     </div>
@@ -340,30 +339,30 @@
                                         <label class="zyFormLabel">颜色:</label>
 
                                         <div class="row">
-                                            <span class="zySName" style="margin-right: 8px;">主色:</span>
+                                            <span class="zySName zyFormLabel">主色</span>
 
                                             <div class="zyColorItem">
-                                                <span class="zyColorShow" id="pInfoMainColor" style="background: orange"></span>
+                                                <span class="zyColorShow" id="pInfoMainColor" style="background: gray"></span>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <span class="zySName">辅色1:</span>
+                                            <span class="zySName zyFormLabel">辅色1</span>
 
                                             <div class="zyColorItem">
                                                 <span class="zyColorShow" id="pInfoAssistColor1" style="background: orange"></span>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <span class="zySName">辅色2:</span>
+                                            <span class="zySName zyFormLabel">辅色2</span>
 
                                             <div class="zyColorItem">
-                                                <span class="zyColorShow" id="pInfoAssistColor2" style="background: orange"></span>
+                                                <span class="zyColorShow" id="pInfoAssistColor2" style="background: gray"></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row zyBgFFFFFF zyTexturePanel zyPd10">
-                                        <label class="zyFormLabel">纹理:</label>
+                                        <label class="zyFormLabel">纹理</label>
 
                                         <div id="pInfoTexture"></div>
 
@@ -472,6 +471,8 @@
             <!-- Compiled and minified JavaScript -->
             <script>
                 var pageName = "mgr";
+                var pageTitle = "新增数据"
+
 
             </script>
             <script src="resources/js/lib/jquery-2.0.3.min.js"></script>

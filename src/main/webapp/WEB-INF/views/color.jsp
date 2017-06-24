@@ -30,10 +30,9 @@
 
                     <div class="zyRight zyPd20">
                         <div class="zyPanel">
-                            <div class="zyPanelTitle">颜色列表</div>
                             <div class="zyPanelContent zyPd20">
                                 <a class="waves-effect waves-light btn" href="color/colorCOU">
-                                    <i class="material-icons left">add</i>新建颜色
+                                    <i class="material-icons left">add</i>新增颜色
                                 </a>
 
                                 <table id="myTable" class="dataTable">
@@ -62,6 +61,8 @@
             <!-- Compiled and minified JavaScript -->
             <script>
                 var pageName = "color";
+                var pageTitle = "颜色列表"
+
 
             </script>
             <script src="resources/js/lib/jquery-2.0.3.min.js"></script>

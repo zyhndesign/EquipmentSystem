@@ -1,6 +1,10 @@
 .zyHeader{
-    background: #3e3a39;
+    background: #ae4127;
     position: relative;
+    height:200px;
+    box-sizing: border-box;
+    padding:20px 0;
+    overflow:hidden;
 }
 .zyLogo{
     color: #fff;
@@ -19,11 +23,14 @@
     
 }
 .zyTitle{
-    text-align: center;
     font-size: 24px;
 }
 .zyTitle a{
     line-height: 60px;
     color: #fff;
     text-decoration: none;
+}
+.zySubTitle{
+    font-size: 42px;
+    color: rgba(255,255,255,0.6)
 }

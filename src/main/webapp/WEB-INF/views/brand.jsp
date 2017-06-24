@@ -26,9 +26,8 @@
 
         </div>
 
-    <div class="zyRight zyPd20">
+    <div class="zyRight">
         <div class="zyPanel">
-            <div class="zyPanelTitle">品牌列表</div>
             <div class="zyPanelContent zyPd20">
                 <a class="waves-effect waves-light btn" href="brand/brandCOU">
                     <i class="material-icons left">add</i>新增品牌
@@ -61,6 +60,7 @@
 <!-- Compiled and minified JavaScript -->
 <script>
     var pageName="brand";
+    var pageTitle = "品牌列表"
 </script>
 <script src="resources/js/lib/jquery-2.0.3.min.js"></script>
 <script src="resources/js/lib/materialize.min.js"></script>

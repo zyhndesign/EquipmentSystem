@@ -34,7 +34,6 @@
                     </div>
                     <div class="zyRight zyPd20">
                         <div class="zyPanel">
-                            <div class="zyPanelTitle">新建/修改 颜色</div>
                             <div class="zyPanelContent zyPd20">
                                 <form class="zyForm" id="myForm" action="#">
                                     <div class="row">
@@ -59,6 +58,8 @@
             <!-- Compiled and minified JavaScript -->
             <script>
                 var pageName = "color";
+                var pageTitle = "新增／修改颜色"
+
 
             </script>
             <script src="resources/js/lib/jquery-2.0.3.min.js"></script>

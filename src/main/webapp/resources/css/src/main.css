@@ -62,15 +62,20 @@ li{
     right: 0;
     top: 0;
     bottom: 0;
+    padding-left:250px;
 }
 
 .zyLeft{
-    
+    background:#3B444B !important;
 }
+
 .zyRight {
     border-left: 1px solid #ccc;
-    background: #f9f9f9;
+    background: #fff;
     min-height: 100%;
+}
+.zyRight.container{
+    width:90%;
 }
 .zyLine{
     width:10px;
@@ -84,17 +89,6 @@ li{
 .zyImgHeightFixed{
     height: 30px;
     width: auto;
-}
-.zyLeft.zySideNav{
-    width:250px;
-    transform: translateX(-250px);
-    transition: all 0.3s ease-out;
-    z-index: 100;
-    height:100%;
-    background:#fff;
-}
-.zyLeft.zySideNav.active{
-    transform: translateX(0)
 }
 .zyBlackout{
     position: fixed;
@@ -140,11 +134,11 @@ li{
     margin:0px 5px;
 }
 .zyColorItem .zyColorShow{
-    height: 20px;
+    height: 30px;
     display: inline-block;
-    width: 60px;
+    width: 30px;
     vertical-align: middle;
-    border-radius: 3px;
+    border-radius: 20px;
     border:1px solid darkgray;
 }
 .zyColorItem .zyColorName{
@@ -264,13 +258,13 @@ li{
 
 /*************************************select****************************/
 .zySelect{
-    border-radius:3px;
     border: 1px solid #ccc;
     padding: 3px;
     background: #eee;
     line-height: 30px;
     display: inline-block;
     cursor: pointer;
+    border-radius: 5px;
 }
 .zySelect .zySShow{
     width: 50px;
@@ -326,7 +320,6 @@ li{
     transform: translateX(-50%);
     letter-spacing: .3em;
     cursor: pointer;
-    border-radius: 3px;
 }
 .zyCollapseCtrl .zyCollapse:hover{
     background: #eee;
@@ -342,11 +335,10 @@ li{
 }
 .zyPanel .zyPanelTitle{
     border-bottom: 1px solid #eee;
-    padding: 8px 0px 8px 30px;
+    padding: 8px 0;
     height: 40px;
     box-sizing: border-box;
     font-size: 16px;
-    text-align: center;
 }
 .zyPanel .zyPanelTitle .btn{
     margin: 0px 10px;
@@ -354,7 +346,32 @@ li{
 .zyPanel .zyPanelContent{
     padding-bottom: 50px;
 }
-
+.zyPanel .zyPanelContent .ztree{
+    
+}
+.zyPanel .zyPanelContent .ztree *{
+    font-family: sans-serif;
+    font-size: 14px;
+}
+.zyPanel .zyPanelContent .ztree li{
+    min-height: 32px;
+    line-height: 32px;
+}
+.zyPanel .zyPanelContent .ztree li a{
+    line-height: 32px;
+    vertical-align: middle;
+    display: inline-block;
+    height: 32px;
+}
+.zyPanel .zyPanelContent .ztree li span.button{
+    vertical-align: middle;
+}
+.zyPanel .zyPanelContent .ztree li a.curSelectedNode {
+    background-color: #ae4127;
+    color: #fff;
+    border: 1px #ae4127 solid;
+    opacity: 0.8;
+}
 /********************************************澶嶅啓datatable****************************/
 .dataTables_wrapper{
     position: relative;
@@ -408,11 +425,33 @@ table.dataTable .zyWidthFixed{
     padding: 0px;
     text-align: center;
 }
+table.dataTable .alignL{
+    text-align: left;
+}
+table.dataTable .alignR{
+    text-align: right;
+}
+table.dataTable .w300{
+    min-width:300px;
+}
+table.dataTable .w200{
+    min-width:200px;
+}
+table.dataTable .w150{
+    min-width:150px;
+}
+table.dataTable .w100{
+    min-width:100px;
+}
+table.dataTable .w50{
+    min-width:50px;
+}
 table.dataTable .zyThumb{
     max-width: 100px;
     height: auto;
     vertical-align: middle;
 }
+
 .dataTables_paginate{
     position: absolute;
     bottom:-55px;
@@ -426,19 +465,18 @@ table.dataTable .zyThumb{
     left:0;
     height:40px;
     line-height: 40px;
-    margin-left: 36px;
+/*    margin-left: 36px;*/
 }
 .paging_full_numbers{
     height: 40px;
     line-height: 1;
-    margin-right: 50px;
+/*    margin-right: 50px;*/
 }
 .paging_full_numbers a.paginate_button, .paging_full_numbers a.paginate_active{
     height:40px;
     line-height: 40px;
     min-width: 40px;
     text-align: center;
-    border-radius: 2px;
     display: inline-block;
     padding:0 5px;
     box-sizing: border-box;
@@ -492,7 +530,6 @@ table.dataTable .zyThumb{
 input.zyInput,select.zyInput{
     cursor:pointer;
     color: #727171;
-    border-radius: 3px;
     border: 1px solid #ccc;
     display: inline-block;
     height: 36px;
@@ -503,11 +540,11 @@ input.zyInput,select.zyInput{
     vertical-align: middle;
     padding-left: 5px;
     background: #eee;
+    border-radius: 5px;
 }
 input.zyInput1{
     cursor:pointer;
     color: #727171;
-    border-radius: 3px;
     border: 1px solid #ccc;
     display: inline-block;
     height: 36px;
@@ -571,7 +608,6 @@ textarea.zyTextarea{
     right:5px;
 }
 .select-wrapper input.select-dropdown{
-    border-radius: 3px;
     border: 1px solid #ccc;
     height: 36px;
     line-height: 36px;
@@ -580,6 +616,7 @@ textarea.zyTextarea{
     vertical-align: top;
     padding-left: 5px;
     background: #eee;
+    border-radius: 5px;
 }
 .select-wrapper .dropdown-content{
     max-height: 300px!important;
@@ -604,14 +641,16 @@ textarea.zyTextarea{
 /*棰勮椤甸潰*/
 .zyTextureItem{
     display: inline-block;
-    margin-left: 4%;
+    font-size: 0;
+    line-height: 0;
+    width: 100%;
 }
 .zyTextureItem .zyTextureImg{
-    height: 50px;
-    width: 50px;
+    height: 30px;
+    width: 30px;
     overflow:hidden;
     text-align:center;
-    border-radius: 3px;
+    display: inline-block;
 }
 .modal .modal-footer{
     border-top: 1px solid #ccc;
@@ -629,17 +668,38 @@ textarea.zyTextarea{
 }
 .zyPanelWrapper{
     position:relative;
+    display: flex;
+}
+.zyProfilePanel .zyFormLabel{
+    position: static;
+    width:100px;
+    padding: 0 10px;
+    margin: 0;
+}
+.zyProfilePanel .row:nth-child(2n){
+    background:#f9f9f9;
 }
 .zyColorPanel {
-    position: absolute;
-    top:0;
-    left: 0;
-    bottom: 0;
-    width:48%;
+    flex: 1;
+    margin-right: 10px;
+}
+.zyColorPanel .zyFormLabel{
+    position: static;
+    width:60px;
+    padding: 0 10px;
+    margin: 0;
 }
 .zyTexturePanel{
-    margin-left: 50%;
+    flex: 1;
 }
+.zyTexturePanel .zyFormLabel{
+    position: static;
+    width:60px;
+    padding: 0 10px;
+    margin: 0;
+    
+}
+
 /*鏍囩椤�*/
 .tabs .indicator{
     height: 4px;
@@ -701,3 +761,10 @@ img{
 .jcrop-holder{
     margin: auto;
 }
+/******************************************preview modal*************************/
+#zyPreviewModal{
+    
+}
+
+
+
