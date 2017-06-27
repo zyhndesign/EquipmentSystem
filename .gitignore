@@ -22,3 +22,5 @@ src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml
 *.prefs
 
 .settings/org.eclipse.wst.common.component
+
+src/main/webapp/WEB-INF/web.xml
