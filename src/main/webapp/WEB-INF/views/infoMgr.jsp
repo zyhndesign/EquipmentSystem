@@ -28,7 +28,7 @@
 
                     </div>
 
-                    <div class="zyRight">
+                    <div class="zyRight zyPd20">
                         <div class="zyPanel">
                             <!--   <div class="zyPanelTitle">知识库</div>  -->
                             <div class="zyPanelContent zyPd20">

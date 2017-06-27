@@ -32,7 +32,7 @@
 
                     </div>
 
-                    <div class="zyRight">
+                    <div class="zyRight zyPd20">
                         <div class="zyPanel">
                             <div class="zyPanelTitle">
                                 <button id="saveBtn" class="btn right hide">上传</button>

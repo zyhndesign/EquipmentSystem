@@ -26,7 +26,7 @@
 
         </div>
 
-    <div class="zyRight">
+    <div class="zyRight zyPd20">
         <div class="zyPanel">
             <div class="zyPanelContent zyPd20">
                 <a class="waves-effect waves-light btn" href="brand/brandCOU">

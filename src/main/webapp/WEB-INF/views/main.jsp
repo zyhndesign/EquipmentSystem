@@ -21,8 +21,8 @@
                     <%@ include file="menu.jsp"%>
                 </div>
 
-                    <div class="zyRight">
-                        <div class="zyPanel zyPd20">
+                    <div class="zyRight zyPd20">
+                        <div class="zyPanel">
                         </div>
 
                     </div>
