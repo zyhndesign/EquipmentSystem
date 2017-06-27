@@ -50,6 +50,7 @@
 
 	<context:component-scan base-package="com.cidic.equipment" />
 
+
 	<!-- MySql数据库连接池配置 -->
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
