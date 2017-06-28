@@ -288,7 +288,7 @@
                             <div class="col s6" style="position: absolute; left: 50%; top: 10px; bottom: 10px">
                                 <div class="zyBgFFFFFF">
                                     <div class="switch">
-                                        <label> <input type="checkbox" id="pChangeImage"> <span class="lever"></span> 显示图片2
+                                        <label> <input type="checkbox" id="pChangeImage"> <span class="lever"></span> 显示特征线
 								</label>
                                     </div>
                                     <img src="resources/images/upload.png" id="pImage" style="width: 100%; height: auto">
