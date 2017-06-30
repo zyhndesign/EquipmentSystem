@@ -308,8 +308,8 @@
                         <li class="tab"><a href="#pInfoChild">分结构信息</a></li>
                     </ul>
                     <div id="pInfo" class="zyTabPanel">
-                        <div class="row zyForm" style="padding: 10px 0px !important; position: relative">
-                            <div class="col s6">
+                        <div class="row zyForm">
+                            <div class="col s6 pInfoLeft">
                                 <div class="zyBgFFFFFF zyPd10 zyProfilePanel">
                                     <div class="row">
                                         <label class="zyFormLabel">产品类别:</label> <label class="zyFormLabel" id="pInfoCategory">xxx</label>
@@ -372,13 +372,29 @@
 
 
                             </div>
-                            <div class="col s6 " style="position: absolute; left: 50%; top: 10px; bottom: 10px">
-                                <div class="zyBgFFFFFF">
+                            <div class="col s6 pInfoRight">
+<!--
+                               <div class="zyBgFFFFFF">
                                     <div class="switch">
                                         <label> <input type="checkbox" id="pChangeImage"> <span class="lever"></span> 显示特征线
 								</label>
                                     </div>
                                     <img src="resources/images/upload.png" id="pImage" style="width: 100%; height: auto">
+                                </div>
+-->
+                                <div class="zyBgFFFFFF pImageWrapper">
+                                    <div class="switch">
+                                        <label> <input type="checkbox" id="toggleLineMode1"> <span class="lever"></span> 显示特征线
+								</label>
+                                    </div>
+                                    <div id="pImage1"><svg></svg></div>
+                                </div>
+                                <div class="zyBgFFFFFF pImageWrapper">
+                                    <div class="switch">
+                                        <label> <input type="checkbox" id="toggleLineMode2"> <span class="lever"></span> 显示特征线
+								</label>
+                                    </div>
+                                    <div id="pImage2"><svg></svg></div>
                                 </div>
 
                                 <video class="zyMT20" style="width: 100%" id="pInfoVideo" controls src=""></video>
@@ -482,6 +498,8 @@
             <script src="resources/js/lib/juicer-min.js"></script>
             <script src="resources/js/lib/plupload.full.min.js"></script>
             <script src="resources/js/lib/qiniu.js"></script>
+            <script src="resources/js/lib/snap.svg-min.js"></script>
+            
             <script src="resources/js/src/config.js"></script>
             <script src="resources/js/src/functions.js"></script>
             <script src="resources/js/src/ZYCtrlDataHandler.js"></script>
