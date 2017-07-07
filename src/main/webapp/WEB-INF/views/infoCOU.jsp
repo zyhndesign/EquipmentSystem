@@ -122,7 +122,8 @@
                                                 <div class="zyImageUpload" id="uploadChanPinImageContainer">
                                                     <img src="resources/images/upload.png" id="uploadChanPinImageBtn"> <input type="hidden" class="zyActionRequired" id="infoImageChanPin">
                                                 </div>
-                                                </div><div class="zyFormChildCtrl thumbWrapper">
+                                            </div>
+                                            <div class="zyFormChildCtrl thumbWrapper">
                                                 <label class="zyFormLabel zyFormLabelHasSub thumbLabel">图片2
 									</label>
 
@@ -373,7 +374,7 @@
 
                             </div>
                             <div class="col s6 pInfoRight">
-<!--
+                                <!--
                                <div class="zyBgFFFFFF">
                                     <div class="switch">
                                         <label> <input type="checkbox" id="pChangeImage"> <span class="lever"></span> 显示特征线
@@ -489,7 +490,6 @@
                 var pageName = "mgr";
                 var pageTitle = "新增数据"
 
-
             </script>
             <script src="resources/js/lib/jquery-2.0.3.min.js"></script>
             <script src="resources/js/lib/materialize.min.js"></script>
@@ -499,7 +499,7 @@
             <script src="resources/js/lib/plupload.full.min.js"></script>
             <script src="resources/js/lib/qiniu.js"></script>
             <script src="resources/js/lib/snap.svg-min.js"></script>
-            
+
             <script src="resources/js/src/config.js"></script>
             <script src="resources/js/src/functions.js"></script>
             <script src="resources/js/src/ZYCtrlDataHandler.js"></script>

@@ -36,11 +36,11 @@ var infoMgr = (function (config, ZYCtrlDataHandler) {
         },
         initSearchHandler: function () {
             var me = this;
-            $("#search").on("click", "input[type='checkbox'],.zyActionSearchByClick",function () {
+            $("#search").on("click", "input[type='checkbox'],.zyActionSearchByClick", function () {
                 me.search();
             }).on("change", ".zyActionSearchByChange", function () {
-                    me.search();
-                });
+                me.search();
+            });
         },
         initData: function () {
             ZYCtrlDataHandler.getBrandItems("", function (stringOption, stringCheckbox) {
@@ -97,24 +97,43 @@ $(document).ready(function () {
                     "sUrl": config.dataTable.langUrl
                 },
                 aoColumns: [
-                    { "mDataProp": "imageUrl1",
+                    {
+                        "mDataProp": "imageUrl1",
+                        "sClass": "w100 alignL",
                         "fnRender": function (oObj) {
-                            return  "<img class='thumb' src='" + oObj.aData.imageUrl1 + "'>";
+                            return "<img class='thumb' src='" + oObj.aData.imageUrl1 + "'>";
                         }
                     },
-                    { "mDataProp": "brandName"},
-                    { "mDataProp": "categoryName"},
-                    { "mDataProp": "productCategory"},
-                    { "mDataProp": "vehicleTextures",
+                    {
+                        "mDataProp": "brandName",
+                        "sClass": "w100"
+                    },
+                    {
+                        "mDataProp": "categoryName",
+                        "sClass": "w100"
+                    },
+                    {
+                        "mDataProp": "productCategory",
+                        "sClass": "w100"
+                    },
+                    {
+                        "mDataProp": "vehicleTextures",
+                        "sClass": "w100",
                         "fnRender": function (oObj) {
                             var arr = [];
                             for (var i = 0, len = oObj.aData.vehicleTextures.length; i < len; i++) {
                                 arr.push(oObj.aData.vehicleTextures[i].texture.name);
                             }
                             return arr.join(",");
-                        }},
-                    { "mDataProp": "onSaleDate"},
-                    { "mDataProp": "vehicleColors",
+                        }
+                    },
+                    {
+                        "mDataProp": "onSaleDate",
+                        "sClass": "w100"
+                    },
+                    {
+                        "mDataProp": "vehicleColors",
+                        "sClass": "w100",
                         "fnRender": function (oObj) {
                             oObj.aData.vehicleColors.sort(function (a, b) {
                                 return b.id - a.id;
@@ -126,10 +145,13 @@ $(document).ready(function () {
                             return juicer(config.colorItemsTpl, {
                                 items: arr
                             });
-                        }},
-                    { "mDataProp": "opt",
+                        }
+                    },
+                    {
+                        "mDataProp": "opt",
+                        "sClass": "w150",
                         "fnRender": function (oObj) {
-                            return  '<a class="preview" href="' + oObj.aData.id + '">预览</a>&nbsp;&nbsp;' +
+                            return '<a class="preview" href="' + oObj.aData.id + '">预览</a>&nbsp;&nbsp;' +
                                 '<a href="vehicleInfo/infoCOU/' + oObj.aData.id + '">编辑</a>&nbsp;&nbsp;' +
                                 '<a href="' + oObj.aData.id + '" class="remove">删除</a>';
                         }
@@ -177,14 +199,16 @@ $(document).ready(function () {
         }
     });
 
-    $("#myTable").on("click", "a.remove",function () {
-        infoMgr.table.delete({id: $(this).attr("href")});
+    $("#myTable").on("click", "a.remove", function () {
+        infoMgr.table.delete({
+            id: $(this).attr("href")
+        });
         return false;
     }).on("click", "a.preview", function () {
-            if (!infoMgr.zyPreview) {
-                infoMgr.zyPreview = new ZYPreviewHandler();
-            }
-            infoMgr.zyPreview.show(infoMgr.loadedData[$(this).attr("href")]);
-            return false;
-        });
+        if (!infoMgr.zyPreview) {
+            infoMgr.zyPreview = new ZYPreviewHandler();
+        }
+        infoMgr.zyPreview.show(infoMgr.loadedData[$(this).attr("href")]);
+        return false;
+    });
 });
