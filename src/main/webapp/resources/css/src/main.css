@@ -439,6 +439,7 @@ table.dataTable .w150{
 }
 table.dataTable .w100{
     min-width:100px;
+    max-width:200px;
 }
 table.dataTable .w50{
     min-width:50px;
@@ -448,7 +449,9 @@ table.dataTable .zyThumb{
     height: auto;
     vertical-align: middle;
 }
-
+table.dataTable .thumb{
+    width:100%;
+}
 .dataTables_paginate{
     position: absolute;
     bottom:-55px;
