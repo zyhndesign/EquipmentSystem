@@ -439,18 +439,18 @@ table.dataTable .w150{
 }
 table.dataTable .w100{
     min-width:100px;
-    max-width:200px;
 }
 table.dataTable .w50{
     min-width:50px;
 }
 table.dataTable .zyThumb{
-    max-width: 100px;
+    max-width: 150px;
     height: auto;
     vertical-align: middle;
 }
 table.dataTable .thumb{
-    width:100%;
+    max-width: 150px;
+    vertical-align: middle;
 }
 .dataTables_paginate{
     position: absolute;
