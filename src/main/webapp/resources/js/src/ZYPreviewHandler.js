@@ -48,30 +48,21 @@ ZYPreviewHandler.prototype.show = function (data) {
             //清理已有的内容
             svgThumb1.clear();
             //定义滤镜
-            var filter1 = svgThumb1.paper.filter(Snap.filter.grayscale(1))
+            //var filter1 = svgThumb1.paper.filter(Snap.filter.grayscale(1))
 
             Snap.load(data.imageUrl1, function (data) {
                 svgThumb1.append(data)
                 //svg状态初始化
                 svgThumb1.select("#特征线").attr("display", "none")
-                svgThumb1.select("#产品图片>image").attr({
-                    "filter": "",
-                    "opacity": 1
-                })
+                svgThumb1.select("#产品图片").attr("display", "block")
                 //绑定checkbox事件处理
                 $("#toggleLineMode1").change(function () {
                     if ($(this).prop("checked")) {
                         svgThumb1.select("#特征线").attr("display", "block")
-                        svgThumb1.select("#产品图片>image").attr({
-                            "filter": filter1,
-                            "opacity": 0.5
-                        })
+                        svgThumb1.select("#产品图片").attr("display", "none")
                     } else {
                         svgThumb1.select("#特征线").attr("display", "none")
-                        svgThumb1.select("#产品图片>image").attr({
-                            "filter": "",
-                            "opacity": 1
-                        })
+                        svgThumb1.select("#产品图片").attr("display", "block")
 
                     }
                 });
@@ -89,24 +80,15 @@ ZYPreviewHandler.prototype.show = function (data) {
                 svgThumb2.append(data)
                 //svg状态初始化
                 svgThumb2.select("#特征线").attr("display", "none")
-                svgThumb2.select("#产品图片>image").attr({
-                    "filter": "",
-                    "opacity": 1
-                })
+                svgThumb2..select("#产品图片").attr("display", "block")
                 //绑定checkbox事件处理
                 $("#toggleLineMode2").change(function () {
                     if ($(this).prop("checked")) {
                         svgThumb2.select("#特征线").attr("display", "block")
-                        svgThumb2.select("#产品图片>image").attr({
-                            "filter": filter2,
-                            "opacity": 0.5
-                        })
+                        svgThumb2.select("#产品图片").attr("display", "none")
                     } else {
                         svgThumb2.select("#特征线").attr("display", "none")
-                        svgThumb2.select("#产品图片>image").attr({
-                            "filter": "",
-                            "opacity": 1
-                        })
+                        svgThumb2.select("#产品图片").attr("display", "block")
                     }
                 });
 
