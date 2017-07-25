@@ -80,7 +80,7 @@ ZYPreviewHandler.prototype.show = function (data) {
                 svgThumb2.append(data)
                 //svg状态初始化
                 svgThumb2.select("#特征线").attr("display", "none")
-                svgThumb2..select("#产品图片").attr("display", "block")
+                svgThumb2.select("#产品图片").attr("display", "block")
                 //绑定checkbox事件处理
                 $("#toggleLineMode2").change(function () {
                     if ($(this).prop("checked")) {
