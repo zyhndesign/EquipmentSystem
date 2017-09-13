@@ -5,7 +5,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>登录</title>
+		<title>高端装备设计知识库管理系统--登录</title>
 		<link rel="stylesheet" href="resources/css/lib/materialize.min.css" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" href="resources/css/src/login.css" />
