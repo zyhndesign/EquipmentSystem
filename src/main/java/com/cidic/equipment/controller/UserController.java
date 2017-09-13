@@ -72,10 +72,10 @@ public class UserController {
 		try {
 			subject.login(token);
 			if (subject.isAuthenticated()) {
-				response.sendRedirect("html/index.html");
+				response.sendRedirect("main.jsp");
 				
 			} else {
-				response.sendRedirect("html/login.html");
+				response.sendRedirect("login.jsp");
 			}
 		} catch (IncorrectCredentialsException e) {
 			msg = "登录密码错误.";
@@ -122,7 +122,6 @@ public class UserController {
 			subject.login(token);
 			if (subject.isAuthenticated()) {
 				
-				//response.sendRedirect("../html/index.html");
 				resultModel.setResultCode(200);
 				WebRequestUtil.responseOutWithJson(response, resultModel);
 				return;

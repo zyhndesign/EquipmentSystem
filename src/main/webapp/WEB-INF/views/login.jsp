@@ -6,9 +6,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>登录</title>
-		<link rel="stylesheet" href="../resources/css/lib/materialize.css" />
+		<link rel="stylesheet" href="resources/css/lib/materialize.min.css" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" href="../resources/css/src/login.css" />
+		<link rel="stylesheet" href="resources/css/src/login.css" />
 		
 	</head>
 
@@ -18,7 +18,7 @@
 			<form id="loginPanel" class="col s6">
 				<div class="row">
 					<div class="input-field col s12 center">
-						<p id="SystemTitle">新通道后台内容管理系统</p>
+						<p id="SystemTitle">高端装备设计知识库管理系统</p>
 					</div>
 				</div>
 				<div class="row" style="margin-top: 20px;">
@@ -71,8 +71,8 @@
 			ui.style.display="none";
 		}
 		</script>
-	<script type="text/javascript" src="../resources/js/jquery/jquery-3.2.1.js"></script>
-	<script type="text/javascript" src="../resources/js/lib/materialize.js"></script>
-	<script type="text/javascript" src="../resources/js/three3d/three.min.js"></script>
-	<script type="text/javascript" src="../resources/js/src/login.js" ></script>
+	<script type="text/javascript" src="resources/js/lib/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="resources/js/lib/materialize.min.js"></script>
+	<script type="text/javascript" src="resources/js/lib/three3d/three.min.js"></script>
+	<script type="text/javascript" src="resources/js/src/login.js" ></script>
 </html>

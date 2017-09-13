@@ -143,7 +143,7 @@ $(document).ready(function() {
 		$.ajax({
 
 			type : "POST",
-			url : "../user/ajaxLogin",
+			url : "user/ajaxLogin",
 			contentType : 'application/json',
 			dataType : "json",
 			data : JSON.stringify(requestData),
@@ -152,7 +152,7 @@ $(document).ready(function() {
 			},
 			success : function(data) {
 				if (data.resultCode == 200) {
-					location.href = "index.html";
+					location.href = "main";
 				} else {
 					$("#loginMsg").html(data.message);
 					$("#circleProgress").hide();
