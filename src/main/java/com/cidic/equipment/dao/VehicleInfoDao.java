@@ -22,4 +22,8 @@ public interface VehicleInfoDao {
 	public void deleteVehicleColor(int vehicleId);
 	
 	public void deleteVehicleTexture(int vehicleId);
+	
+	public List<VehicleInfo> getDataByBrandId(int id);
+	
+	public List<VehicleInfo> getDataByCategoryId(int id);
 }

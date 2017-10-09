@@ -76,7 +76,7 @@ public class BrandController {
 	@ResponseBody
 	public ResultModel createBrand(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam String name, @RequestParam String icon, @RequestParam String description) {
-		WebRequestUtil.AccrossAreaRequestSet(request, response);
+		
 		resultModel = new ResultModel();
 		Brand brand = new Brand();
 		brand.setCreateTime(new Date());
@@ -98,7 +98,7 @@ public class BrandController {
 	@ResponseBody
 	public ResultModel updateBrand(HttpServletRequest request, HttpServletResponse response, @RequestParam int id,
 			@RequestParam String name, @RequestParam String icon, @RequestParam String description) {
-		WebRequestUtil.AccrossAreaRequestSet(request, response);
+		
 		resultModel = new ResultModel();
 		Brand brand = new Brand();
 		brand.setCreateTime(new Date());
@@ -120,7 +120,7 @@ public class BrandController {
 	@RequestMapping(value = "/deleteBrand", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultModel deleteBrand(HttpServletRequest request, HttpServletResponse response, @RequestParam int id) {
-		WebRequestUtil.AccrossAreaRequestSet(request, response);
+		
 		resultModel = new ResultModel();
 		int result = brandServiceImpl.deleteBrand(id);
 		if (result == ResponseCodeUtil.DB_OPERATION_SUCCESS) {
@@ -137,7 +137,6 @@ public class BrandController {
 	public ListResultModel getDataByCondition(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam int iDisplayLength, @RequestParam int iDisplayStart, @RequestParam String sEcho) {
 		
-		WebRequestUtil.AccrossAreaRequestSet(request, response);
 		ListResultModel listResultModel = new ListResultModel();
 		try {
 			
@@ -157,7 +156,7 @@ public class BrandController {
 	@RequestMapping(value = "/getAllBrand", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultModel getAllBrand(HttpServletRequest request, HttpServletResponse response) {
-		WebRequestUtil.AccrossAreaRequestSet(request, response);
+		
 		resultModel = new ResultModel();
 		try {
 			List<Brand> list = brandServiceImpl.getAllBrand();
@@ -173,7 +172,7 @@ public class BrandController {
 	@RequestMapping(value = "/getBrandById", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultModel getBrandById(HttpServletRequest request, HttpServletResponse response,@RequestParam int id) {
-		WebRequestUtil.AccrossAreaRequestSet(request, response);
+		
 		resultModel = new ResultModel();
 		try {
 			Brand brand = brandServiceImpl.getDataByBrandId(id).get();

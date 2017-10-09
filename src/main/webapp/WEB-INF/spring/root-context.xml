@@ -80,6 +80,7 @@
 				/texture/*=authc
 				/vehicleInfo/*=authc
 				/user/ajaxLogin=anon
+				/esApi/*=anon
 			</value>
 		</property>
 	</bean>	

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cidic.equipment.dao.BrandDao;
 import com.cidic.equipment.dao.CategoryDao;
 import com.cidic.equipment.dao.VehicleInfoDao;
+import com.cidic.equipment.model.Category;
 import com.cidic.equipment.model.VehicleInfo;
 import com.cidic.equipment.model.VehicleInfoTableModel;
 import com.cidic.equipment.service.VehicleInfoService;
@@ -97,6 +98,18 @@ public class VehicleInfoServiceImpl implements VehicleInfoService {
 	public Optional<VehicleInfo> getDataByVehicleInfoId(int id) {
 		// TODO Auto-generated method stub
 		return vehicleInfoDaoImpl.getDataByVehicleInfoId(id);
+	}
+
+	@Override
+	public List<VehicleInfo> getDataByBrandId(int id) {
+		// TODO Auto-generated method stub
+		return vehicleInfoDaoImpl.getDataByBrandId(id);
+	}
+
+	@Override
+	public List<VehicleInfo> getDataByCategoryId(int id) {
+		// TODO Auto-generated method stub
+		return vehicleInfoDaoImpl.getDataByCategoryId(id);
 	}
 
 }

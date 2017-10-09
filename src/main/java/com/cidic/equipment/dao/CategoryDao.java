@@ -23,4 +23,6 @@ public interface CategoryDao {
 	public Optional<Category> getDataByCategoryId(int id);
 	
 	public Map<Integer, String> getCategoryMap();
+	
+	public List<Category> getCategoryByParentId(int parentId);
 }

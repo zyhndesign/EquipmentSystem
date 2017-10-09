@@ -126,4 +126,26 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 		query.executeUpdate();
 	}
 
+	@Override
+	public List<VehicleInfo> getDataByBrandId(int id) {
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = " select new VehicleInfo(id,imageUrl1,imageUrl2,productCategory) from VehicleInfo where brandId = ?";
+		Query query = session.createQuery(hql);
+        query.setParameter(0, id); 
+        @SuppressWarnings("unchecked")
+		List<VehicleInfo> list = query.list();
+        return list;
+	}
+
+	@Override
+	public List<VehicleInfo> getDataByCategoryId(int id) {
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = " select new VehicleInfo(id,imageUrl1,imageUrl2,productCategory) from VehicleInfo where categoryId = ?";
+		Query query = session.createQuery(hql);
+        query.setParameter(0, id); 
+        @SuppressWarnings("unchecked")
+		List<VehicleInfo> list = query.list();
+        return list;
+	}
+
 }
