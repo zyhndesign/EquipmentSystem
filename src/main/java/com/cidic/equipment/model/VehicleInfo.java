@@ -54,11 +54,12 @@ public class VehicleInfo implements java.io.Serializable {
 	public VehicleInfo() {
 	}
 	
-	public VehicleInfo(int id, String imageUrl1,String imageUrl2,String productCategory){
+	public VehicleInfo(int id, String imageUrl1,String imageUrl2,String productCategory,String componentInfo){
 		this.id = id;
 		this.imageUrl1 = imageUrl1;
 		this.imageUrl2 = imageUrl2;
 		this.productCategory = productCategory;
+		this.componentInfo = componentInfo;
 	}
 
 	public VehicleInfo(int categoryId, int brandId, byte entry, String style, Date createTime, String componentInfo) {

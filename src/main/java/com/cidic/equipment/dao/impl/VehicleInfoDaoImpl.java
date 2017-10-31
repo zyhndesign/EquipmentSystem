@@ -129,7 +129,7 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 	@Override
 	public List<VehicleInfo> getDataByBrandId(int id) {
 		Session session = this.getSessionFactory().getCurrentSession();
-		String hql = " select new VehicleInfo(id,imageUrl1,imageUrl2,productCategory) from VehicleInfo where brandId = ?";
+		String hql = " select new VehicleInfo(id,imageUrl1,imageUrl2,productCategory,componentInfo) from VehicleInfo where brandId = ?";
 		Query query = session.createQuery(hql);
         query.setParameter(0, id); 
         @SuppressWarnings("unchecked")
@@ -140,7 +140,7 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 	@Override
 	public List<VehicleInfo> getDataByCategoryId(int id) {
 		Session session = this.getSessionFactory().getCurrentSession();
-		String hql = " select new VehicleInfo(id,imageUrl1,imageUrl2,productCategory) from VehicleInfo where categoryId = ?";
+		String hql = " select new VehicleInfo(id,imageUrl1,imageUrl2,productCategory,componentInfo) from VehicleInfo where categoryId = ?";
 		Query query = session.createQuery(hql);
         query.setParameter(0, id); 
         @SuppressWarnings("unchecked")
