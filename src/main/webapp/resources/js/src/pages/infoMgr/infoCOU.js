@@ -305,10 +305,13 @@ var infoCou = (function (config, functions, ZYCtrlDataHandler) {
             });
 
             if (id) {
-                ZYCtrlDataHandler.getDataForUpdate(config.ajaxUrls.infoGetDetail, {id: id}, function (data) {
-                    me.initCtrlData(data);
-                    me.initChildInfo(data.categoryId);
-                });
+            	setTimeout(function() {
+            		ZYCtrlDataHandler.getDataForUpdate(config.ajaxUrls.infoGetDetail, {id: id}, function (data) {
+            			me.initCtrlData(data);
+            			me.initChildInfo(data.categoryId);
+            		});
+            	},10000);
+                
             }
 
         },
