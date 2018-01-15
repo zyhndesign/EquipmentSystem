@@ -1,5 +1,6 @@
 package com.cidic.equipment.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.cidic.equipment.dao.VehicleInfoDao;
+import com.cidic.equipment.model.User;
 import com.cidic.equipment.model.VehicleColor;
 import com.cidic.equipment.model.VehicleInfo;
 import com.cidic.equipment.model.VehicleTexture;
@@ -129,12 +131,36 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 	@Override
 	public List<VehicleInfo> getDataByBrandId(int id) {
 		Session session = this.getSessionFactory().getCurrentSession();
-		String hql = " select new VehicleInfo(id,imageUrl1,imageUrl2,productCategory,componentInfo) from VehicleInfo where brandId = ?";
-		Query query = session.createQuery(hql);
+		
+        String hql  = "select v.id,v.categoryName,v.imageUrl1,v.imageUrl2,v.productCategory,v.componentInfo,c.name from VehicleInfo v, Category c where v.brandId = ? and v.categoryId = c.id ";
+        Query query = session.createQuery(hql);
         query.setParameter(0, id); 
-        @SuppressWarnings("unchecked")
-		List<VehicleInfo> list = query.list();
-        return list;
+		List list = query.list();
+		
+		List<VehicleInfo> vList= new ArrayList<VehicleInfo>(10);
+		VehicleInfo vehicleInfo = null;
+        for(int i=0; i<list.size(); i++)
+        {
+        	vehicleInfo = new VehicleInfo();
+            Object []o = (Object[])list.get(i);
+            int vid = ((Number)o[0]).intValue();
+            String categoryName = (String)o[1];
+            String imageUrl1 = (String)o[2];
+            String imageUrl2 = (String)o[3];
+            String productCategory = (String)o[4];
+            String componentInfo = (String)o[5];
+            String name = (String)o[6];
+            
+            vehicleInfo.setId(vid);
+            vehicleInfo.setCategoryName(categoryName);
+            vehicleInfo.setImageUrl1(imageUrl1);
+            vehicleInfo.setImageUrl2(imageUrl2);
+            vehicleInfo.setProductCategory(productCategory);
+            vehicleInfo.setComponentInfo(componentInfo);
+            vehicleInfo.setCategoryName(name);
+            vList.add(vehicleInfo);
+        }
+        return vList;
 	}
 
 	@Override
