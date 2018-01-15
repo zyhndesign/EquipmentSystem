@@ -132,7 +132,7 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 	public List<VehicleInfo> getDataByBrandId(int id) {
 		Session session = this.getSessionFactory().getCurrentSession();
 		
-        String hql  = "select v.id,v.categoryName,v.imageUrl1,v.imageUrl2,v.productCategory,v.componentInfo,c.name from VehicleInfo v, Category c where v.brandId = ? and v.categoryId = c.id ";
+        String hql  = "select v.id,v.imageUrl1,v.imageUrl2,v.productCategory,v.componentInfo,c.name from VehicleInfo v, Category c where v.brandId = ? and v.categoryId = c.id ";
         Query query = session.createQuery(hql);
         query.setParameter(0, id); 
 		List list = query.list();
@@ -144,15 +144,13 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
         	vehicleInfo = new VehicleInfo();
             Object []o = (Object[])list.get(i);
             int vid = ((Number)o[0]).intValue();
-            String categoryName = (String)o[1];
-            String imageUrl1 = (String)o[2];
-            String imageUrl2 = (String)o[3];
-            String productCategory = (String)o[4];
-            String componentInfo = (String)o[5];
-            String name = (String)o[6];
+            String imageUrl1 = (String)o[1];
+            String imageUrl2 = (String)o[2];
+            String productCategory = (String)o[3];
+            String componentInfo = (String)o[4];
+            String name = (String)o[5];
             
             vehicleInfo.setId(vid);
-            vehicleInfo.setCategoryName(categoryName);
             vehicleInfo.setImageUrl1(imageUrl1);
             vehicleInfo.setImageUrl2(imageUrl2);
             vehicleInfo.setProductCategory(productCategory);
