@@ -118,4 +118,15 @@ public class CategoryDaoImpl implements CategoryDao {
 		return map;
 	}
 
+	@Override
+	public List<Category> getCategoryByParentId(int parentId) {
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = " from Category where parentId = ?";
+		final Query query = session.createQuery(hql);  
+		query.setParameter(0, parentId);
+        @SuppressWarnings("unchecked")
+		final List<Category> list = query.list(); 
+		return list;
+	}
+
 }

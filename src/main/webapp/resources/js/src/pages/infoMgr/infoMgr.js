@@ -9,24 +9,14 @@ var infoMgr = (function (config, ZYCtrlDataHandler) {
             params.startDate = $("#searchStartDate").val();
             params.endDate = $("#searchEndDate").val();
             params.marketType = [];
-            $("#searchMarketType").find("input[type='checkbox']").each(function (index, el) {
-                el = $(el);
-                if (el.prop("checked")) {
-                    params.marketType.push(el.val());
-                }
-            });
-
-            params.brand = $("#searchBrand").val();
+            
+            params.brand = [];
+            
             params.mainColor = $("#searchMainColor").val();
             params.assistColor1 = $("#searchAssistColor1").val();
             params.assistColor2 = $("#searchAssistColor2").val();
             params.texture = [];
-            $("#searchTexture").find("input[type='checkbox']").each(function (index, el) {
-                el = $(el);
-                if (el.prop("checked")) {
-                    params.texture.push(el.val());
-                }
-            });
+           
 
             return params;
 
@@ -39,6 +29,7 @@ var infoMgr = (function (config, ZYCtrlDataHandler) {
             $("#search").on("click", "input[type='checkbox'],.zyActionSearchByClick", function () {
                 me.search();
             }).on("change", ".zyActionSearchByChange", function () {
+            	
                 me.search();
             });
         },
@@ -161,7 +152,46 @@ $(document).ready(function () {
 
                 },
                 "fnServerData": function (sSource, aoData, fnCallback) {
+                	
+                	var params = infoMgr.getSearchInfo();
+                	$("#searchBrand").find("input[type='checkbox']").each(function (index, el) {
+                        el = $(el);
+                
+                        if (el.prop("checked")) {
+                        	
+                            params.brand.push(el.val());
+                        }
+                    });
+                	
+                	$("#searchMarketType").find("input[type='checkbox']").each(function (index, el) {
+                        el = $(el);
+                        if (el.prop("checked")) {
+                            params.marketType.push(el.val());
+                        }
+                    });
+                	
+                	 $("#searchTexture").find("input[type='checkbox']").each(function (index, el) {
+                         el = $(el);
+                         if (el.prop("checked")) {
+                             params.texture.push(el.val());
+                         }
+                     });
+                	
+                	var keys = Object.keys(params);
 
+                	keys.forEach(function(key, index) {
+                	  aoData.push( { "name": key, "value": params[key] } );
+                	});
+                	
+                	console.log(params.brand.length);
+                	if (params.brand.length > 0){
+                		sSource = config.ajaxUrls.infoSearchPageByCondition;
+                	}
+                	else{
+                		sSource = config.ajaxUrls.infoGetByPage;
+                	}
+                	
+                	console.log(sSource);
                     //回调函数
                     $.ajax({
                         "dataType": 'json',

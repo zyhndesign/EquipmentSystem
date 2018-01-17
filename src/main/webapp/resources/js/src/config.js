@@ -9,6 +9,7 @@ var config={
     baseUrl:"",
     ajaxUrls:{
         infoGetByPage:"vehicleInfo/getDataByCondition",
+        infoSearchPageByCondition:"vehicleInfo/searchDataByCondition",
         infoDelete:"vehicleInfo/deleteVehicleInfo",
         infoCreate:"vehicleInfo/createVehicleInfo",
         infoUpdate:"vehicleInfo/updateVehicleInfo",

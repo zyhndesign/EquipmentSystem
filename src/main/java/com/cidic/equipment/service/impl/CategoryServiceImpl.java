@@ -78,4 +78,10 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryDaoImpl.getDataByCategoryId(id);
 	}
 
+	@Override
+	public List<Category> getCategoryByParentId(int parentId) {
+		// TODO Auto-generated method stub
+		return categoryDaoImpl.getCategoryByParentId(parentId);
+	}
+
 }

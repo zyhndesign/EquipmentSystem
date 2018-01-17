@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cidic.equipment.dao.BrandDao;
 import com.cidic.equipment.dao.CategoryDao;
 import com.cidic.equipment.dao.VehicleInfoDao;
+import com.cidic.equipment.model.Category;
 import com.cidic.equipment.model.VehicleInfo;
 import com.cidic.equipment.model.VehicleInfoTableModel;
 import com.cidic.equipment.service.VehicleInfoService;
@@ -95,8 +96,36 @@ public class VehicleInfoServiceImpl implements VehicleInfoService {
 
 	@Override
 	public Optional<VehicleInfo> getDataByVehicleInfoId(int id) {
-		// TODO Auto-generated method stub
 		return vehicleInfoDaoImpl.getDataByVehicleInfoId(id);
+	}
+
+	@Override
+	public List<VehicleInfo> getDataByBrandId(int id) {
+		return vehicleInfoDaoImpl.getDataByBrandId(id);
+	}
+
+	@Override
+	public List<VehicleInfo> getDataByCategoryId(int id) {
+		return vehicleInfoDaoImpl.getDataByCategoryId(id);
+	}
+
+	@Override
+	public VehicleInfoTableModel getVehicleInfoBySearchCondition(List<Integer> brandList, int offset, int limit) {
+		VehicleInfoTableModel vehicleInfoTableModel = new VehicleInfoTableModel();
+		List<VehicleInfo> list = vehicleInfoDaoImpl.getDataBySearchCondition(brandList, offset, limit);
+		int count = vehicleInfoDaoImpl.getDataCountBySearchCondition(brandList);
+		Map<Integer,String> brandMap = brandDaoImpl.getBrandMap();
+		Map<Integer,String> categoryMap = categoryDaoImpl.getCategoryMap();
+		for (VehicleInfo vehicleInfo : list){
+			vehicleInfo.setBrandName(brandMap.get(vehicleInfo.getBrandId()));
+			vehicleInfo.setCategoryName(categoryMap.get(vehicleInfo.getCategoryId()));
+	       
+		}
+		vehicleInfoTableModel.setList(list);
+		vehicleInfoTableModel.setCount(count);
+		
+		
+		return vehicleInfoTableModel;
 	}
 
 }

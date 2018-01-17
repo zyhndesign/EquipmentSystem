@@ -19,4 +19,6 @@ public interface CategoryService {
 	public List<Category> getAllCategory();
 	
 	public Optional<Category> getDataByCategoryId(int id);
+
+	public List<Category> getCategoryByParentId(int parentId);
 }
