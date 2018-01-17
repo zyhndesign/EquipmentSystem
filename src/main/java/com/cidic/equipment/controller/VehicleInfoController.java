@@ -1,7 +1,10 @@
 package com.cidic.equipment.controller;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -137,6 +140,29 @@ public class VehicleInfoController {
 			listResultModel.setiTotalDisplayRecords((int) vehicleInfoTableModel.getCount());
 			listResultModel.setSuccess(true);
 		} catch (Exception e) {
+			listResultModel.setSuccess(false);
+		}
+		return listResultModel;
+	}
+	
+	@RequestMapping(value = "/searchDataByCondition", method = RequestMethod.GET)
+	@ResponseBody
+	public ListResultModel searchDataByCondition(HttpServletRequest request, HttpServletResponse response, @RequestParam String brand,
+			@RequestParam int iDisplayLength, @RequestParam int iDisplayStart, @RequestParam String sEcho) {
+		
+		WebRequestUtil.AccrossAreaRequestSet(request, response);
+		ListResultModel listResultModel = new ListResultModel();
+		try {
+			int[] brandsArray = Arrays.stream(brand.split(",")).mapToInt(s -> Integer.parseInt(s)).toArray();
+	        List<Integer> list = Arrays.stream(brandsArray).boxed().collect(Collectors.toList());  
+			VehicleInfoTableModel vehicleInfoTableModel = vehicleInfoServiceImpl.getVehicleInfoBySearchCondition(list,iDisplayStart, iDisplayLength);
+			listResultModel.setAaData(vehicleInfoTableModel.getList());
+			listResultModel.setsEcho(sEcho);
+			listResultModel.setiTotalRecords((int) vehicleInfoTableModel.getCount());
+			listResultModel.setiTotalDisplayRecords((int) vehicleInfoTableModel.getCount());
+			listResultModel.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
 			listResultModel.setSuccess(false);
 		}
 		return listResultModel;

@@ -26,4 +26,8 @@ public interface VehicleInfoDao {
 	public List<VehicleInfo> getDataByBrandId(int id);
 	
 	public List<VehicleInfo> getDataByCategoryId(int id);
+	
+	public List<VehicleInfo> getDataBySearchCondition(List<Integer> brandList, int offset, int limit);
+	
+	public int getDataCountBySearchCondition(List<Integer> brandList);
 }

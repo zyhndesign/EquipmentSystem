@@ -22,4 +22,6 @@ public interface VehicleInfoService {
 	
 	public List<VehicleInfo> getDataByCategoryId(int id);
 	
+	public VehicleInfoTableModel getVehicleInfoBySearchCondition(List<Integer> brandList, int offset, int limit);
+	
 }
