@@ -1,6 +1,7 @@
 package com.cidic.equipment.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.cidic.equipment.model.VehicleInfo;
@@ -22,6 +23,6 @@ public interface VehicleInfoService {
 	
 	public List<VehicleInfo> getDataByCategoryId(int id);
 	
-	public VehicleInfoTableModel getVehicleInfoBySearchCondition(List<Integer> brandList, int offset, int limit);
+	public VehicleInfoTableModel getVehicleInfoBySearchCondition(List<Integer> brandList, Map<String,Integer> timeQuantumMap, int offset, int limit);
 	
 }

@@ -3,6 +3,7 @@ package com.cidic.equipment.dao.impl;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.hibernate.Query;
@@ -172,23 +173,44 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 	}
 
 	@Override
-	public List<VehicleInfo> getDataBySearchCondition(List<Integer> brandList, int offset, int limit) {
+	public List<VehicleInfo> getDataBySearchCondition(List<Integer> brandList, Map<String,Integer> timeQuantumMap,int offset, int limit) {
 		if (brandList == null || brandList.isEmpty()) {
 			return new ArrayList<VehicleInfo>(0);
 		}
+		
+		String hql = "";
+		
 		Session session = this.getSessionFactory().getCurrentSession();
-		String hql = " FROM VehicleInfo v WHERE v.brandId IN (:brandList)";
-		final Query query = session.createQuery(hql);
-		query.setParameterList("brandList", brandList);
-		query.setFirstResult(offset);
-		query.setMaxResults(limit);
-		@SuppressWarnings("unchecked")
-		final List<VehicleInfo> list = query.list();
+		
+		int startYear = timeQuantumMap.get("startYear");
+		int endYear = timeQuantumMap.get("endYear");
+		
+		List<VehicleInfo> list = null;
+		
+		if (startYear < endYear && startYear > 0 && endYear > 0){
+			hql = "FROM VehicleInfo v WHERE v.brandId IN (:brandList) and onSaleDate > (:startYear) and onSaleDate < (:endYear) ";
+			final Query query = session.createQuery(hql);
+			query.setParameterList("brandList", brandList);
+			query.setParameter("startYear", startYear);
+			query.setParameter("endYear", endYear);
+			query.setFirstResult(offset);
+			query.setMaxResults(limit);
+			list = query.list();
+		}
+		else{
+			hql = " FROM VehicleInfo v WHERE v.brandId IN (:brandList) ";
+			final Query query = session.createQuery(hql);
+			query.setParameterList("brandList", brandList);
+			query.setFirstResult(offset);
+			query.setMaxResults(limit);
+			list = query.list();
+		}
+		
 		return list;
 	}
 
 	@Override
-	public int getDataCountBySearchCondition(List<Integer> brandList) {
+	public int getDataCountBySearchCondition(List<Integer> brandList,Map<String,Integer> timeQuantumMap) {
 		Session session = this.getSessionFactory().getCurrentSession();
 		final String hql = " select count(v) from VehicleInfo v WHERE v.brandId IN (:brandList)";
 		final Query query = session.createQuery(hql);

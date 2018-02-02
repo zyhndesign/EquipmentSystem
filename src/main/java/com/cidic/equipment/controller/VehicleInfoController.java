@@ -2,8 +2,10 @@ package com.cidic.equipment.controller;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -147,15 +149,21 @@ public class VehicleInfoController {
 	
 	@RequestMapping(value = "/searchDataByCondition", method = RequestMethod.GET)
 	@ResponseBody
-	public ListResultModel searchDataByCondition(HttpServletRequest request, HttpServletResponse response, @RequestParam String brand,
-			@RequestParam int iDisplayLength, @RequestParam int iDisplayStart, @RequestParam String sEcho) {
+	public ListResultModel searchDataByCondition(HttpServletRequest request, HttpServletResponse response, @RequestParam(required=false) String brand,
+			@RequestParam int iDisplayLength, @RequestParam int iDisplayStart, @RequestParam(required=false) int startYear, 
+			@RequestParam(required=false) int endYear, @RequestParam String sEcho) {
 		
 		WebRequestUtil.AccrossAreaRequestSet(request, response);
 		ListResultModel listResultModel = new ListResultModel();
 		try {
 			int[] brandsArray = Arrays.stream(brand.split(",")).mapToInt(s -> Integer.parseInt(s)).toArray();
 	        List<Integer> list = Arrays.stream(brandsArray).boxed().collect(Collectors.toList());  
-			VehicleInfoTableModel vehicleInfoTableModel = vehicleInfoServiceImpl.getVehicleInfoBySearchCondition(list,iDisplayStart, iDisplayLength);
+	        
+	        Map<String,Integer> timeQuantumMap = new HashMap<String,Integer>();
+	        timeQuantumMap.put("startYear", startYear);
+	        timeQuantumMap.put("endYear", endYear);
+	        
+			VehicleInfoTableModel vehicleInfoTableModel = vehicleInfoServiceImpl.getVehicleInfoBySearchCondition(list,timeQuantumMap,iDisplayStart, iDisplayLength);
 			listResultModel.setAaData(vehicleInfoTableModel.getList());
 			listResultModel.setsEcho(sEcho);
 			listResultModel.setiTotalRecords((int) vehicleInfoTableModel.getCount());
