@@ -190,7 +190,7 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 		List<VehicleInfo> list = null;
 		
 		if (startYear!= null && !startYear.equals("") && endYear != null && !endYear.equals("")){
-			hql.append(" and onSaleDate > (:startYear) and onSaleDate < (:endYear) ");
+			hql.append(" and onSaleDate >= (:startYear) and onSaleDate <= (:endYear) ");
 			
 		}
 		else if (marketTypeList.size() > 0){
@@ -234,7 +234,7 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 		}
 		
 		if (startYear!= null && !startYear.equals("") && endYear != null && !endYear.equals("")){
-			hql.append(" and onSaleDate > (:startYear) and onSaleDate < (:endYear) ");
+			hql.append(" and onSaleDate >= (:startYear) and onSaleDate <= (:endYear) ");
 			
 		}
 		else if (marketTypeList.size() > 0){
