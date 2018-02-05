@@ -124,10 +124,10 @@
                                         <h4 class="zySearchTitle">产品类型:</h4>
                                         <div class="zySearchContent row" id="searchMarketType">
                                             <div class="col">
-                                                <input type="checkbox" class="filled-in" id="type1" value="上市产品" /> <label for="type1">上市产品</label>
+                                                <input type="checkbox" class="filled-in" id="type1" value="1" /> <label for="type1">上市产品</label>
                                             </div>
                                             <div class="col">
-                                                <input type="checkbox" class="filled-in" id="type2" value="概念产品" /> <label for="type2">概念产品</label>
+                                                <input type="checkbox" class="filled-in" id="type2" value="2" /> <label for="type2">概念产品</label>
                                             </div>
                                         </div>
                                     </div>

@@ -173,48 +173,90 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 	}
 
 	@Override
-	public List<VehicleInfo> getDataBySearchCondition(List<Integer> brandList, Map<String,Integer> timeQuantumMap,int offset, int limit) {
-		if (brandList == null || brandList.isEmpty()) {
-			return new ArrayList<VehicleInfo>(0);
-		}
+	public List<VehicleInfo> getDataBySearchCondition(List<Integer> brandList, Map<String,String> timeQuantumMap, List<Integer> marketTypeList,int offset, int limit) {
 		
-		String hql = "";
+		StringBuilder hql = new StringBuilder(" FROM VehicleInfo v WHERE 1=1 ");
 		
 		Session session = this.getSessionFactory().getCurrentSession();
 		
-		int startYear = timeQuantumMap.get("startYear");
-		int endYear = timeQuantumMap.get("endYear");
+		String startYear = "";
+		String endYear = "";
+		
+		if (timeQuantumMap.containsKey("startYear") && timeQuantumMap.containsKey("endYear")){
+			startYear = timeQuantumMap.get("startYear");
+			endYear = timeQuantumMap.get("endYear");
+		}
 		
 		List<VehicleInfo> list = null;
 		
-		if (startYear < endYear && startYear > 0 && endYear > 0){
-			hql = "FROM VehicleInfo v WHERE v.brandId IN (:brandList) and onSaleDate > (:startYear) and onSaleDate < (:endYear) ";
-			final Query query = session.createQuery(hql);
-			query.setParameterList("brandList", brandList);
+		if (startYear!= null && !startYear.equals("") && endYear != null && !endYear.equals("")){
+			hql.append(" and onSaleDate > (:startYear) and onSaleDate < (:endYear) ");
+			
+		}
+		else if (marketTypeList.size() > 0){
+			hql.append(" and v.entry IN (:marketTypeList) ");
+			
+		}
+		else if (brandList.size() > 0){
+			hql.append(" and v.brandId IN (:brandList) ");
+		}
+
+		final Query query = session.createQuery(hql.toString());
+		if (startYear!= null && !startYear.equals("") && endYear != null && !endYear.equals("")){
 			query.setParameter("startYear", startYear);
 			query.setParameter("endYear", endYear);
-			query.setFirstResult(offset);
-			query.setMaxResults(limit);
-			list = query.list();
 		}
-		else{
-			hql = " FROM VehicleInfo v WHERE v.brandId IN (:brandList) ";
-			final Query query = session.createQuery(hql);
+		else if (marketTypeList.size() > 0){
+			query.setParameterList("marketTypeList", marketTypeList);
+		}
+		else if (brandList.size() > 0){
 			query.setParameterList("brandList", brandList);
-			query.setFirstResult(offset);
-			query.setMaxResults(limit);
-			list = query.list();
 		}
+		
+		query.setFirstResult(offset);
+		query.setMaxResults(limit);
+		list = query.list();
 		
 		return list;
 	}
 
 	@Override
-	public int getDataCountBySearchCondition(List<Integer> brandList,Map<String,Integer> timeQuantumMap) {
+	public int getDataCountBySearchCondition(List<Integer> brandList,Map<String,String> timeQuantumMap, List<Integer> marketTypeList) {
 		Session session = this.getSessionFactory().getCurrentSession();
-		final String hql = " select count(v) from VehicleInfo v WHERE v.brandId IN (:brandList)";
-		final Query query = session.createQuery(hql);
-		query.setParameterList("brandList", brandList);
+		StringBuilder hql = new StringBuilder(" select count(v) from VehicleInfo v WHERE 1 = 1 ");
+		
+		String startYear = "";
+		String endYear = "";
+		
+		if (timeQuantumMap.containsKey("startYear") && timeQuantumMap.containsKey("endYear")){
+			startYear = timeQuantumMap.get("startYear");
+			endYear = timeQuantumMap.get("endYear");
+		}
+		
+		if (startYear!= null && !startYear.equals("") && endYear != null && !endYear.equals("")){
+			hql.append(" and onSaleDate > (:startYear) and onSaleDate < (:endYear) ");
+			
+		}
+		else if (marketTypeList.size() > 0){
+			hql.append(" and v.entry IN (:marketTypeList) ");
+			
+		}
+		else if (brandList.size() > 0){
+			hql.append(" and v.brandId IN (:brandList) ");
+		}
+
+		final Query query = session.createQuery(hql.toString());
+		if (startYear!= null && !startYear.equals("") && endYear != null && !endYear.equals("")){
+			query.setParameter("startYear", startYear);
+			query.setParameter("endYear", endYear);
+		}
+		else if (marketTypeList.size() > 0){
+			query.setParameterList("marketTypeList", marketTypeList);
+		}
+		else if (brandList.size() > 0){
+			query.setParameterList("brandList", brandList);
+		}
+
 		long count = (Long) query.uniqueResult();
 		return (int) count;
 	}

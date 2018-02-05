@@ -23,6 +23,6 @@ public interface VehicleInfoService {
 	
 	public List<VehicleInfo> getDataByCategoryId(int id);
 	
-	public VehicleInfoTableModel getVehicleInfoBySearchCondition(List<Integer> brandList, Map<String,Integer> timeQuantumMap, int offset, int limit);
+	public VehicleInfoTableModel getVehicleInfoBySearchCondition(List<Integer> brandList, Map<String,String> timeQuantumMap, List<Integer> marketTypeList, int offset, int limit);
 	
 }

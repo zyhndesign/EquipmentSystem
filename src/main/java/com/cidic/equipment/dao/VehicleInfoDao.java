@@ -28,7 +28,7 @@ public interface VehicleInfoDao {
 	
 	public List<VehicleInfo> getDataByCategoryId(int id);
 	
-	public List<VehicleInfo> getDataBySearchCondition(List<Integer> brandList, Map<String,Integer> timeQuantumMap, int offset, int limit);
+	public List<VehicleInfo> getDataBySearchCondition(List<Integer> brandList, Map<String,String> timeQuantumMap, List<Integer> marketTypeList, int offset, int limit);
 	
-	public int getDataCountBySearchCondition(List<Integer> brandList, Map<String,Integer> timeQuantumMap);
+	public int getDataCountBySearchCondition(List<Integer> brandList, Map<String,String> timeQuantumMap, List<Integer> marketTypeList);
 }

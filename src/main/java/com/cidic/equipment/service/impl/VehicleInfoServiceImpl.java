@@ -110,10 +110,10 @@ public class VehicleInfoServiceImpl implements VehicleInfoService {
 	}
 
 	@Override
-	public VehicleInfoTableModel getVehicleInfoBySearchCondition(List<Integer> brandList, Map<String,Integer> timeQuantumMap, int offset, int limit) {
+	public VehicleInfoTableModel getVehicleInfoBySearchCondition(List<Integer> brandList, Map<String,String> timeQuantumMap, List<Integer> marketTypeList,int offset, int limit) {
 		VehicleInfoTableModel vehicleInfoTableModel = new VehicleInfoTableModel();
-		List<VehicleInfo> list = vehicleInfoDaoImpl.getDataBySearchCondition(brandList, timeQuantumMap, offset, limit);
-		int count = vehicleInfoDaoImpl.getDataCountBySearchCondition(brandList, timeQuantumMap);
+		List<VehicleInfo> list = vehicleInfoDaoImpl.getDataBySearchCondition(brandList, timeQuantumMap, marketTypeList, offset, limit);
+		int count = vehicleInfoDaoImpl.getDataCountBySearchCondition(brandList, timeQuantumMap,marketTypeList);
 		Map<Integer,String> brandMap = brandDaoImpl.getBrandMap();
 		Map<Integer,String> categoryMap = categoryDaoImpl.getCategoryMap();
 		for (VehicleInfo vehicleInfo : list){
