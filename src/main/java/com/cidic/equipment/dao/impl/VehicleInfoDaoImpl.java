@@ -133,7 +133,7 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 	public List<VehicleInfo> getDataByBrandId(int id) {
 		Session session = this.getSessionFactory().getCurrentSession();
 
-		String hql = "select v.id,v.imageUrl1,v.imageUrl2,v.productCategory,v.componentInfo,c.name from VehicleInfo v, Category c where v.brandId = ? and v.categoryId = c.id ";
+		String hql = "select v.id,v.imageUrl1,v.imageUrl2,v.productCategory,v.componentInfo,c.name,v.style from VehicleInfo v, Category c where v.brandId = ? and v.categoryId = c.id ";
 		Query query = session.createQuery(hql);
 		query.setParameter(0, id);
 		List list = query.list();
@@ -149,13 +149,15 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 			String productCategory = (String) o[3];
 			String componentInfo = (String) o[4];
 			String name = (String) o[5];
-
+			String style = (String)o[6];
+			
 			vehicleInfo.setId(vid);
 			vehicleInfo.setImageUrl1(imageUrl1);
 			vehicleInfo.setImageUrl2(imageUrl2);
 			vehicleInfo.setProductCategory(productCategory);
 			vehicleInfo.setComponentInfo(componentInfo);
 			vehicleInfo.setCategoryName(name);
+			vehicleInfo.setStyle(style);
 			vList.add(vehicleInfo);
 		}
 		return vList;
