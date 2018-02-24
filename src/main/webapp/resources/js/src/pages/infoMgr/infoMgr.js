@@ -158,7 +158,7 @@ $(document).ready(function () {
                         el = $(el);
                 
                         if (el.prop("checked")) {
-                        	
+                        	console.log(el.val())
                             params.brand.push(el.val());
                         }
                     });
@@ -183,15 +183,24 @@ $(document).ready(function () {
                 	  aoData.push( { "name": key, "value": params[key] } );
                 	});
                 	
-                	console.log(params.brand.length);
                 	if (params.brand.length > 0){
+                		sSource = config.ajaxUrls.infoSearchPageByCondition;
+                	}
+                	else if (params.startDate != '' && params.startDate > 0)
+                	{
+                		sSource = config.ajaxUrls.infoSearchPageByCondition;
+                	}
+                	else if (params.endDate != '' && params.endDate > 0)
+                	{
+                		sSource = config.ajaxUrls.infoSearchPageByCondition;
+                	}
+                	else if (params.marketType.length > 0){
                 		sSource = config.ajaxUrls.infoSearchPageByCondition;
                 	}
                 	else{
                 		sSource = config.ajaxUrls.infoGetByPage;
                 	}
                 	
-                	console.log(sSource);
                     //回调函数
                     $.ajax({
                         "dataType": 'json',

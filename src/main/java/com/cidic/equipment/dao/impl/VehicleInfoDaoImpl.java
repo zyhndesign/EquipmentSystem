@@ -3,6 +3,7 @@ package com.cidic.equipment.dao.impl;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.hibernate.Query;
@@ -132,7 +133,7 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 	public List<VehicleInfo> getDataByBrandId(int id) {
 		Session session = this.getSessionFactory().getCurrentSession();
 
-		String hql = "select v.id,v.imageUrl1,v.imageUrl2,v.productCategory,v.componentInfo,c.name from VehicleInfo v, Category c where v.brandId = ? and v.categoryId = c.id ";
+		String hql = "select v.id,v.imageUrl1,v.imageUrl2,v.productCategory,v.componentInfo,c.name,v.style from VehicleInfo v, Category c where v.brandId = ? and v.categoryId = c.id ";
 		Query query = session.createQuery(hql);
 		query.setParameter(0, id);
 		List list = query.list();
@@ -148,13 +149,15 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 			String productCategory = (String) o[3];
 			String componentInfo = (String) o[4];
 			String name = (String) o[5];
-
+			String style = (String)o[6];
+			
 			vehicleInfo.setId(vid);
 			vehicleInfo.setImageUrl1(imageUrl1);
 			vehicleInfo.setImageUrl2(imageUrl2);
 			vehicleInfo.setProductCategory(productCategory);
 			vehicleInfo.setComponentInfo(componentInfo);
 			vehicleInfo.setCategoryName(name);
+			vehicleInfo.setStyle(style);
 			vList.add(vehicleInfo);
 		}
 		return vList;
@@ -172,27 +175,90 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 	}
 
 	@Override
-	public List<VehicleInfo> getDataBySearchCondition(List<Integer> brandList, int offset, int limit) {
-		if (brandList == null || brandList.isEmpty()) {
-			return new ArrayList<VehicleInfo>(0);
-		}
+	public List<VehicleInfo> getDataBySearchCondition(List<Integer> brandList, Map<String,String> timeQuantumMap, List<Integer> marketTypeList,int offset, int limit) {
+		
+		StringBuilder hql = new StringBuilder(" FROM VehicleInfo v WHERE 1=1 ");
+		
 		Session session = this.getSessionFactory().getCurrentSession();
-		String hql = " FROM VehicleInfo v WHERE v.brandId IN (:brandList)";
-		final Query query = session.createQuery(hql);
-		query.setParameterList("brandList", brandList);
+		
+		String startYear = "";
+		String endYear = "";
+		
+		if (timeQuantumMap.containsKey("startYear") && timeQuantumMap.containsKey("endYear")){
+			startYear = timeQuantumMap.get("startYear");
+			endYear = timeQuantumMap.get("endYear");
+		}
+		
+		List<VehicleInfo> list = null;
+		
+		if (startYear!= null && !startYear.equals("") && endYear != null && !endYear.equals("")){
+			hql.append(" and onSaleDate >= (:startYear) and onSaleDate <= (:endYear) ");
+			
+		}
+		else if (marketTypeList.size() > 0){
+			hql.append(" and v.entry IN (:marketTypeList) ");
+			
+		}
+		else if (brandList.size() > 0){
+			hql.append(" and v.brandId IN (:brandList) ");
+		}
+
+		final Query query = session.createQuery(hql.toString());
+		if (startYear!= null && !startYear.equals("") && endYear != null && !endYear.equals("")){
+			query.setParameter("startYear", startYear);
+			query.setParameter("endYear", endYear);
+		}
+		else if (marketTypeList.size() > 0){
+			query.setParameterList("marketTypeList", marketTypeList);
+		}
+		else if (brandList.size() > 0){
+			query.setParameterList("brandList", brandList);
+		}
+		
 		query.setFirstResult(offset);
 		query.setMaxResults(limit);
-		@SuppressWarnings("unchecked")
-		final List<VehicleInfo> list = query.list();
+		list = query.list();
+		
 		return list;
 	}
 
 	@Override
-	public int getDataCountBySearchCondition(List<Integer> brandList) {
+	public int getDataCountBySearchCondition(List<Integer> brandList,Map<String,String> timeQuantumMap, List<Integer> marketTypeList) {
 		Session session = this.getSessionFactory().getCurrentSession();
-		final String hql = " select count(v) from VehicleInfo v WHERE v.brandId IN (:brandList)";
-		final Query query = session.createQuery(hql);
-		query.setParameterList("brandList", brandList);
+		StringBuilder hql = new StringBuilder(" select count(v) from VehicleInfo v WHERE 1 = 1 ");
+		
+		String startYear = "";
+		String endYear = "";
+		
+		if (timeQuantumMap.containsKey("startYear") && timeQuantumMap.containsKey("endYear")){
+			startYear = timeQuantumMap.get("startYear");
+			endYear = timeQuantumMap.get("endYear");
+		}
+		
+		if (startYear!= null && !startYear.equals("") && endYear != null && !endYear.equals("")){
+			hql.append(" and onSaleDate >= (:startYear) and onSaleDate <= (:endYear) ");
+			
+		}
+		else if (marketTypeList.size() > 0){
+			hql.append(" and v.entry IN (:marketTypeList) ");
+			
+		}
+		else if (brandList.size() > 0){
+			hql.append(" and v.brandId IN (:brandList) ");
+		}
+
+		final Query query = session.createQuery(hql.toString());
+		if (startYear!= null && !startYear.equals("") && endYear != null && !endYear.equals("")){
+			query.setParameter("startYear", startYear);
+			query.setParameter("endYear", endYear);
+		}
+		else if (marketTypeList.size() > 0){
+			query.setParameterList("marketTypeList", marketTypeList);
+		}
+		else if (brandList.size() > 0){
+			query.setParameterList("brandList", brandList);
+		}
+
 		long count = (Long) query.uniqueResult();
 		return (int) count;
 	}

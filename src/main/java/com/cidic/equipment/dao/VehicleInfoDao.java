@@ -1,6 +1,7 @@
 package com.cidic.equipment.dao;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.cidic.equipment.model.VehicleInfo;
@@ -27,7 +28,7 @@ public interface VehicleInfoDao {
 	
 	public List<VehicleInfo> getDataByCategoryId(int id);
 	
-	public List<VehicleInfo> getDataBySearchCondition(List<Integer> brandList, int offset, int limit);
+	public List<VehicleInfo> getDataBySearchCondition(List<Integer> brandList, Map<String,String> timeQuantumMap, List<Integer> marketTypeList, int offset, int limit);
 	
-	public int getDataCountBySearchCondition(List<Integer> brandList);
+	public int getDataCountBySearchCondition(List<Integer> brandList, Map<String,String> timeQuantumMap, List<Integer> marketTypeList);
 }

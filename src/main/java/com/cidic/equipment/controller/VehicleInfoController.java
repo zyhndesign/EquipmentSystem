@@ -1,9 +1,12 @@
 package com.cidic.equipment.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -147,15 +150,34 @@ public class VehicleInfoController {
 	
 	@RequestMapping(value = "/searchDataByCondition", method = RequestMethod.GET)
 	@ResponseBody
-	public ListResultModel searchDataByCondition(HttpServletRequest request, HttpServletResponse response, @RequestParam String brand,
-			@RequestParam int iDisplayLength, @RequestParam int iDisplayStart, @RequestParam String sEcho) {
+	public ListResultModel searchDataByCondition(HttpServletRequest request, HttpServletResponse response, @RequestParam(required=false) String brand,
+			@RequestParam int iDisplayLength, @RequestParam int iDisplayStart, @RequestParam(required=false) String startDate, 
+			@RequestParam(required=false) String endDate, @RequestParam(required=false) String marketType, @RequestParam String sEcho) {
 		
 		WebRequestUtil.AccrossAreaRequestSet(request, response);
 		ListResultModel listResultModel = new ListResultModel();
 		try {
-			int[] brandsArray = Arrays.stream(brand.split(",")).mapToInt(s -> Integer.parseInt(s)).toArray();
-	        List<Integer> list = Arrays.stream(brandsArray).boxed().collect(Collectors.toList());  
-			VehicleInfoTableModel vehicleInfoTableModel = vehicleInfoServiceImpl.getVehicleInfoBySearchCondition(list,iDisplayStart, iDisplayLength);
+			List<Integer> list = new ArrayList<>();
+			if (brand.length() > 1){
+				int[] brandsArray = Arrays.stream(brand.split(",")).mapToInt(s -> Integer.parseInt(s)).toArray();
+		        list = Arrays.stream(brandsArray).boxed().collect(Collectors.toList());  
+			}
+			
+			List<Integer> marketTypeList = new ArrayList<>();
+	        if (marketType.length() > 1){
+	        	int[] marketTypesArray = Arrays.stream(marketType.split(",")).mapToInt(s -> Integer.parseInt(s)).toArray();
+		        marketTypeList = Arrays.stream(marketTypesArray).boxed().collect(Collectors.toList()); 
+	        }
+	        
+	        Map<String,String> timeQuantumMap = new HashMap<String,String>();
+	        if (startDate != null && !startDate.equals("")){
+	        	timeQuantumMap.put("startYear", startDate);
+	        }
+	        if (endDate != null && !endDate.equals("")){
+	        	timeQuantumMap.put("endYear", endDate);
+	        }
+	        
+			VehicleInfoTableModel vehicleInfoTableModel = vehicleInfoServiceImpl.getVehicleInfoBySearchCondition(list,timeQuantumMap,marketTypeList,iDisplayStart, iDisplayLength);
 			listResultModel.setAaData(vehicleInfoTableModel.getList());
 			listResultModel.setsEcho(sEcho);
 			listResultModel.setiTotalRecords((int) vehicleInfoTableModel.getCount());
