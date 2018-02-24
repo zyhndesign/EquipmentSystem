@@ -1,10 +1,15 @@
 package com.cidic.equipment.dao.impl;
 
 import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -15,6 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.cidic.equipment.dao.VehicleInfoDao;
+import com.cidic.equipment.model.Texture;
 import com.cidic.equipment.model.User;
 import com.cidic.equipment.model.VehicleColor;
 import com.cidic.equipment.model.VehicleInfo;
@@ -133,11 +139,14 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 	public List<VehicleInfo> getDataByBrandId(int id) {
 		Session session = this.getSessionFactory().getCurrentSession();
 
-		String hql = "select v.id,v.imageUrl1,v.imageUrl2,v.productCategory,v.componentInfo,c.name,v.style from VehicleInfo v, Category c where v.brandId = ? and v.categoryId = c.id ";
+		String hql = "select v.id,v.imageUrl1,v.imageUrl2,v.productCategory,v.componentInfo,c.name,v.style,"
+				+ "v.onSaleDate,v.createTime,b.name,t.texture from VehicleInfo v, Category c,Brand b join v.vehicleTextures t join t.texture where v.brandId = ? and "
+				+ " v.categoryId = c.id and v.brandId = b.id";
 		Query query = session.createQuery(hql);
 		query.setParameter(0, id);
 		List list = query.list();
-
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		List<VehicleInfo> vList = new ArrayList<VehicleInfo>(10);
 		VehicleInfo vehicleInfo = null;
 		for (int i = 0; i < list.size(); i++) {
@@ -150,6 +159,11 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 			String componentInfo = (String) o[4];
 			String name = (String) o[5];
 			String style = (String)o[6];
+			String onSaleDate = (String)o[7];
+			Date createTime = (Date)o[8];
+			
+			String brandName = (String)o[9];
+			
 			
 			vehicleInfo.setId(vid);
 			vehicleInfo.setImageUrl1(imageUrl1);
@@ -158,9 +172,46 @@ public class VehicleInfoDaoImpl implements VehicleInfoDao {
 			vehicleInfo.setComponentInfo(componentInfo);
 			vehicleInfo.setCategoryName(name);
 			vehicleInfo.setStyle(style);
+			vehicleInfo.setOnSaleDate(onSaleDate);
+			vehicleInfo.setCreateTime(createTime);
+			vehicleInfo.setBrandName(brandName);
+			//vehicleInfo.setVehicleTextures(vehicleTextures);
 			vList.add(vehicleInfo);
 		}
-		return vList;
+		
+		List<VehicleInfo> resultList = new ArrayList<>();
+		
+		for (VehicleInfo locVehicleInfo : vList){
+			boolean hasData = false;
+			for (VehicleInfo rlocVehicleInfo : resultList){
+				if (locVehicleInfo.getId() == rlocVehicleInfo.getId()){
+					hasData = true;
+					break;
+				}
+			}
+			
+			if (!hasData){
+				resultList.add(locVehicleInfo);
+			}
+		}
+		
+		Set<VehicleTexture> vehicleTextures = null;
+		for (VehicleInfo rlocVehicleInfo : resultList){
+			vehicleTextures = new HashSet<VehicleTexture>(10);
+			for (int i = 0; i < list.size(); i++) {
+				Object[] o = (Object[]) list.get(i);
+				int vid = ((Number) o[0]).intValue();
+				if (rlocVehicleInfo.getId() == vid){
+					VehicleTexture vehicleTexture = new VehicleTexture();
+					Texture texture = (Texture)o[10];
+					vehicleTexture.setTexture(texture);
+					vehicleTextures.add(vehicleTexture);
+				}
+			}
+			rlocVehicleInfo.setVehicleTextures(vehicleTextures);
+		}
+		
+		return resultList;
 	}
 
 	@Override

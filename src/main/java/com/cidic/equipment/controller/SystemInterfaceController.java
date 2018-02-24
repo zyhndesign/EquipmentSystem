@@ -96,6 +96,7 @@ public class SystemInterfaceController {
 			resultModel.setObject(list);
 			return resultModel;
 		}catch (Exception e) {
+			e.printStackTrace();
 			throw new EquipmentException(500, "操作失败！");
 		}
 	}
